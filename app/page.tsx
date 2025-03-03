@@ -11,7 +11,7 @@ export default function Home() {
           
           <div className="space-y-6">
             <p className="text-2xl text-gray-300">
-              My name is Fayaz. I build software and write about technology, development, and my journey.
+              My name is Fayaz Rafin. I build software and write about technology, development, and my journey.
             </p>
             
             <p className="text-xl text-gray-400">

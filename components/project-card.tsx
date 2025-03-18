@@ -1,8 +1,7 @@
-// components/ProjectCard.tsx
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface ProjectProps {
+interface ProjectCardProps {
   title: string
   description: string
   image: string
@@ -10,15 +9,16 @@ interface ProjectProps {
   link?: string
 }
 
-export function ProjectCard({ title, description, image, technologies, link }: ProjectProps) {
-  const Card = link ? Link : 'div'
-  
+export function ProjectCard({ 
+  title, 
+  description, 
+  image, 
+  technologies,
+  link 
+}: ProjectCardProps) {
   return (
-    <Card 
-      href={link || '#'} 
-      className="bg-[#1a1b26] rounded-xl overflow-hidden transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-[#1e1f2e]"
-    >
-      <div className="relative h-48 w-full">
+    <div className="bg-[#1a1b26] rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+      <div className="relative aspect-video w-full">
         <Image
           src={image}
           alt={title}
@@ -29,9 +29,7 @@ export function ProjectCard({ title, description, image, technologies, link }: P
       
       <div className="p-6">
         <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-gray-400 mb-4 line-clamp-2">
-          {description}
-        </p>
+        <p className="text-gray-400 mb-4 line-clamp-2">{description}</p>
         
         <div className="flex flex-wrap gap-2">
           {technologies.map((tech, index) => (
@@ -43,7 +41,18 @@ export function ProjectCard({ title, description, image, technologies, link }: P
             </span>
           ))}
         </div>
+        
+        {link && (
+          <div className="mt-4">
+            <Link 
+              href={link} 
+              className="text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              View Project →
+            </Link>
+          </div>
+        )}
       </div>
-    </Card>
+    </div>
   )
 }

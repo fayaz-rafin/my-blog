@@ -1,4 +1,5 @@
 // app/now/page.tsx
+import Link from 'next/link'
 import React from 'react'
 
 export default function Page(): React.JSX.Element {
@@ -45,7 +46,20 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Personal portfolio website (this one!)</li>
               <li>A blog system with MDX support</li>
-              <li>Contributing to open source projects</li>
+              </ul>
+
+            <p>These are the open-source projects that i am contributing to:</p>
+            <ul>
+              <li>
+                <Link href="https://github.com/SheerSt/pokewilds" className='text-blue-400 hover:text-blue-300 underline'>
+                  Pokewilds
+                </Link> - A Gen 2 Pokemon Fan Game/Engine using libGDX
+              </li>
+              <li>
+                <Link href="https://github.com/JustJavaOrg/gymcore" className='text-blue-400 hover:text-blue-300 underline'>
+                  Gymcore
+                </Link> - a simple RESTful API for managing gym members and their subscriptions.
+              </li>
             </ul>
           </section>
 

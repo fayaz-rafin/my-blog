@@ -20,12 +20,20 @@ export default function Page(): React.JSX.Element {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">🚀 Current Focus</h2>
             <p>
-              Building and learning new technologies in web development. Currently diving deep into:
+              Building and learning new technologies in Software Engineering. Currently diving deep into:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>Next.js 14 and Server Components</li>
+              <li>Next.js 15 and Server Components</li>
               <li>TypeScript best practices</li>
               <li>System Design patterns</li>
+            </ul>
+            <p>
+              Additionally, I'm taking the following courses in university:
+            </p>
+            <ul className="list-disc list-inside space-y-2 pl-4">
+              <li>Digital Logic Design</li>
+              <li>Operating Systems</li>
+              <li>Communication Networks</li>
             </ul>
           </section>
 
@@ -56,12 +64,12 @@ export default function Page(): React.JSX.Element {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">📍 Location</h2>
             <p>
-              Currently based in [Your Location]
+                I'm currently based in Toronto, Ontario, Canada. I love the tech scene here and the vibrant community of developers.
             </p>
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-white">🎯 Goals for 2024</h2>
+            <h2 className="text-2xl font-bold text-white">🎯 Goals for 2025</h2>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Launch 3 side projects</li>
               <li>Write one technical blog post per month</li>
@@ -73,7 +81,7 @@ export default function Page(): React.JSX.Element {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">📖 Currently Reading</h2>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>&quot;Clean Architecture&quot; by Robert C. Martin</li>
+              <li>&quot;Dune&quot; by Frank Herbert</li>
               <li>&quot;Designing Data-Intensive Applications&quot; by Martin Kleppmann</li>
             </ul>
           </section>

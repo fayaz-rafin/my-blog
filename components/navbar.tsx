@@ -35,7 +35,7 @@ export function Navbar() {
             href="/"
             className="flex-shrink-0 w-[140px]"
           >
-            <span className="text-xl font-bold text-white">Your Name</span>
+            <span className="text-xl font-bold text-white">Fayaz Rafin</span>
           </Link>
           
           {/* Desktop Navigation */}

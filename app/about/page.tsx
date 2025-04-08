@@ -10,26 +10,78 @@ interface WorkExperience {
   logo: string
 }
 
+interface Skill {
+  name: string
+  icon: string
+}
+
+const skills = {
+  languages: [
+    { name: "JavaScript", icon: "/icons/javascript.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "Python", icon: "/icons/python.svg" },
+    { name: "Java", icon: "/icons/java.svg" },
+    { name: "C", icon: "/icons/c.svg" },
+    { name: "Go", icon: "/icons/go.svg" },
+    { name: "Rust", icon: "/icons/rust.svg" },
+    { name: "Flutter", icon: "/icons/flutter.svg" },
+  ],
+  frameworks: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "Next.js", icon: "/icons/nextjs.svg" },
+    { name: "Flask", icon: "/icons/flask.svg" },
+    { name: "Express.js", icon: "/icons/express.svg" },
+    { name: "Docker", icon: "/icons/docker.svg" },
+    { name: "TailwindCSS", icon: "/icons/tailwind.svg" },
+  ],
+  cloud: [
+    { name: "AWS", icon: "/icons/aws.svg" },
+    { name: "Google Cloud", icon: "/icons/gcp.svg" },
+    { name: "AWS RDS", icon: "/icons/awsrds.svg" },
+    { name: "AWS S3", icon: "/icons/awss3.svg" },
+    { name: "AWS Cognito", icon: "/icons/awscognito.svg" },
+    { name: "AWS Lambda", icon: "/icons/awslambda.svg" },
+    { name: "Localstack", icon: "/icons/cloud.svg"},
+    { name: "auth0", icon: "/icons/auth0.svg" },
+    { name: "Vercel", icon: "/icons/vercel.svg" },
+  ],
+  databases: [
+    { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
+    { name: "MySQL", icon: "/icons/mysql.svg" },
+    { name: "SQLite", icon: "/icons/sqlite.svg" },
+    { name: "Supabase", icon: "/icons/supabase.svg" },
+    { name: "MongoDB", icon: "/icons/mongodb.svg" },
+    { name: "Grafana", icon: "/icons/grafana.svg" },
+    { name: "Redis", icon: "/icons/redis.svg" },
+    { name: "Power BI", icon: "/icons/powerbi.svg" },
+  ],
+  practices: [
+    { name: "CI/CD", icon: "/icons/cicd.svg" },
+    { name: "Agile", icon: "/icons/agile.svg" },
+    { name: "System Design", icon: "/icons/system-design.svg" },
+    { name: "Cloud Architecture", icon: "/icons/cloud.svg" },
+  ]
+}
+
 const experiences: WorkExperience[] = [
     {
         company: "Software Engineer",
         role: "Dorayaki Studios",
         period: "March 2024 — Present",
-        logo: "/logos/gigs.png"
-      },
+        logo: "/logos/ds.png"
+    },
     {
-    company: "Outlier AI",
-    role: "Prompt Engineer",
-    period: "May 2024 — August 2024",
-    logo: "/logos/gigs.png"
-  },
-  {
-    company: "Radar",
-    role: "Software Engineer Intern",
-    period: "May 2022 — August 2022",
-    logo: "/logos/stackoverflow.png"
-  },
-  
+        company: "Outlier AI",
+        role: "Prompt Engineer",
+        period: "May 2024 — August 2024",
+        logo: "/logos/outlier.png"
+    },
+    {
+        company: "Radar",
+        role: "Software Engineer Intern",
+        period: "May 2022 — August 2022",
+        logo:"/logos/radar.png"
+    },
 ]
 
 export default function Page(): React.JSX.Element {
@@ -41,14 +93,33 @@ export default function Page(): React.JSX.Element {
           <h1 className="text-4xl font-bold text-white mb-8">About Me</h1>
           <div className="prose prose-invert max-w-none">
             <p className="text-xl text-gray-300 mb-6">
-              Hi! I'm [Your Name], a software engineer passionate about building great products 
-              and leading engineering teams. With over 15 years of experience in software development,
-              I specialize in web technologies and distributed systems.
+              Hi! I'm Fayaz, a software engineer based in Toronto, ON. Originally from Dhaka, Bangladesh, 
+              I'm currently pursuing my degree in Electrical Engineering at York University, where I've found 
+              my passion at the intersection of hardware and software.
             </p>
             <p className="text-gray-400 mb-6">
-              I enjoy solving complex problems and sharing knowledge with the community. 
-              When I'm not coding, you can find me writing technical articles, contributing 
-              to open source projects, or mentoring other developers.
+              My journey in tech has been shaped by my love for both hardware and software. While my Electrical 
+              Engineering background satisfies my curiosity for hardware systems, my internship at Radar in 2022 
+              helped me discover my true calling in software engineering. This unique perspective allows me to 
+              approach problems with both hardware and software solutions in mind.
+            </p>
+            <p className="text-gray-400 mb-6">
+              When I'm not coding or tinkering with hardware, you'll find me exploring the vibrant streets of 
+              downtown Toronto or embarking on outdoor adventures - from tobogganing in winter to hiking and 
+              beach trips in summer. I'm an avid gamer with a particular love for roguelikes like{' '}
+              <Link href="https://enterthegungeon.com/" className="text-pink-400 hover:text-pink-300">
+                Enter the Gungeon
+              </Link>{' '}
+              and{' '}
+              <Link href="https://dead-cells.com/" className="text-pink-400 hover:text-pink-300">
+                Dead Cells
+              </Link>
+              . You can also catch me diving into the worlds of <Link href="https://www.minecraft.net/en-us">Minecraft</Link>{' '}  and {' '}<Link href="https://play.pokemonshowdown.com/">Pokemon</Link>.
+            </p>
+            <p className="text-gray-400 mb-6">
+              As an extrovert, I thrive on social interactions and community engagement. Whether it's discussing 
+              the latest tech trends, sharing cooking recipes, or getting lost in a good book, I'm always eager 
+              to connect with people who share similar interests.
             </p>
           </div>
         </section>
@@ -113,25 +184,115 @@ export default function Page(): React.JSX.Element {
         {/* Skills Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-white mb-8">Skills & Technologies</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              "JavaScript/TypeScript",
-              "React & Next.js",
-              "Node.js",
-              "AWS",
-              "System Design",
-              "Team Leadership",
-              "Agile Methodologies",
-              "CI/CD",
-              "Cloud Architecture"
-            ].map((skill, index) => (
-              <div 
-                key={index}
-                className="bg-[#252837] rounded-lg px-4 py-3 text-gray-300"
-              >
-                {skill}
-              </div>
-            ))}
+          
+          {/* Languages */}
+          <div className="mb-8">
+            <h3 className="text-xl text-pink-400 mb-4">Programming Languages</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skills.languages.map((skill, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                >
+                  <Image 
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert opacity-[.85]"
+                  />
+                  <span className="text-gray-300">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Frameworks */}
+          <div className="mb-8">
+            <h3 className="text-xl text-pink-400 mb-4">Libraries & Frameworks</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skills.frameworks.map((skill, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                >
+                  <Image 
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert opacity-[.85]"
+                  />
+                  <span className="text-gray-300">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Cloud & DevOps */}
+          <div className="mb-8">
+            <h3 className="text-xl text-pink-400 mb-4">Cloud & DevOps</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skills.cloud.map((skill, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                >
+                  <Image 
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert opacity-[.85]"
+                  />
+                  <span className="text-gray-300">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* databases & Databases */}
+          <div className="mb-8">
+            <h3 className="text-xl text-pink-400 mb-4">Databases</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skills.databases.map((skill, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                >
+                  <Image 
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert opacity-[.85]"
+                  />
+                  <span className="text-gray-300">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Practices */}
+          <div>
+            <h3 className="text-xl text-pink-400 mb-4">Practices & Concepts</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skills.practices.map((skill, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                >
+                  <Image 
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={24}
+                    height={24}
+                    className="brightness-0 invert opacity-[.85]"
+                  />
+                  <span className="text-gray-300">{skill.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>

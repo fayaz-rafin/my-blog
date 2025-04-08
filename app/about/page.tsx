@@ -158,7 +158,7 @@ export default function Page(): React.JSX.Element {
               <p className="text-gray-400">
                 Want to see more?{' '}
                 <Link 
-                  href="/resume.pdf" 
+                  href="resume/resume.pdf" 
                   className="text-pink-400 hover:text-pink-300 inline-flex items-center gap-1"
                 >
                   Check out my Resume

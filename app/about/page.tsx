@@ -93,7 +93,7 @@ export default function Page(): React.JSX.Element {
           <h1 className="text-4xl font-bold text-white mb-8">About Me</h1>
           <div className="prose prose-invert max-w-none">
             <p className="text-xl text-gray-300 mb-6">
-              Hi! I'm Fayaz, a software engineer based in Toronto, ON. Originally from Dhaka, Bangladesh, 
+              Hi! I'm Fayaz, a software engineer based in Toronto, Canada. Originally from Dhaka, Bangladesh, 
               I'm currently pursuing my degree in Electrical Engineering at York University, where I've found 
               my passion at the intersection of hardware and software.
             </p>
@@ -108,13 +108,21 @@ export default function Page(): React.JSX.Element {
               downtown Toronto or embarking on outdoor adventures - from tobogganing in winter to hiking and 
               beach trips in summer. I'm an avid gamer with a particular love for roguelikes like{' '}
               <Link href="https://enterthegungeon.com/" className="text-pink-400 hover:text-pink-300">
-                Enter the Gungeon
+              Enter the Gungeon
               </Link>{' '}
               and{' '}
               <Link href="https://dead-cells.com/" className="text-pink-400 hover:text-pink-300">
-                Dead Cells
+              Dead Cells
               </Link>
-              . You can also catch me diving into the worlds of <Link href="https://www.minecraft.net/en-us">Minecraft</Link>{' '}  and {' '}<Link href="https://play.pokemonshowdown.com/">Pokemon</Link>.
+              . You can also catch me diving into the worlds of{' '}
+              <Link href="https://www.minecraft.net/en-us" className="text-pink-400 hover:text-pink-300">
+              Minecraft
+              </Link>{' '}
+              and{' '}
+              <Link href="https://play.pokemonshowdown.com/" className="text-pink-400 hover:text-pink-300">
+              Pokemon
+              </Link>
+              .
             </p>
             <p className="text-gray-400 mb-6">
               As an extrovert, I thrive on social interactions and community engagement. Whether it's discussing 

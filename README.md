@@ -37,10 +37,6 @@ Welcome to my personal portfolio website! Built with **Next.js 14**, **TypeScrip
 ├── public/ # Static assets (avatar, icons, images)
 ├── styles/ # Tailwind global styles
 ```
-less
-Copy
-Edit
-
 ## 🧑‍💻 Developer
 
 **Fayaz Rafin**

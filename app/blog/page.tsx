@@ -5,14 +5,16 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import ReactMarkdown from 'react-markdown'
 
-// Define the correct types for the props
-type Props = {
-  params: {
-    slug: string
-  }
+// Define more specific types
+type Params = {
+  slug: string;
 }
 
-// Generate static route parameters based on markdown files
+type PageProps = {
+  params: Params;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'content/blog')
   const files = await fs.readdir(blogDir)
@@ -21,18 +23,25 @@ export async function generateStaticParams() {
   }))
 }
 
-// Generate metadata for each blog post page
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps
+): Promise<Metadata> {
   const filePath = path.join(process.cwd(), 'content/blog', `${params.slug}.md`)
-  const file = await fs.readFile(filePath, 'utf8')
-  const { data } = matter(file)
-  return {
-    title: data.title || 'Blog',
+  try {
+    const file = await fs.readFile(filePath, 'utf8')
+    const { data } = matter(file)
+    return {
+      title: data.title || 'Blog',
+    }
+  } catch {
+    return {
+      title: 'Blog Post Not Found',
+    }
   }
 }
 
-// Default export for the blog post page
-export default async function BlogPost({ params }: Props) {
+export default async function BlogPost(props: PageProps) {
+  const { params } = props
   const filePath = path.join(process.cwd(), 'content/blog', `${params.slug}.md`)
 
   try {

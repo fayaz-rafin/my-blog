@@ -5,6 +5,13 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import ReactMarkdown from 'react-markdown'
 
+// Define the correct types for the props
+type Props = {
+  params: {
+    slug: string
+  }
+}
+
 // Generate static route parameters based on markdown files
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'content/blog')
@@ -15,10 +22,8 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each blog post page
-export async function generateMetadata(props: { params: { slug: string } }): Promise<Metadata> {
-  // Await the params to satisfy Next.js's dynamic params requirement
-  const { slug } = await Promise.resolve(props.params)
-  const filePath = path.join(process.cwd(), 'content/blog', `${slug}.md`)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const filePath = path.join(process.cwd(), 'content/blog', `${params.slug}.md`)
   const file = await fs.readFile(filePath, 'utf8')
   const { data } = matter(file)
   return {
@@ -27,10 +32,8 @@ export async function generateMetadata(props: { params: { slug: string } }): Pro
 }
 
 // Default export for the blog post page
-export default async function BlogPost(props: { params: { slug: string } }) {
-  // Await the params to satisfy the type constraints
-  const { slug } = await Promise.resolve(props.params)
-  const filePath = path.join(process.cwd(), 'content/blog', `${slug}.md`)
+export default async function BlogPost({ params }: Props) {
+  const filePath = path.join(process.cwd(), 'content/blog', `${params.slug}.md`)
 
   try {
     const fileContent = await fs.readFile(filePath, 'utf8')

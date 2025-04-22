@@ -1,19 +1,26 @@
 // app/now/page.tsx
 import Link from 'next/link'
 import React from 'react'
+import fs from 'fs';
+import path from 'path';
 
 export default function Page(): React.JSX.Element {
+  // Get the modification time of this file and format it immediately
+  const filePath = path.join(process.cwd(), 'app/now/page.tsx');
+  const stats = fs.statSync(filePath);
+  const lastUpdatedString = stats.mtime.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
     <main className="pt-32 pb-16">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">What I'm Doing Now</h1>
           <p className="text-gray-400">
-            Last updated: {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
+            Last updated: {lastUpdatedString}
           </p>
         </header>
 

@@ -22,8 +22,7 @@ export default function RecentPosts() {
     const filePath = path.join('content/blog', filename) // Store file path
     const fileContent = fs.readFileSync(filePath, 'utf-8')
     const { data, content } = matter(fileContent) // Extract content
-    const stats = fs.statSync(filePath) // Get file stats
-    const formattedDate = stats.mtime.toLocaleDateString('en-US', { // Format mtime
+    const formattedDate = new Date(data.date).toLocaleDateString('en-US', { // Format date from frontmatter
       year: 'numeric',
       month: 'long',
       day: 'numeric',

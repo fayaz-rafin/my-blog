@@ -1,6 +1,7 @@
 ---
 title: "From Rejection to Reality: My Internship Journey Begins"
 description: "Tired of the job market blues? Follow my honest and effort-filled journey as I blog my way to an internship."
+date: "2025-04-26"
 ---
 
 

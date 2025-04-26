@@ -33,15 +33,14 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Next.js 15 and Server Components</li>
               <li>TypeScript best practices</li>
-              <li>System Design patterns</li>
+              <li>Java Springboot</li>
             </ul>
             <p>
               Additionally, I'm taking the following courses in university:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>Digital Logic Design</li>
-              <li>Operating Systems</li>
-              <li>Communication Networks</li>
+              <li>Network Application and Protocols</li>
+              <li>Electricity and Magnetism</li>
             </ul>
           </section>
 
@@ -52,11 +51,12 @@ export default function Page(): React.JSX.Element {
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Personal portfolio website (this one!)</li>
-              <li>A blog system with MDX support</li>
-              </ul>
+              <li>Learning how to make a Chrome Extension.</li>
+              <li>Developing a web application to turn Leetcode into a fun and competitive experience with friends.</li>
+            </ul>
 
             <p>These are the open-source projects that i am contributing to:</p>
-            <ul>
+            <ul className="list-disc list-inside space-y-2 pl-4">
               <li>
                 <Link href="https://github.com/SheerSt/pokewilds" className='text-blue-400 hover:text-blue-300 underline'>
                   Pokewilds
@@ -103,7 +103,6 @@ export default function Page(): React.JSX.Element {
             <h2 className="text-2xl font-bold text-white">📖 Currently Reading</h2>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>&quot;Dune&quot; by Frank Herbert</li>
-              <li>&quot;Designing Data-Intensive Applications&quot; by Martin Kleppmann</li>
             </ul>
           </section>
 

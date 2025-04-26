@@ -48,11 +48,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // Markdown render components
 const components = {
-  h1: ({ node, ...props }: any) => <h1 className="text-4xl font-bold mt-8 mb-4 text-white" {...props} />,
+  h1: ({ node, ...props }: any) => <h1 className="text-4xl font-sans font-bold mt-8 mb-4 text-white" {...props} />,
   h2: ({ node, ...props }: any) => <h2 className="text-3xl font-bold mt-8 mb-3 text-white" {...props} />,
   h3: ({ node, ...props }: any) => <h3 className="text-2xl font-bold mt-6 mb-3 text-white" {...props} />,
   h4: ({ node, ...props }: any) => <h4 className="text-xl font-bold mt-6 mb-2 text-white" {...props} />,
-  p: ({ node, ...props }: any) => <p className="my-4 text-gray-300" {...props} />,
+  p: ({ node, ...props }: any) => <p className="font-sans my-4 text-gray-300" {...props} />,
   a: ({ node, href, ...props }: any) => <a href={href} className="text-blue-400 hover:underline" {...props} />,
   ul: ({ node, ...props }: any) => <ul className="list-disc pl-8 my-4 text-gray-300" {...props} />,
   ol: ({ node, ...props }: any) => <ol className="list-decimal pl-8 my-4 text-gray-300" {...props} />,

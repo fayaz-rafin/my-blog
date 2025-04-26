@@ -1,3 +1,75 @@
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-MediumIt.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-SemiboldIt.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-BoldIt.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-BoldCn.otf') format('opentype');
+  font-weight: bold;
+  font-stretch: condensed;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-BoldCnIt.otf') format('opentype');
+  font-weight: bold;
+  font-stretch: condensed;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MinionPro';
+  src: url('/fonts/MinionPro-It.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -105,9 +177,9 @@
   }
 }
 
-body {
-  font-family: var(--font-sans);
-}
+/* body {
+  font-family: 'MinionPro', sans-serif;
+} */
 
 .dark {
   --background: oklch(0.145 0 0);

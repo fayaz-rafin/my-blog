@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['MinionPro', 'var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
+      },
       typography: {
         DEFAULT: {
           css: {

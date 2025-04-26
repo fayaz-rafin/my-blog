@@ -63,10 +63,10 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               <p className="text-gray-400">My latest updates and activities.</p>
               <div className="mt-6 flex items-center gap-4">
                 <div className="bg-[#313244] p-4 rounded-lg flex-shrink-0">
-                  <span className="text-3xl">📚</span>
+                  <span className="text-3xl">😎</span>
                 </div>
                 <p className="text-xl text-gray-300 leading-normal">
-                  I'm currently studying for my final exams and questioning all my life choices!
+                  Exams are finally over! I can finally rest, and watch the sun rise on a grateful universe.
                 </p>
               </div>
             </div>

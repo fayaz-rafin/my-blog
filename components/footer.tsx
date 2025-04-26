@@ -25,14 +25,20 @@ export function Footer() {
           {/* Navigation links */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
             <FooterLink href="#top">↑ Back to top</FooterLink>
-            <FooterLink href="mailto:fayaz.rafin@gmail.com">✉️ Say "hi"!</FooterLink>
-            <FooterLink href="https://github.com/fayaz-rafin">🐙 Github</FooterLink>
-            <FooterLink href="https://linkedin.com/in/fayazrafin">💼 LinkedIn</FooterLink>
+            <FooterLink href="mailto:fayaz.rafin@gmail.com">
+              <img src="/icons/email.svg" alt="Email" className="w-6 h-6" />
+            </FooterLink>
+            <FooterLink href="https://github.com/fayaz-rafin">
+              <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6" />
+            </FooterLink>
+            <FooterLink href="https://linkedin.com/in/fayazrafin">
+              <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6" />
+            </FooterLink>
           </div>
 
           {/* Copyright */}
           <div className="text-center text-sm sm:text-base text-gray-400">
-            © 2024 Fayaz Rafin. All rights reserved.
+            © 2025 Fayaz Rafin. All rights reserved.
           </div>
         </div>
       </div>
@@ -54,7 +60,7 @@ function FooterLink({ href, children }: FooterLinkProps) {
         bg-[#252837] hover:bg-[#1e1e2e] text-gray-300 hover:text-[#cba6f7]
         transition-all duration-200"
     >
-      {children}
+      {typeof children === 'string' ? children : children}
     </Link>
   )
 }

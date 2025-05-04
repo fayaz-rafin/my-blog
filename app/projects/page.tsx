@@ -18,6 +18,15 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: 2,
+    title: "sponsorship.io",
+    description: "A web-app to help peopel draft emails for sponsorships.",
+    image: "/projects/sponsorship.png",
+    technologies: ["Next.js", "Tailwind", "TypeScript", "Vercel", "Google Gemini"],
+    link: "https://sponsorshipio.vercel.app/",
+    category: "Web App"
+  },
+  {
     id: 1,
     title: "LeetLogger",
     description: "A Leetcode progress tracker to make Leetcode more fun and engaging.",
@@ -27,7 +36,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 2,
+    id: 3,
     title: "Pomoduino",
     description: "A functional Pomodoro timer in Arduino using a 4-Digit 7 Segment LED Display and 4x4 Keypad and Arduino DUE Microcontroller.",
     image: "/projects/pomoduino.png",
@@ -36,7 +45,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 3,
+    id: 4,
     title: "Veri-Thread",
     description: "Transparent, sustainable fashion backed up by blockchain. Trace every step from material to finished product, safety contracts, earn ICP tokens for supporting ethical and eco-friendly manufacturing.",
     image: "/projects/verithread.png",
@@ -45,7 +54,7 @@ const projects: Project[] = [
     category: "App"
   },
   {
-    id: 4,
+    id: 5,
     title: "Veripong",
     description: "VGA Pong Game Implementation on DE10-Lite FPGA",
     image: "/projects/veripong.png",
@@ -54,7 +63,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 5,
+    id: 6,
     title: "Amnesiac's Odyssey",
     description: "JRPG Game on the Nintendo Gameboy using GBDK and Aseprite.",
     image: "/projects/aogame.png",
@@ -63,7 +72,7 @@ const projects: Project[] = [
     category: "Game"
   },
   {
-    id: 6,
+    id: 7,
     title: "CTRL+HACK+DEL",
     description: "Landing page of CTRL+HACK+DEL, York University's Premier Hackathon.",
     image: "/projects/chd.png",
@@ -71,6 +80,7 @@ const projects: Project[] = [
     link: "https://www.ctrlhackdel.com/",
     category: "Web App"
   },
+  
 ]
 
 const PROJECTS_PER_PAGE = 6

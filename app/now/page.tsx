@@ -28,7 +28,7 @@ export default function Page(): React.JSX.Element {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-white">🚀 Current Focus</h2>
             <p>
-              Building and learning new technologies in Software Engineering. Currently diving deep into:
+              Starting a new full-time job as a Student Life Assistant @ York University. I'm also currently diving deep into:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Next.js 15 and Server Components</li>
@@ -39,7 +39,7 @@ export default function Page(): React.JSX.Element {
               Additionally, I'm taking the following courses in university:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>Network Application and Protocols</li>
+              <li>Multivariable Calculus</li>
               <li>Electricity and Magnetism</li>
             </ul>
           </section>
@@ -51,7 +51,7 @@ export default function Page(): React.JSX.Element {
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Personal portfolio website (this one!)</li>
-              <li>Learning how to make a Chrome Extension.</li>
+              <li>Developing a web-app to streamline the process for people to find sponsorships.</li>
               <li>Developing a web application to turn Leetcode into a fun and competitive experience with friends.</li>
             </ul>
 

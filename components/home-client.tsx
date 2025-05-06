@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -18,6 +18,37 @@ interface HomeClientProps {
 }
 
 export default function HomeClient({ recentPost }: HomeClientProps) {
+  const [displayText, setDisplayText] = useState('Hello, World!');
+  const phrases = ['Hello, World!', 'Bonjour, le monde!', 'Hola, Mundo!', 'こんにちは、世界！', '안녕하세요, 세계!', 'Привет, мир!', 'مرحبا بالعالم!','হ্যালো, বিশ্ব!', 'नमस्ते, दुनिया!', 'வணக்கம், உலகம்!', '你好，世界！', 'Olá, Mundo!', 'Ciao, Mondo!', 'שלום, עולם!'];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentPhrase = phrases[phraseIndex];
+      setDisplayText(
+        isDeleting
+          ? currentPhrase.substring(0, displayText.length - 1)
+          : currentPhrase.substring(0, displayText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 75 : 150);
+
+      if (!isDeleting && displayText === currentPhrase) {
+        setTimeout(() => setIsDeleting(true), 1000);
+      } else if (isDeleting && displayText === '') {
+        setIsDeleting(false);
+        setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+      }
+    };
+
+    const typingTimer = setTimeout(handleTyping, typingSpeed);
+
+    return () => clearTimeout(typingTimer);
+  }, [displayText, isDeleting, phraseIndex, typingSpeed]);
+
+
   return (
     <main className="pt-32 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,8 +64,8 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             />
           </div>
           <div className="flex-1 space-y-6">
-            <h1 className="text-5xl sm:text-6xl font-bold text-white">
-              Hello, World!
+            <h1 className="text-5xl sm:text-6xl font-bold text-white" style={{ minHeight: '4rem' }}>
+            {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
             </h1>
             <p className="text-2xl text-gray-300">
               My name is Fayaz Rafin. I build software and write about technology, development, and my journey.

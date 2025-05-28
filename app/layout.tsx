@@ -28,15 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
+      <Analytics />
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#1e1e2e] min-h-screen`}
       >
-        <Analytics />
+        
         <Providers>
           {/* Move the Navbar outside the content container */}
           <Navbar />
-          
           {/* Content container separate from Navbar */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12 md:py-16 space-y-16 md:space-y-24">
@@ -48,5 +49,6 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
+    </>
   );
 }

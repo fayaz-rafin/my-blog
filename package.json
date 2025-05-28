@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
@@ -39,5 +40,20 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Welcome to my personal portfolio website! Built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**, this site showcases who I am, what I’ve built, what I’m working on now, and where I’m headed.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fayaz-rafin/my-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fayaz-rafin/my-blog/issues"
+  },
+  "homepage": "https://github.com/fayaz-rafin/my-blog#readme"
 }

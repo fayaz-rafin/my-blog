@@ -65,8 +65,8 @@ const skills = {
 
 const experiences: WorkExperience[] = [
     {
-        company: "Software Engineer",
-        role: "Dorayaki Studios",
+        company: "Dorayaki Studios",
+        role: "Software Engineer",
         period: "March 2024 — Present",
         logo: "/logos/ds.png"
     },

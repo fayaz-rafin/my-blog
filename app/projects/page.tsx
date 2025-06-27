@@ -28,11 +28,11 @@ const projects: Project[] = [
   },
   {
     id: 1,
-    title: "LeetLogger",
+    title: "Leetcode Tracker",
     description: "A Leetcode progress tracker to make Leetcode more fun and engaging.",
     image: "/projects/leetlogger.png",
     technologies: ["Next.js", "TypeScript", "Tailwind", "Supabase", "PostgreSQL", "Vercel"],
-    link: "https://github.com/fayaz-rafin/leetcode-tracker",
+    link: "https://leetcode-tracker-phi.vercel.app/",
     category: "Web App"
   },
   {

@@ -17,6 +17,16 @@ export interface Project {
 }
 
 const projects: Project[] = [
+
+  {
+    id: 1,
+    title: "social brocoli",
+    description: "The first Agentic shopping assistant for no name brands.",
+    image: "/projects/socialbrocoli.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Supabase", "PostgreSQL", "Vercel", "groq",],
+    link: "https://social-pod.vercel.app/",
+    category: "Web App",
+  },
   {
     id: 2,
     title: "sponsorship.io",
@@ -27,7 +37,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 1,
+    id: 8,
     title: "Leetcode Tracker",
     description: "A Leetcode progress tracker to make Leetcode more fun and engaging.",
     image: "/projects/leetlogger.png",

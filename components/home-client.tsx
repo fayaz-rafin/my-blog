@@ -109,10 +109,11 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
           </motion.div>
         </section>
 
+
+
         {/* Recent Blog Post Section */}
         <section className="mt-16">
           <motion.div 
-
             className="bg-[#252837] rounded-xl p-6 relative overflow-hidden"
             initial={{ backgroundColor: '#252837' }}
             whileHover={{ backgroundColor: '#313244' }}

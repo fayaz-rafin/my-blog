@@ -21,6 +21,7 @@ const skills = {
     { name: "TypeScript", icon: "/icons/typescript.svg" },
     { name: "Python", icon: "/icons/python.svg" },
     { name: "Java", icon: "/icons/java.svg" },
+    { name: "Swift", icon: "/icons/swift.svg" },  
     { name: "C", icon: "/icons/c.svg" },
     { name: "Go", icon: "/icons/go.svg" },
     { name: "Rust", icon: "/icons/rust.svg" },
@@ -29,6 +30,7 @@ const skills = {
   frameworks: [
     { name: "React", icon: "/icons/react.svg" },
     { name: "Next.js", icon: "/icons/nextjs.svg" },
+    { name: "SwiftUI", icon: "/icons/swift.svg" },
     { name: "Flask", icon: "/icons/flask.svg" },
     { name: "Express.js", icon: "/icons/express.svg" },
     { name: "Docker", icon: "/icons/docker.svg" },

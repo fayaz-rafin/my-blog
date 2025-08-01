@@ -14,6 +14,8 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
   const [isTracking, setIsTracking] = useState<boolean>(false)
   const [blobAvailable, setBlobAvailable] = useState<boolean>(false)
   const [mounted, setMounted] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [fallbackMode, setFallbackMode] = useState<boolean>(false)
 
   useEffect(() => {
     setMounted(true)
@@ -31,20 +33,49 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
         const response = await fetch('/api/viewers')
         if (response.ok) {
           setBlobAvailable(true)
+          setError(false)
+          setFallbackMode(false)
+        } else {
+          console.log('Vercel Blob not available - API returned error')
+          setBlobAvailable(false)
+          setError(true)
+          setFallbackMode(true)
         }
       } catch (error) {
-        console.log('Vercel Blob not available')
+        console.log('Vercel Blob not available - Network error:', error)
         setBlobAvailable(false)
+        setError(true)
+        setFallbackMode(true)
       }
     }
 
     checkBlobAvailability()
+
+    // Set up fallback mode with simulated data
+    if (fallbackMode) {
+      const simulateViewers = () => {
+        const baseCount = Math.floor(Math.random() * 3) + 1
+        const randomIncrement = Math.floor(Math.random() * 2)
+        const newCount = baseCount + randomIncrement
+        setViewerCount(newCount)
+        setIsOnline(true)
+      }
+
+      // Initial count
+      simulateViewers()
+
+      // Update count every 30 seconds
+      const interval = setInterval(simulateViewers, 30000)
+
+      return () => clearInterval(interval)
+    }
 
     // Only track if blob is available
     if (blobAvailable) {
       const trackViewer = async () => {
         try {
           setIsTracking(true)
+          setError(false)
           
           // Get geographic data
           const geoData = await getGeographicData()
@@ -71,9 +102,13 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
               setViewerCount(result.viewersData.totalViewers)
             }
             setIsOnline(true)
+          } else {
+            console.error('Failed to track viewer - API error')
+            setError(true)
           }
         } catch (error) {
           console.error('Error tracking viewer:', error)
+          setError(true)
         } finally {
           setIsTracking(false)
         }
@@ -88,9 +123,14 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
           if (response.ok) {
             const data = await response.json()
             setViewerCount(data.totalViewers)
+            setError(false)
+          } else {
+            console.error('Failed to update viewers - API error')
+            setError(true)
           }
         } catch (error) {
           console.error('Error updating viewers:', error)
+          setError(true)
         }
       }
 
@@ -100,7 +140,7 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
       // Set up heartbeat
       const heartbeatInterval = setInterval(async () => {
         try {
-          await fetch('/api/socket', {
+          const response = await fetch('/api/socket', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -110,6 +150,10 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
               data: { id }
             }),
           })
+          
+          if (!response.ok) {
+            console.error('Failed to send heartbeat - API error')
+          }
         } catch (error) {
           console.error('Error sending heartbeat:', error)
         }
@@ -120,15 +164,15 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
         clearInterval(heartbeatInterval)
       }
     }
-  }, [mounted, blobAvailable])
+  }, [mounted, blobAvailable, fallbackMode])
 
   // Don't render anything during SSR or if not mounted
   if (!mounted) {
     return null
   }
 
-  // Don't render if blob is not available
-  if (!blobAvailable) {
+  // Don't render if there's an error and not in fallback mode
+  if (error && !fallbackMode) {
     return null
   }
 
@@ -144,6 +188,9 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
         <span className="text-xs">
           {isTracking ? 'Connecting...' : `${viewerCount} ${viewerCount === 1 ? 'person' : 'people'} online`}
         </span>
+        {fallbackMode && (
+          <span className="text-xs text-gray-500 ml-1">(demo)</span>
+        )}
       </div>
     </motion.div>
   )

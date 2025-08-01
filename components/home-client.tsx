@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import OnlineViewers from './online-viewers'
 
 interface BlogPost {
   title: string
@@ -52,6 +53,10 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
   return (
     <main className="pt-32 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Online Viewers Counter */}
+        <div className="flex justify-end mb-4">
+          <OnlineViewers />
+        </div>
         {/* Intro Section */}
         <div className="flex items-start gap-6 flex-col sm:flex-row">
           <div className="flex-shrink-0">
@@ -94,10 +99,10 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               <p className="text-gray-400">My latest updates and activities.</p>
               <div className="mt-6 flex items-center gap-4">
                 <div className="bg-[#313244] p-4 rounded-lg flex-shrink-0">
-                  <span className="text-3xl">😎</span>
+                  <span className="text-3xl">🏃</span>
                 </div>
                 <p className="text-xl text-gray-300 leading-normal">
-                  Exams are finally over! I can finally rest, and watch the sun rise on a grateful universe.
+                  Making the most of my summer break before university starts.
                 </p>
               </div>
             </div>
@@ -107,6 +112,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
         {/* Recent Blog Post Section */}
         <section className="mt-16">
           <motion.div 
+
             className="bg-[#252837] rounded-xl p-6 relative overflow-hidden"
             initial={{ backgroundColor: '#252837' }}
             whileHover={{ backgroundColor: '#313244' }}

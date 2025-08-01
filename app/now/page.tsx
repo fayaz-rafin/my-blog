@@ -33,13 +33,13 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Next.js 15 and Server Components</li>
               <li>TypeScript best practices</li>
-              <li>Java Springboot</li>
+              <li>Swift and SwiftUI</li>
             </ul>
             <p>
               Additionally, I'm taking the following courses in university:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>Multivariable Calculus</li>
+              <li>Computer Organization</li>
               <li>Electricity and Magnetism</li>
             </ul>
           </section>
@@ -51,7 +51,7 @@ export default function Page(): React.JSX.Element {
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Personal portfolio website (this one!)</li>
-              <li>Developing a web-app to streamline the process for people to find sponsorships.</li>
+              <li>Developing an iOS app for runners on race day.</li>
               <li>Developing a web application to turn Leetcode into a fun and competitive experience with friends.</li>
             </ul>
 
@@ -78,7 +78,7 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Advanced React patterns</li>
               <li>Software architecture</li>
-              <li>Cloud infrastructure (AWS)</li>
+              <li>Cloud infrastructure (AWS, Azure)</li>
             </ul>
           </section>
 
@@ -96,6 +96,8 @@ export default function Page(): React.JSX.Element {
               <li>Write one technical blog post per month</li>
               <li>Contribute to 5 open source projects</li>
               <li>Improve system design skills</li>
+              <li>Learn more about the stock market</li>
+              <li>Learn app development in Swift</li>
             </ul>
           </section>
 
@@ -103,6 +105,7 @@ export default function Page(): React.JSX.Element {
             <h2 className="text-2xl font-bold text-white">📖 Currently Reading</h2>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>&quot;Dune&quot; by Frank Herbert</li>
+              <li>&quot;Lovecraft Country&quot; by Matt Ruff</li>
             </ul>
           </section>
 

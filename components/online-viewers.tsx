@@ -27,6 +27,9 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
     // Initialize visitor ID
     const id = getVisitorId()
 
+    // Create AbortController for cleanup
+    const abortController = new AbortController()
+
     // Check if Vercel Blob is available and set up the system
     const initializeSystem = async () => {
       try {
@@ -38,6 +41,8 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
           
           // Track viewer with real data
           const trackViewer = async () => {
+            if (abortController.signal.aborted) return
+            
             try {
               setIsTracking(true)
               setError(false)
@@ -59,6 +64,7 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
                     ...geoData
                   }
                 }),
+                signal: abortController.signal
               })
 
               if (response.ok) {
@@ -72,10 +78,14 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
                 setError(true)
               }
             } catch (error) {
-              console.error('Error tracking viewer:', error)
-              setError(true)
+              if (error instanceof Error && error.name !== 'AbortError') {
+                console.error('Error tracking viewer:', error)
+                setError(true)
+              }
             } finally {
-              setIsTracking(false)
+              if (!abortController.signal.aborted) {
+                setIsTracking(false)
+              }
             }
           }
 
@@ -83,9 +93,13 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
 
           // Set up polling for viewer updates and heartbeat in a single interval
           const updateViewersAndHeartbeat = async () => {
+            if (abortController.signal.aborted) return
+            
             try {
               // Update viewer count
-              const response = await fetch('/api/viewers')
+              const response = await fetch('/api/viewers', {
+                signal: abortController.signal
+              })
               if (response.ok) {
                 const data = await response.json()
                 setViewerCount(data.totalViewers)
@@ -105,20 +119,28 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
                   type: 'viewer-heartbeat',
                   data: { id }
                 }),
+                signal: abortController.signal
               })
               
               if (!heartbeatResponse.ok) {
                 console.error('Failed to send heartbeat - API error')
               }
             } catch (error) {
-              console.error('Error in update cycle:', error)
-              setError(true)
+              if (error instanceof Error && error.name !== 'AbortError') {
+                console.error('Error in update cycle:', error)
+                setError(true)
+              }
             }
           }
 
           // Update every 30 seconds
           const interval = setInterval(updateViewersAndHeartbeat, 30000)
-          return () => clearInterval(interval)
+          
+          // Clean up interval when aborted
+          abortController.signal.addEventListener('abort', () => {
+            clearInterval(interval)
+          })
+          
         } else {
           console.log('Vercel Blob not available - API returned error')
           setBlobAvailable(false)
@@ -127,6 +149,8 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
           
           // Set up fallback mode with simulated data
           const simulateViewers = () => {
+            if (abortController.signal.aborted) return
+            
             const baseCount = Math.floor(Math.random() * 3) + 1
             const randomIncrement = Math.floor(Math.random() * 2)
             const newCount = baseCount + randomIncrement
@@ -139,47 +163,50 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
 
           // Update count every 30 seconds
           const interval = setInterval(simulateViewers, 30000)
-          return () => clearInterval(interval)
+          
+          // Clean up interval when aborted
+          abortController.signal.addEventListener('abort', () => {
+            clearInterval(interval)
+          })
         }
       } catch (error) {
-        console.log('Vercel Blob not available - Network error:', error)
-        setBlobAvailable(false)
-        setError(true)
-        setFallbackMode(true)
-        
-        // Set up fallback mode with simulated data
-        const simulateViewers = () => {
-          const baseCount = Math.floor(Math.random() * 3) + 1
-          const randomIncrement = Math.floor(Math.random() * 2)
-          const newCount = baseCount + randomIncrement
-          setViewerCount(newCount)
-          setIsOnline(true)
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.log('Vercel Blob not available - Network error:', error)
+          setBlobAvailable(false)
+          setError(true)
+          setFallbackMode(true)
+          
+          // Set up fallback mode with simulated data
+          const simulateViewers = () => {
+            if (abortController.signal.aborted) return
+            
+            const baseCount = Math.floor(Math.random() * 3) + 1
+            const randomIncrement = Math.floor(Math.random() * 2)
+            const newCount = baseCount + randomIncrement
+            setViewerCount(newCount)
+            setIsOnline(true)
+          }
+
+          // Initial count
+          simulateViewers()
+
+          // Update count every 30 seconds
+          const interval = setInterval(simulateViewers, 30000)
+          
+          // Clean up interval when aborted
+          abortController.signal.addEventListener('abort', () => {
+            clearInterval(interval)
+          })
         }
-
-        // Initial count
-        simulateViewers()
-
-        // Update count every 30 seconds
-        const interval = setInterval(simulateViewers, 30000)
-        return () => clearInterval(interval)
       }
     }
 
-    // Initialize and handle cleanup
-    let cleanup: (() => void) | undefined
-    let isActive = true
+    // Initialize the system
+    initializeSystem()
 
-    initializeSystem().then((cleanupFn) => {
-      if (isActive) {
-        cleanup = cleanupFn
-      }
-    })
-
+    // Cleanup function
     return () => {
-      isActive = false
-      if (cleanup) {
-        cleanup()
-      }
+      abortController.abort()
     }
   }, [mounted])
 

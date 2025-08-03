@@ -165,13 +165,18 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
       }
     }
 
-    // Initialize and get cleanup function
+    // Initialize and handle cleanup
     let cleanup: (() => void) | undefined
+    let isActive = true
+
     initializeSystem().then((cleanupFn) => {
-      cleanup = cleanupFn
+      if (isActive) {
+        cleanup = cleanupFn
+      }
     })
 
     return () => {
+      isActive = false
       if (cleanup) {
         cleanup()
       }

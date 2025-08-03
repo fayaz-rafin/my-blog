@@ -30,8 +30,9 @@ export async function getViewerData() {
       
       // Filter blobs by timestamp before fetching
       const recentBlobs = blobs.filter(blob => {
-        // Extract timestamp from blob name if it follows a pattern
-        const timestampMatch = blob.pathname.match(/(\d+)/)
+        // Extract timestamp from blob name using specific pattern for viewer data
+        // Expected format: viewers/{timestamp}-{id}.json or viewers/{id}.json
+        const timestampMatch = blob.pathname.match(/viewers\/(\d+)/)
         if (timestampMatch) {
           const blobTimestamp = parseInt(timestampMatch[1]) * 1000
           return blobTimestamp >= cutoffTime

@@ -68,15 +68,66 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
   const getTimeDifference = () => {
     if (!visitorTimezone || !currentTime) return { text: 'Loading...', percentage: 50 }
     try {
-      // Use getTimezoneOffset() for accurate timezone calculations
-      // Reference date for consistent offset calculation (any date works, using epoch start)
-      const REFERENCE_DATE = new Date('1970-01-01T00:00:00.000Z')
+      // Use Intl.DateTimeFormat with formatToParts() for accurate timezone calculations
+      // Use current date for timezone offset calculation (more intuitive than epoch start)
+      const REFERENCE_DATE = new Date()
       
-      // Get timezone offsets using getTimezoneOffset() method
-      const userOffset = new Date(REFERENCE_DATE.toLocaleString('en-US', { timeZone: userTimezone })).getTimezoneOffset()
-      const visitorOffset = new Date(REFERENCE_DATE.toLocaleString('en-US', { timeZone: visitorTimezone })).getTimezoneOffset()
+      // Get timezone offsets using Intl.DateTimeFormat with formatToParts()
+      const userFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: userTimezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      })
       
-      // Calculate the difference in hours (getTimezoneOffset returns minutes)
+      const visitorFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: visitorTimezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      })
+
+      // Get timezone offsets by comparing with UTC
+      const utcFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      })
+
+      // Format the same date in different timezones
+      const utcParts = utcFormatter.formatToParts(REFERENCE_DATE)
+      const userParts = userFormatter.formatToParts(REFERENCE_DATE)
+      const visitorParts = visitorFormatter.formatToParts(REFERENCE_DATE)
+
+      // Extract time components
+      const getTimeInMinutes = (parts: Intl.DateTimeFormatPart[]) => {
+        const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0')
+        const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0')
+        return hour * 60 + minute
+      }
+
+      const utcMinutes = getTimeInMinutes(utcParts)
+      const userMinutes = getTimeInMinutes(userParts)
+      const visitorMinutes = getTimeInMinutes(visitorParts)
+
+      // Calculate timezone offsets in minutes
+      const userOffset = userMinutes - utcMinutes
+      const visitorOffset = visitorMinutes - utcMinutes
+
+      // Calculate the difference in hours
       const diffHours = (visitorOffset - userOffset) / 60
       
       const absDiff = Math.abs(diffHours)

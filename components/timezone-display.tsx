@@ -68,75 +68,59 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
   const getTimeDifference = () => {
     if (!visitorTimezone || !currentTime) return { text: 'Loading...', percentage: 50 }
     try {
-      // Use proper timezone offset calculations
-      // Get the current time in milliseconds
-      const now = currentTime.getTime()
-      
-      // Create temporary dates for timezone offset calculation
-      // We need to use a consistent reference time to calculate offsets
-      const tempDate = new Date('2024-01-01T12:00:00.000Z')
-      
-      // Get timezone offsets by comparing the same moment in different timezones
-      // Format the date in each timezone and parse back to get local representation
-      const userTimeString = tempDate.toLocaleString('en-CA', { 
-        timeZone: userTimezone,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      })
-      
-      const visitorTimeString = tempDate.toLocaleString('en-CA', { 
-        timeZone: visitorTimezone,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      })
-      
-      // Parse the strings back to dates (these will be in local timezone)
-      const userLocalTime = new Date(userTimeString.replace(/,/g, ''))
-      const visitorLocalTime = new Date(visitorTimeString.replace(/,/g, ''))
-      
-      // Calculate the offset difference in milliseconds
-      const offsetDifference = visitorLocalTime.getTime() - userLocalTime.getTime()
-      
-      // Convert to hours
-      const diffHours = offsetDifference / (1000 * 60 * 60)
-      
-      const absDiff = Math.abs(diffHours)
-      const hours = Math.floor(absDiff)
-      const minutes = Math.round((absDiff - hours) * 60)
-      
-      let text = ''
+      // Use Intl.DateTimeFormat with formatToParts for efficient timezone offset calculation
+      // Use a fixed UTC reference time
+      const referenceDate = new Date(Date.UTC(2024, 0, 1, 12, 0, 0)); // Jan 1, 2024, 12:00 UTC
+
+      function getOffsetParts(timeZone: string) {
+        const dtf = new Intl.DateTimeFormat('en', {
+          timeZone,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+        const parts = dtf.formatToParts(referenceDate);
+        const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0', 10);
+        const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0', 10);
+        const second = parseInt(parts.find(p => p.type === 'second')?.value || '0', 10);
+        return hour * 3600 + minute * 60 + second;
+      }
+
+      const userOffsetSeconds = getOffsetParts(userTimezone);
+      const visitorOffsetSeconds = getOffsetParts(visitorTimezone);
+
+      // Calculate the offset difference in hours
+      const diffSeconds = visitorOffsetSeconds - userOffsetSeconds;
+      const diffHours = diffSeconds / 3600;
+
+      const absDiff = Math.abs(diffHours);
+      const hours = Math.floor(absDiff);
+      const minutes = Math.round((absDiff - hours) * 60);
+
+      let text = '';
       if (hours === 0 && minutes === 0) {
-        text = 'same time'
+        text = 'same time';
       } else if (hours === 0) {
-        text = `${minutes}m ${diffHours > 0 ? 'ahead' : 'behind'}`
+        text = `${minutes}m ${diffHours > 0 ? 'ahead' : 'behind'}`;
       } else if (minutes === 0) {
-        text = `${hours}h ${diffHours > 0 ? 'ahead' : 'behind'}`
+        text = `${hours}h ${diffHours > 0 ? 'ahead' : 'behind'}`;
       } else {
-        text = `${hours}h ${minutes}m ${diffHours > 0 ? 'ahead' : 'behind'}`
+        text = `${hours}h ${minutes}m ${diffHours > 0 ? 'ahead' : 'behind'}`;
       }
 
       // Calculate percentage for the bar (50% is center, 0% is far left, 100% is far right)
       // Max time difference we'll show is ±12 hours
-      const maxDiff = 12
-      const clampedDiff = Math.max(-maxDiff, Math.min(maxDiff, diffHours))
+      const maxDiff = 12;
+      const clampedDiff = Math.max(-maxDiff, Math.min(maxDiff, diffHours));
       // If your time is ahead (positive diff), bar goes right (more blue)
       // If your time is behind (negative diff), bar goes left (more green)
-      const percentage = 50 + (clampedDiff / maxDiff) * 50
+      const percentage = 50 + (clampedDiff / maxDiff) * 50;
 
-      return { text, percentage }
+      return { text, percentage };
     } catch (error) {
-      console.error('Error calculating time difference:', error)
-      return { text: 'calculating...', percentage: 50 }
+      console.error('Error calculating time difference:', error);
+      return { text: 'calculating...', percentage: 50 };
     }
   }
 

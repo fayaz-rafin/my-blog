@@ -68,19 +68,47 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
   const getTimeDifference = () => {
     if (!visitorTimezone || !currentTime) return { text: 'Loading...', percentage: 50 }
     try {
-      // Use getTimezoneOffset() for reliable timezone calculations
-      // This method handles DST transitions and edge cases automatically
+      // Use proper timezone offset calculations
+      // Get the current time in milliseconds
+      const now = currentTime.getTime()
       
-      // Create dates in the target timezones and get their offsets
-      const userDate = new Date(currentTime.toLocaleString('en-US', { timeZone: userTimezone }))
-      const visitorDate = new Date(currentTime.toLocaleString('en-US', { timeZone: visitorTimezone }))
+      // Create temporary dates for timezone offset calculation
+      // We need to use a consistent reference time to calculate offsets
+      const tempDate = new Date('2024-01-01T12:00:00.000Z')
       
-      // Get timezone offsets in minutes (getTimezoneOffset returns minutes from UTC)
-      const userOffset = userDate.getTimezoneOffset()
-      const visitorOffset = visitorDate.getTimezoneOffset()
+      // Get timezone offsets by comparing the same moment in different timezones
+      // Format the date in each timezone and parse back to get local representation
+      const userTimeString = tempDate.toLocaleString('en-CA', { 
+        timeZone: userTimezone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      })
       
-      // Calculate the difference in hours
-      const diffHours = (visitorOffset - userOffset) / 60
+      const visitorTimeString = tempDate.toLocaleString('en-CA', { 
+        timeZone: visitorTimezone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      })
+      
+      // Parse the strings back to dates (these will be in local timezone)
+      const userLocalTime = new Date(userTimeString.replace(/,/g, ''))
+      const visitorLocalTime = new Date(visitorTimeString.replace(/,/g, ''))
+      
+      // Calculate the offset difference in milliseconds
+      const offsetDifference = visitorLocalTime.getTime() - userLocalTime.getTime()
+      
+      // Convert to hours
+      const diffHours = offsetDifference / (1000 * 60 * 60)
       
       const absDiff = Math.abs(diffHours)
       const hours = Math.floor(absDiff)

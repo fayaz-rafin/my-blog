@@ -33,7 +33,8 @@ export async function getViewerData() {
         // Expected format: viewers/{timestamp}-{id}.json or viewers/{id}.json
         const timestampMatch = blob.pathname.match(/viewers\/(\d+)/)
         if (timestampMatch) {
-          const blobTimestamp = parseInt(timestampMatch[1]) * 1000
+          // Timestamp in blob name is already in milliseconds
+          const blobTimestamp = parseInt(timestampMatch[1])
           return blobTimestamp >= cutoffTime
         }
         // If no timestamp in name, fetch and check later

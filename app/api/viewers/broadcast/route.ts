@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Use a WeakMap to store clients with automatic cleanup
-const clientMap = new WeakMap<ReadableStreamDefaultController, boolean>()
+// Use a regular Map for reliable client management
+const clientMap = new Map<ReadableStreamDefaultController, boolean>()
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'

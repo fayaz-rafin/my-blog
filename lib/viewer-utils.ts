@@ -19,18 +19,33 @@ export async function getViewerData() {
   try {
     const now = Date.now()
     const activeThreshold = 5 * 60 * 1000 // 5 minutes
+    const cutoffTime = now - activeThreshold
     let viewers: ViewerData[] = []
 
     // Try to use Vercel Blob, fallback to in-memory storage
     try {
+      // Filter by timestamp prefix to only fetch recent blobs
+      const timestampPrefix = Math.floor(cutoffTime / 1000).toString()
       const { blobs } = await list({ prefix: 'viewers/' })
       
-      for (const blob of blobs) {
+      // Filter blobs by timestamp before fetching
+      const recentBlobs = blobs.filter(blob => {
+        // Extract timestamp from blob name if it follows a pattern
+        const timestampMatch = blob.pathname.match(/(\d+)/)
+        if (timestampMatch) {
+          const blobTimestamp = parseInt(timestampMatch[1]) * 1000
+          return blobTimestamp >= cutoffTime
+        }
+        // If no timestamp in name, fetch and check later
+        return true
+      })
+      
+      for (const blob of recentBlobs) {
         try {
           const response = await fetch(blob.url)
           const viewerData: ViewerData = await response.json()
           
-          // Only include active viewers (seen in last 5 minutes)
+          // Double-check if viewer is still active
           if (now - viewerData.lastSeen < activeThreshold) {
             viewers.push(viewerData)
           }

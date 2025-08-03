@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       // Send initial connection message
       controller.enqueue(encoder.encode('data: {"type":"connected","message":"SSE connected"}\n\n'))
       
-      // Set up interval to send viewer updates
+      // Set up interval to send viewer updates with reduced frequency
       const interval = setInterval(async () => {
         try {
           // Fetch current viewer data directly
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
           console.error('Error fetching viewer data for SSE:', error)
           controller.enqueue(encoder.encode('data: {"type":"error","message":"Failed to fetch viewer data"}\n\n'))
         }
-      }, 5000) // Update every 5 seconds for real-time feel
+      }, 15000) // Update every 15 seconds to reduce load on Vercel Blob storage
       
       // Clean up interval when connection closes
       request.signal.addEventListener('abort', () => {

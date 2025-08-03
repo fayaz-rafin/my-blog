@@ -68,36 +68,16 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
   const getTimeDifference = () => {
     if (!visitorTimezone || !currentTime) return { text: 'Loading...', percentage: 50 }
     try {
-      // Calculate timezone offsets properly using Intl.DateTimeFormat
-      const userFormatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: userTimezone,
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric'
-      })
+      // Use getTimezoneOffset() for accurate timezone calculations
+      // Reference date for consistent offset calculation (any date works, using epoch start)
+      const REFERENCE_DATE = new Date('1970-01-01T00:00:00.000Z')
       
-      const visitorFormatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: visitorTimezone,
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric'
-      })
-
-      // Get the timezone offsets by comparing UTC time
-      const utcDate = new Date('2024-01-01T00:00:00.000Z')
-      const userDate = new Date(userFormatter.format(utcDate))
-      const visitorDate = new Date(visitorFormatter.format(utcDate))
+      // Get timezone offsets using getTimezoneOffset() method
+      const userOffset = new Date(REFERENCE_DATE.toLocaleString('en-US', { timeZone: userTimezone })).getTimezoneOffset()
+      const visitorOffset = new Date(REFERENCE_DATE.toLocaleString('en-US', { timeZone: visitorTimezone })).getTimezoneOffset()
       
-      // Calculate the difference in hours
-      const userOffset = userDate.getTime() - utcDate.getTime()
-      const visitorOffset = visitorDate.getTime() - utcDate.getTime()
-      const diffHours = (userOffset - visitorOffset) / (1000 * 60 * 60)
+      // Calculate the difference in hours (getTimezoneOffset returns minutes)
+      const diffHours = (visitorOffset - userOffset) / 60
       
       const absDiff = Math.abs(diffHours)
       const hours = Math.floor(absDiff)

@@ -1,135 +1,60 @@
-# Welcome to my Portfolio! [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fayaz-rafin_my-blog&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fayaz-rafin_my-blog)
+# Fayaz Rafin - Personal Portfolio & Blog
 
-Welcome to my personal portfolio website! Built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**, this site showcases who I am, what I've built, what I'm working on now, and where I'm headed. Features real-time viewer tracking with geographic analytics!
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fayaz-rafin_my-blog&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fayaz-rafin_my-blog)
+[![Next.js](https://img.shields.io/badge/Next.js-15.2.0-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
-![image](https://github.com/user-attachments/assets/0afc54e8-36ba-49b0-b746-a40974e0710b)
+> **Live Demo:** [fayazrafin.xyz](https://fayazrafin.xyz)
 
-## 🚀 Features
+A modern full-stack portfolio showcasing real-time analytics, interactive features, and diverse project experience. Built with Next.js 15, TypeScript, and cutting-edge web technologies.
 
-- ⚡ Fast and modern stack (App Router, Server Components, Suspense)
-- 🎨 Fully responsive, themed with **Catppuccin Mocha**
-- 🌙 Light/Dark mode toggle (powered by `next-themes`)
-- 🧑‍💻 About & Work History section
-- 🗃️ Project showcase with filtering
-- 📬 Custom "Now" page to highlight current focuses
-- 📝 Blog with MDX support
-- 👥 **Real-time viewer tracking** with geographic analytics
-- 🌍 **Live visitor counter** showing active viewers
-- 📊 **Interactive analytics** with country-based data
+![Portfolio Preview](https://github.com/user-attachments/assets/0afc54e8-36ba-49b0-b746-a40974e0710b)
+
+## 🚀 Key Features
+
+- 🌍 **Real-Time Analytics**: Live visitor tracking with geographic data
+- ⚡ **Next.js 15 App Router**: Latest React patterns with Server Components
+- 🎨 **Modern UI**: Responsive design with Tailwind CSS and Framer Motion
+- 📝 **MDX Blog**: Rich markdown support with syntax highlighting
+- 🎯 **Project Showcase**: Filterable portfolio with diverse tech stack
+- 🔒 **Privacy-First**: Anonymous tracking with GDPR compliance
 
 ## 🛠 Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) with App Router
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS + ShadCN UI
-- **Animations:** Framer Motion
-- **Icons:** Lucide
-- **Markdown Parsing:** `gray-matter`, `react-markdown`, `shiki`
-- **Real-time Data:** Vercel Blob Storage + HTTP Polling
-- **Geographic Data:** IP-based geolocation via ip-api.com
-- **Analytics:** Custom viewer tracking system
+**Frontend:** Next.js 15, TypeScript, Tailwind CSS, Framer Motion  
+**Backend:** Vercel Edge Runtime, Vercel Blob Storage  
+**Content:** MDX, Shiki syntax highlighting, gray-matter  
+**Analytics:** Custom real-time system with IP geolocation  
 
-## 🏗️ Architecture Overview
+## 🎯 Featured Projects
 
-### **App Router Structure**
-```
-portfolio/
-├── app/                    # App Router pages
-│   ├── page.tsx           # Home page (Server Component)
-│   ├── about/page.tsx     # About page
-│   ├── blog/page.tsx      # Blog listing
-│   ├── projects/page.tsx  # Projects page
-│   ├── now/page.tsx       # Current focuses
-│   └── api/               # API routes
-│       ├── viewers/       # Real-time tracking
-│       ├── socket/        # HTTP-based updates
-│       └── ip/           # IP detection
-├── components/            # Reusable components
-├── content/              # Blog posts (markdown)
-├── public/               # Static assets
-└── lib/                  # Utility functions
-```
+### **Web Applications**
+- **[Social Brocoli](https://social-pod.vercel.app/)**: Agentic shopping assistant (Next.js, Supabase, Groq)
+- **[Sponsorship.io](https://sponsorshipio.vercel.app/)**: AI-powered email drafting (Next.js, Google Gemini)
+- **[Leetcode Tracker](https://leetcode-tracker-phi.vercel.app/)**: Progress tracking system (Next.js, Supabase)
+- **[CTRL+HACK+DEL](https://www.ctrlhackdel.com/)**: Hackathon landing page (Next.js, AWS, PostgreSQL)
 
-### **Real-Time Viewer Tracking System**
+### **Hardware & Embedded**
+- **[Pomoduino](https://github.com/fayaz-rafin/Embedded-Systems-FInal-Project---Pomodoro-Timer)**: Arduino Pomodoro timer with 7-segment display
+- **[Veripong](https://github.com/fayaz-rafin/veripong)**: VGA Pong on DE10-Lite FPGA (Verilog)
+- **[Amnesiac's Odyssey](https://fintastic14.itch.io/amnesiacs-odyssey)**: JRPG for Nintendo GameBoy (C, GBDK)
 
-The site includes a sophisticated real-time viewer tracking system that shows live analytics:
+## 🧑‍💻 About Me
 
-#### **How It Works:**
-1. **Visitor Arrives** → Unique ID generated → IP detected → Geographic data fetched
-2. **Real-Time Updates** → HTTP polling every 30 seconds → Vercel Blob storage
-3. **Live Display** → Viewer counter in top-right corner → Geographic analytics
+**Software Engineer** based in Toronto, pursuing Electrical Engineering at York University. Unique background spanning hardware and software development.
 
-#### **Features:**
-- 🌍 **Geographic Tracking**: Shows which countries visitors are from
-- ⏰ **Real-time Updates**: Live viewer count updates every 30 seconds
-- 🗄️ **Cloud Storage**: Uses Vercel Blob for scalable data storage
-- 🧹 **Auto Cleanup**: Inactive viewers (5+ minutes) automatically filtered
-- 🔒 **Privacy-Focused**: Only collects anonymous geographic data
+### **Experience**
+- **Software Engineer** @ Dorayaki Studios (March 2024 - Present)
+- **Prompt Engineer** @ Outlier AI (May 2024 - August 2024)
+- **Software Engineer Intern** @ Radar (May 2022 - August 2022)
 
-#### **API Endpoints:**
-- `GET /api/viewers` - Get active viewer count and geographic data
-- `POST /api/viewers` - Track new viewer with geographic info
-- `PUT /api/viewers` - Update viewer heartbeat
-- `GET /api/ip` - Server-side IP detection
-- `POST /api/socket` - Handle real-time updates
+### **Technical Skills**
+**Languages:** JavaScript, TypeScript, Python, Java, Swift, C, Go, Rust  
+**Frameworks:** React, Next.js, SwiftUI, Flask, Express.js, Docker  
+**Cloud:** AWS (RDS, S3, Lambda, Cognito), Google Cloud, Vercel  
+**Databases:** PostgreSQL, MongoDB, Supabase, Redis  
 
-## 📁 Folder Structure
-```
-/ ├── app/ # App directory routing
-│ ├── page.tsx # Home
-│ ├── about/ # About page
-│ ├── projects/ # Projects page
-│ ├── blog/ # Blog landing
-│ ├── now/ # Now page
-│ └── api/ # API routes for viewer tracking
-├── components/ # Reusable UI components
-│ ├── online-viewers.tsx # Real-time viewer counter
-│ ├── viewer-analytics.tsx # Analytics dashboard
-│ └── ... # Other components
-├── lib/ # Utility functions
-│ ├── geo.ts # Geographic data utilities
-│ └── ... # Other utilities
-├── content/ # Blog posts (markdown)
-├── public/ # Static assets (avatar, icons, images)
-└── styles/ # Tailwind global styles
-```
-
-## 🎯 Key Features Deep Dive
-
-### **1. Real-Time Viewer Tracking**
-- **Live Counter**: Shows "X people online" in top-right corner
-- **Geographic Data**: Tracks visitor countries and cities
-- **Blob Storage**: Scalable cloud storage for viewer data
-- **Auto Cleanup**: Removes inactive viewers automatically
-
-### **2. Blog System**
-- **Markdown Support**: Write posts in `.md` files
-- **Frontmatter**: Metadata for titles, dates, descriptions
-- **Static Generation**: Pre-built at build time for performance
-- **Syntax Highlighting**: Code blocks with Shiki
-
-### **3. Performance Optimizations**
-- **Static Generation**: Blog posts pre-built for fast loading
-- **Image Optimization**: Next.js Image component with WebP
-- **Code Splitting**: Automatic by Next.js
-- **SSR-Safe Components**: No hydration mismatches
-
-### **4. Responsive Design**
-- **Mobile First**: Optimized for all screen sizes
-- **Dark Theme**: Catppuccin Mocha color scheme
-- **Smooth Animations**: Framer Motion throughout
-- **Touch Friendly**: Mobile-optimized interactions
-
-## 🧑‍💻 Developer
-
-**Fayaz Rafin**
-
-- 🌐 [fayaz-rafin.xyz](https://fayazrafin.xyz)
-- 🐙 [GitHub](https://github.com/fayaz-rafin)
-- 💼 [LinkedIn](https://linkedin.com/in/fayazrafin)
-- ✉️ fayaz.rafin@gmail.com
-
-## 🧪 Running Locally
+## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/fayaz-rafin/portfolio.git
@@ -137,35 +62,16 @@ cd portfolio
 npm install
 npm run dev
 ```
-Visit http://localhost:3000 to view the site locally.
 
-### **Environment Setup (Optional)**
-For real-time viewer tracking, create a `.env.local` file:
-```bash
-BLOB_READ_WRITE_TOKEN=your_vercel_blob_token_here
-```
+Visit [http://localhost:3000](http://localhost:3000) to view locally.
 
-## 📦 Deploy
-This site is optimized for deployment on Vercel with automatic deployments on push to main branch.
+## 📞 Contact
 
-## 🔒 Privacy & Security
-
-### **Viewer Tracking:**
-- **Anonymous**: No personal data collected
-- **IP-based**: Only geographic data from IP addresses
-- **Auto Expiration**: Data expires after 5 minutes
-- **No Cookies**: No persistent tracking cookies
-
-### **Content:**
-- **Static Generation**: No server-side data exposure
-- **Markdown**: Safe content format
-- **No Authentication**: No user accounts needed
-
-## 📄 License
-This project is open source and available under the MIT License.
+- 🌐 **Website**: [fayazrafin.xyz](https://fayazrafin.xyz)
+- 📧 **Email**: fayaz.rafin@gmail.com
+- 💼 **LinkedIn**: [linkedin.com/in/fayazrafin](https://linkedin.com/in/fayazrafin)
+- 🐙 **GitHub**: [github.com/fayaz-rafin](https://github.com/fayaz-rafin)
 
 ---
 
-Made with ☕ and way too many Tailwind utility classes 😅
-
-*Now with real-time viewer tracking powered by Vercel Blob! 🌟*
+**Made with ☕ and way too many Tailwind utility classes 😅**

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Use a regular Map for reliable client management
-const clientMap = new Map<ReadableStreamDefaultController, boolean>()
+// In Edge Runtime, avoid module-level state for client management.
+// Broadcasting to all clients requires an external pub/sub system.
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'

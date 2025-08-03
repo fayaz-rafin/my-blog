@@ -11,26 +11,23 @@ interface TimezoneDisplayProps {
 export default function TimezoneDisplay({ userTimezone, userLocation }: TimezoneDisplayProps) {
   const [currentTime, setCurrentTime] = useState<Date | null>(null)
   const [visitorTimezone, setVisitorTimezone] = useState<string>('')
-  const [visitorTime, setVisitorTime] = useState<Date | null>(null)
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
     
-    // Initialize times
+    // Initialize time
     const now = new Date()
     setCurrentTime(now)
-    setVisitorTime(now)
     
     // Get visitor's timezone
     const visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone
     setVisitorTimezone(visitorTz)
 
-    // Update time every second
+    // Update time every second - create Date once and reuse
     const timer = setInterval(() => {
       const now = new Date()
       setCurrentTime(now)
-      setVisitorTime(now)
     }, 1000)
 
     return () => clearInterval(timer)
@@ -69,12 +66,38 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
   }
 
   const getTimeDifference = () => {
-    if (!visitorTimezone) return { text: 'Loading...', percentage: 50 }
+    if (!visitorTimezone || !currentTime) return { text: 'Loading...', percentage: 50 }
     try {
-      const now = new Date()
-      const userTime = new Date(now.toLocaleString("en-US", { timeZone: userTimezone }))
-      const visitorTime = new Date(now.toLocaleString("en-US", { timeZone: visitorTimezone }))
-      const diffHours = (userTime.getTime() - visitorTime.getTime()) / (1000 * 60 * 60)
+      // Calculate timezone offsets properly using Intl.DateTimeFormat
+      const userFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: userTimezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      })
+      
+      const visitorFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: visitorTimezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      })
+
+      // Get the timezone offsets by comparing UTC time
+      const utcDate = new Date('2024-01-01T00:00:00.000Z')
+      const userDate = new Date(userFormatter.format(utcDate))
+      const visitorDate = new Date(visitorFormatter.format(utcDate))
+      
+      // Calculate the difference in hours
+      const userOffset = userDate.getTime() - utcDate.getTime()
+      const visitorOffset = visitorDate.getTime() - utcDate.getTime()
+      const diffHours = (userOffset - visitorOffset) / (1000 * 60 * 60)
       
       const absDiff = Math.abs(diffHours)
       const hours = Math.floor(absDiff)
@@ -189,10 +212,10 @@ export default function TimezoneDisplay({ userTimezone, userLocation }: Timezone
               <h3 className="text-lg font-semibold text-white">Your Time</h3>
             </div>
             <div className="text-3xl font-mono font-bold text-green-400 mb-2">
-              {formatTime(visitorTime, visitorTimezone)}
+              {formatTime(currentTime, visitorTimezone)}
             </div>
             <div className="text-sm text-gray-400">
-              {formatDate(visitorTime, visitorTimezone)}
+              {formatDate(currentTime, visitorTimezone)}
             </div>
             <div className="text-xs text-gray-500 mt-1">
               {visitorTimezone}

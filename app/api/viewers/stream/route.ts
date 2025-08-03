@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+import { getViewerData } from '@/lib/viewer-utils'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
@@ -15,19 +16,16 @@ export async function GET(request: NextRequest) {
       // Set up interval to send viewer updates
       const interval = setInterval(async () => {
         try {
-          // Fetch current viewer data
-          const response = await fetch(`${request.nextUrl.origin}/api/viewers`)
-          if (response.ok) {
-            const data = await response.json()
-            
-            // Send viewer data as SSE
-            const sseData = {
-              type: 'viewers-updated',
-              data: data
-            }
-            
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify(sseData)}\n\n`))
+          // Fetch current viewer data directly
+          const data = await getViewerData()
+          
+          // Send viewer data as SSE
+          const sseData = {
+            type: 'viewers-updated',
+            data: data
           }
+          
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(sseData)}\n\n`))
         } catch (error) {
           console.error('Error fetching viewer data for SSE:', error)
           controller.enqueue(encoder.encode('data: {"type":"error","message":"Failed to fetch viewer data"}\n\n'))

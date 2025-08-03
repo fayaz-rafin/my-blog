@@ -35,136 +35,142 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
           setBlobAvailable(true)
           setError(false)
           setFallbackMode(false)
+          return true
         } else {
           console.log('Vercel Blob not available - API returned error')
           setBlobAvailable(false)
           setError(true)
           setFallbackMode(true)
+          return false
         }
       } catch (error) {
         console.log('Vercel Blob not available - Network error:', error)
         setBlobAvailable(false)
         setError(true)
         setFallbackMode(true)
+        return false
       }
     }
 
-    checkBlobAvailability()
-
-    // Set up fallback mode with simulated data
-    if (fallbackMode) {
-      const simulateViewers = () => {
-        const baseCount = Math.floor(Math.random() * 3) + 1
-        const randomIncrement = Math.floor(Math.random() * 2)
-        const newCount = baseCount + randomIncrement
-        setViewerCount(newCount)
-        setIsOnline(true)
-      }
-
-      // Initial count
-      simulateViewers()
-
-      // Update count every 30 seconds
-      const interval = setInterval(simulateViewers, 30000)
-
-      return () => clearInterval(interval)
-    }
-
-    // Only track if blob is available
-    if (blobAvailable) {
-      const trackViewer = async () => {
-        try {
-          setIsTracking(true)
-          setError(false)
-          
-          // Get geographic data
-          const geoData = await getGeographicData()
-          
-          // Track viewer with geographic data
-          const response = await fetch('/api/socket', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              type: 'track-viewer',
-              data: {
-                id,
-                userAgent: navigator.userAgent,
-                ...geoData
-              }
-            }),
-          })
-
-          if (response.ok) {
-            const result = await response.json()
-            if (result.viewersData) {
-              setViewerCount(result.viewersData.totalViewers)
-            }
-            setIsOnline(true)
-          } else {
-            console.error('Failed to track viewer - API error')
-            setError(true)
-          }
-        } catch (error) {
-          console.error('Error tracking viewer:', error)
-          setError(true)
-        } finally {
-          setIsTracking(false)
+    // Initialize the system
+    const initializeSystem = async () => {
+      const isBlobAvailable = await checkBlobAvailability()
+      
+      if (!isBlobAvailable) {
+        // Set up fallback mode with simulated data
+        const simulateViewers = () => {
+          const baseCount = Math.floor(Math.random() * 3) + 1
+          const randomIncrement = Math.floor(Math.random() * 2)
+          const newCount = baseCount + randomIncrement
+          setViewerCount(newCount)
+          setIsOnline(true)
         }
-      }
 
-      trackViewer()
+        // Initial count
+        simulateViewers()
 
-      // Set up polling for viewer updates
-      const updateViewers = async () => {
-        try {
-          const response = await fetch('/api/viewers')
-          if (response.ok) {
-            const data = await response.json()
-            setViewerCount(data.totalViewers)
+        // Update count every 30 seconds
+        const interval = setInterval(simulateViewers, 30000)
+        return () => clearInterval(interval)
+      } else {
+        // Track viewer with real data
+        const trackViewer = async () => {
+          try {
+            setIsTracking(true)
             setError(false)
-          } else {
-            console.error('Failed to update viewers - API error')
+            
+            // Get geographic data
+            const geoData = await getGeographicData()
+            
+            // Track viewer with geographic data
+            const response = await fetch('/api/socket', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                type: 'track-viewer',
+                data: {
+                  id,
+                  userAgent: navigator.userAgent,
+                  ...geoData
+                }
+              }),
+            })
+
+            if (response.ok) {
+              const result = await response.json()
+              if (result.viewersData) {
+                setViewerCount(result.viewersData.totalViewers)
+              }
+              setIsOnline(true)
+            } else {
+              console.error('Failed to track viewer - API error')
+              setError(true)
+            }
+          } catch (error) {
+            console.error('Error tracking viewer:', error)
+            setError(true)
+          } finally {
+            setIsTracking(false)
+          }
+        }
+
+        trackViewer()
+
+        // Set up polling for viewer updates and heartbeat in a single interval
+        const updateViewersAndHeartbeat = async () => {
+          try {
+            // Update viewer count
+            const response = await fetch('/api/viewers')
+            if (response.ok) {
+              const data = await response.json()
+              setViewerCount(data.totalViewers)
+              setError(false)
+            } else {
+              console.error('Failed to update viewers - API error')
+              setError(true)
+            }
+
+            // Send heartbeat
+            const heartbeatResponse = await fetch('/api/socket', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                type: 'viewer-heartbeat',
+                data: { id }
+              }),
+            })
+            
+            if (!heartbeatResponse.ok) {
+              console.error('Failed to send heartbeat - API error')
+            }
+          } catch (error) {
+            console.error('Error in update cycle:', error)
             setError(true)
           }
-        } catch (error) {
-          console.error('Error updating viewers:', error)
-          setError(true)
         }
-      }
 
-      // Update viewers every 30 seconds
-      const interval = setInterval(updateViewers, 30000)
-
-      // Set up heartbeat
-      const heartbeatInterval = setInterval(async () => {
-        try {
-          const response = await fetch('/api/socket', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              type: 'viewer-heartbeat',
-              data: { id }
-            }),
-          })
-          
-          if (!response.ok) {
-            console.error('Failed to send heartbeat - API error')
-          }
-        } catch (error) {
-          console.error('Error sending heartbeat:', error)
-        }
-      }, 30000) // Every 30 seconds
-
-      return () => {
-        clearInterval(interval)
-        clearInterval(heartbeatInterval)
+        // Update every 30 seconds
+        const interval = setInterval(updateViewersAndHeartbeat, 30000)
+        return () => clearInterval(interval)
       }
     }
-  }, [mounted, blobAvailable, fallbackMode])
+
+    let cleanup: (() => void) | undefined
+
+    initializeSystem().then((cleanupFn) => {
+      cleanup = cleanupFn
+    })
+
+    return () => {
+      if (cleanup) {
+        cleanup()
+      }
+    }
+  }, [mounted])
 
   // Don't render anything during SSR or if not mounted
   if (!mounted) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Store connected SSE clients
-const clients = new Set<ReadableStreamDefaultController>()
+// Use a WeakMap to store clients with automatic cleanup
+const clientMap = new WeakMap<ReadableStreamDefaultController, boolean>()
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
@@ -11,15 +11,15 @@ export async function GET(request: NextRequest) {
   
   const stream = new ReadableStream({
     start(controller) {
-      // Add this client to the set
-      clients.add(controller)
+      // Add this client to the map
+      clientMap.set(controller, true)
       
       // Send initial connection message
       controller.enqueue(encoder.encode('data: {"type":"connected","message":"Broadcast connected"}\n\n'))
       
       // Clean up when connection closes
       request.signal.addEventListener('abort', () => {
-        clients.delete(controller)
+        clientMap.delete(controller)
         controller.close()
       })
     }
@@ -45,16 +45,20 @@ export async function POST(request: NextRequest) {
     const message = JSON.stringify({ type, data, timestamp: Date.now() })
     
     // Broadcast to all connected clients
-    clients.forEach(client => {
-      try {
-        client.enqueue(encoder.encode(`data: ${message}\n\n`))
-      } catch (error) {
-        // Remove disconnected clients
-        clients.delete(client)
+    let activeClients = 0
+    for (const [client, isActive] of clientMap.entries()) {
+      if (isActive) {
+        try {
+          client.enqueue(encoder.encode(`data: ${message}\n\n`))
+          activeClients++
+        } catch (error) {
+          // Remove disconnected clients
+          clientMap.delete(client)
+        }
       }
-    })
+    }
     
-    return NextResponse.json({ success: true, clientsCount: clients.size })
+    return NextResponse.json({ success: true, clientsCount: activeClients })
   } catch (error) {
     console.error('Broadcast error:', error)
     return NextResponse.json({ error: 'Broadcast failed' }, { status: 500 })

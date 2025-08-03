@@ -173,25 +173,25 @@ export default function OnlineViewers({ className = '' }: OnlineViewersProps) {
           })
         }
       } catch (error) {
-                 if (error instanceof Error && error.name !== 'AbortError') {
-           console.log('Vercel Blob not available - Network error:', error)
-           setBlobAvailable(false)
-           setError(true)
-           setFallbackMode(true)
-           
-           // Set up fallback mode with simulated data
-           const MIN_SIMULATED_VIEWERS = 1
-           const MAX_SIMULATED_VIEWERS = 4
-           
-           const simulateViewers = () => {
-             if (abortController.signal.aborted) return
-             
-             const baseCount = Math.floor(Math.random() * MAX_SIMULATED_VIEWERS) + MIN_SIMULATED_VIEWERS
-             const randomIncrement = Math.floor(Math.random() * 2)
-             const newCount = baseCount + randomIncrement
-             setViewerCount(newCount)
-             setIsOnline(true)
-           }
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.log('Vercel Blob not available - Network error:', error)
+          setBlobAvailable(false)
+          setError(true)
+          setFallbackMode(true)
+          
+          // Set up fallback mode with simulated data
+          const MIN_SIMULATED_VIEWERS = 1
+          const MAX_SIMULATED_VIEWERS = 4
+          
+          const simulateViewers = () => {
+            if (abortController.signal.aborted) return
+            
+            const baseCount = Math.floor(Math.random() * MAX_SIMULATED_VIEWERS) + MIN_SIMULATED_VIEWERS
+            const randomIncrement = Math.floor(Math.random() * 2)
+            const newCount = baseCount + randomIncrement
+            setViewerCount(newCount)
+            setIsOnline(true)
+          }
 
           // Initial count
           simulateViewers()

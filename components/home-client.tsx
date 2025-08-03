@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import OnlineViewers from './online-viewers'
+import TimezoneDisplay from './timezone-display'
 
 interface BlogPost {
   title: string
@@ -162,6 +163,14 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               )}
             </div>
           </motion.div>
+        </section>
+
+        {/* Timezone Display Section */}
+        <section className="mt-16">
+          <TimezoneDisplay 
+            userTimezone="America/Toronto"
+            userLocation="Toronto, Canada"
+          />
         </section>
       </div>
     </main>

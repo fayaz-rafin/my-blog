@@ -4,30 +4,20 @@ import { getViewerData } from '@/lib/viewer-utils'
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
 
-// Shared cache and controller list (global for the module)
-let viewerDataCache: any = null
-let controllers: Array<{ controller: ReadableStreamDefaultController, encoder: TextEncoder }> = []
-let pollingInterval: NodeJS.Timeout | null = null
+// No shared cache or controller list (per-connection state only)
 
-async function pollViewerDataAndBroadcast() {
+// Helper function to fetch and encode viewer data for SSE
+async function fetchAndEncodeViewerData() {
   try {
     const data = await getViewerData()
-    viewerDataCache = data
     const sseData = {
       type: 'viewers-updated',
       data: data
     }
-    const encoded = new TextEncoder().encode(`data: ${JSON.stringify(sseData)}\n\n`)
-    // Broadcast to all connected clients
-    controllers.forEach(({ controller, encoder }) => {
-      controller.enqueue(encoded)
-    })
+    return new TextEncoder().encode(`data: ${JSON.stringify(sseData)}\n\n`)
   } catch (error) {
     console.error('Error fetching viewer data for SSE:', error)
-    const errorMsg = new TextEncoder().encode('data: {"type":"error","message":"Failed to fetch viewer data"}\n\n')
-    controllers.forEach(({ controller, encoder }) => {
-      controller.enqueue(errorMsg)
-    })
+    return new TextEncoder().encode('data: {"type":"error","message":"Failed to fetch viewer data"}\n\n')
   }
 }
 

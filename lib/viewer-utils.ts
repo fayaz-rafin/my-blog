@@ -25,7 +25,6 @@ export async function getViewerData() {
     // Try to use Vercel Blob, fallback to in-memory storage
     try {
       // Filter by timestamp prefix to only fetch recent blobs
-      const timestampPrefix = Math.floor(cutoffTime / 1000).toString()
       const { blobs } = await list({ prefix: 'viewers/' })
       
       // Filter blobs by timestamp before fetching

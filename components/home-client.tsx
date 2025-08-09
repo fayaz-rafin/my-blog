@@ -73,13 +73,98 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
             </h1>
             <p className="text-2xl text-gray-300">
-              My name is Fayaz Rafin. I build software and write about technology, development, and my journey.
+              My name is Fayaz Rafin. Computer Engineering Student at York University with expertise in full-stack development.
             </p>
             <p className="text-xl text-gray-400">
               Welcome to my digital garden. Here, I share my thoughts, projects, and experiences in software development and beyond.
             </p>
+            
+            {/* Social Links */}
+            <div className="flex gap-4 pt-4">
+              <Link 
+                href="https://github.com/fayazrafin" 
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
+              >
+                <Image
+                  src="/icons/github.svg"
+                  alt="GitHub"
+                  width={20}
+                  height={20}
+                />
+                <span className="text-white">GitHub</span>
+              </Link>
+              <Link 
+                href="https://linkedin.com/in/fayazrafin" 
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
+              >
+                <Image
+                  src="/icons/linkedin.svg"
+                  alt="LinkedIn"
+                  width={20}
+                  height={20}
+                />
+                <span className="text-white">LinkedIn</span>
+              </Link>
+            </div>
           </div>
         </div>
+
+        {/* Professional Summary Section */}
+        <section className="mt-16">
+          <motion.div 
+            className="bg-[#252837] rounded-xl p-8 relative overflow-hidden"
+            initial={{ backgroundColor: '#252837' }}
+            whileHover={{ backgroundColor: '#313244' }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-cyan-500/20"
+              initial={{ x: '100%', y: '100%' }}
+              whileHover={{ x: 0, y: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
+            />
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-[#313244] p-3 rounded-lg">
+                  <span className="text-2xl">💻</span>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white">About My Work</h2>
+                  <p className="text-gray-400">Full-stack development expertise</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4 text-gray-300 leading-relaxed">
+                <p className="text-lg">
+                  I have strong experience in <span className="text-cyan-400 font-medium">front-end development with React and Next.js</span>, 
+                  focusing on building responsive and user-friendly web applications.
+                </p>
+                
+                <p>
+                  In projects like <span className="text-white font-medium">SocialPod</span> and <span className="text-white font-medium">CTRL+HACK+DEL</span>, 
+                  I collaborated with designers and stakeholders to translate Figma prototypes into polished interfaces using tools such as 
+                  <span className="text-cyan-400"> shadcn, Rive, and Tailwind CSS</span>.
+                </p>
+                
+                <p>
+                  I prioritize <span className="text-cyan-400 font-medium">accessibility, visual consistency, and performance</span> while 
+                  iterating quickly based on feedback. My work often involves transforming wireframes into interactive experiences, 
+                  integrating backend APIs, and ensuring seamless functionality across devices.
+                </p>
+              </div>
+              
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">React</span>
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Next.js</span>
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">TypeScript</span>
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Tailwind CSS</span>
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">shadcn/ui</span>
+                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Figma</span>
+              </div>
+            </div>
+          </motion.div>
+        </section>
 
         {/* What's New Section */}
         <section className="mt-16">

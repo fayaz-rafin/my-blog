@@ -26,6 +26,9 @@ const skills = {
     { name: "Go", icon: "/icons/go.svg" },
     { name: "Rust", icon: "/icons/rust.svg" },
     { name: "Flutter", icon: "/icons/flutter.svg" },
+    { name: "Assembly", icon: "/icons/assembly.svg" },
+    { name: "Verilog", icon: "/icons/verilog.svg" },
+    
   ],
   frameworks: [
     { name: "React", icon: "/icons/react.svg" },

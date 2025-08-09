@@ -120,7 +120,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <motion.div
-              className="absolute inset-0 bg-cyan-500/20"
+              className="absolute inset-0 bg-pink-500/20"
               initial={{ x: '100%', y: '100%' }}
               whileHover={{ x: 0, y: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
             />
@@ -135,32 +135,30 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                 </div>
               </div>
               
-              <div className="space-y-4 text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p className="text-lg">
-                  I have strong experience in <span className="text-cyan-400 font-medium">front-end development with React and Next.js</span>, 
+                  I have strong experience in <span className="text-pink-400 font-medium">front-end development with React and Next.js</span>, 
                   focusing on building responsive and user-friendly web applications.
                 </p>
                 
-                <p>
-                  In projects like <span className="text-white font-medium">SocialPod</span> and <span className="text-white font-medium">CTRL+HACK+DEL</span>, 
-                  I collaborated with designers and stakeholders to translate Figma prototypes into polished interfaces using tools such as 
-                  <span className="text-cyan-400"> shadcn, Rive, and Tailwind CSS</span>.
+                <p className="text-base">
+                  I prioritize <span className="text-pink-400 font-medium">accessibility, visual consistency, and performance</span> while 
+                  iterating quickly based on feedback.
                 </p>
-                
-                <p>
-                  I prioritize <span className="text-cyan-400 font-medium">accessibility, visual consistency, and performance</span> while 
-                  iterating quickly based on feedback. My work often involves transforming wireframes into interactive experiences, 
+
+                <p className="text-base">
+                  My work often involves transforming <span className="text-white font-medium">wireframes into interactive experiences</span>, 
                   integrating backend APIs, and ensuring seamless functionality across devices.
                 </p>
               </div>
               
-              <div className="mt-6 flex flex-wrap gap-3">
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">React</span>
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Next.js</span>
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">TypeScript</span>
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Tailwind CSS</span>
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">shadcn/ui</span>
-                <span className="px-3 py-1 bg-[#313244] text-cyan-400 rounded-full text-sm">Figma</span>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">React</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Next.js</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">TypeScript</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Tailwind CSS</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">shadcn/ui</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Figma</span>
               </div>
             </div>
           </motion.div>

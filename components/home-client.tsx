@@ -82,7 +82,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             {/* Social Links */}
             <div className="flex gap-4 pt-4">
               <Link 
-                href="https://github.com/fayazrafin" 
+                href="https://github.com/fayaz-rafin" 
                 target="_blank"
                 className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
               >

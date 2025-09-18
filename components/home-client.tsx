@@ -107,6 +107,19 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                 />
                 <span className="text-white">LinkedIn</span>
               </Link>
+              <Link 
+                href="https://devpost.com/fayaz-rafin" 
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
+              >
+                <Image
+                  src="/icons/devpost.svg"
+                  alt="Devpost"
+                  width={20}
+                  height={20}
+                />
+                <span className="text-white">Devpost</span>
+              </Link>
             </div>
           </div>
         </div>

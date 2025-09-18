@@ -19,26 +19,35 @@ export interface Project {
 const projects: Project[] = [
   {
     id: 0,
+    title: "HONCK!",
+    description: "A robotic goose productivity coach that monitors activity and honks when you slack. Hardware (Raspberry Pi + camera) with a React Native (Expo) app, FastAPI backend, OpenCV/TensorFlow detection, and Groq analysis.",
+    image: "/projects/honck.png",
+    technologies: ["React Native", "TypeScript", "Expo", "Tailwind CSS", "FastAPI", "SQLite", "OpenCV", "TensorFlow", "Groq", "Raspberry Pi"],
+    link: "https://devpost.com/software/honck",
+    category: "App"
+  },
+
+  {
+    id: 1,
     title: "Campus Class Availability Analytics (Streamlit)",
     description: "An interactive Streamlit dashboard that analyzes York University Markham Campus timetables to identify optimal time slots for hosting events.",
     image: "/projects/streamlit.png",
     technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
     link: "https://fayaz-rafin-student-data-visualization-streamlit-app-upgzzd.streamlit.app/",
     category: "Web App"
-},
+  },
 
   {
-    
-    id: 1,
+    id: 2,
     title: "social brocoli",
     description: "The first Agentic shopping assistant for no name brands.",
     image: "/projects/socialbrocoli.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind", "Supabase", "PostgreSQL", "Vercel", "groq",],
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Supabase", "PostgreSQL", "Vercel", "groq"],
     link: "https://social-pod.vercel.app/",
     category: "Web App",
   },
   {
-    id: 2,
+    id: 3,
     title: "sponsorship.io",
     description: "A web-app to help peopel draft emails for sponsorships.",
     image: "/projects/sponsorship.png",
@@ -47,7 +56,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 8,
+    id: 4,
     title: "Leetcode Tracker",
     description: "A Leetcode progress tracker to make Leetcode more fun and engaging.",
     image: "/projects/leetlogger.png",
@@ -56,7 +65,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 3,
+    id: 5,
     title: "Pomoduino",
     description: "A functional Pomodoro timer in Arduino using a 4-Digit 7 Segment LED Display and 4x4 Keypad and Arduino DUE Microcontroller.",
     image: "/projects/pomoduino.png",
@@ -65,7 +74,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 4,
+    id: 6,
     title: "Veri-Thread",
     description: "Transparent, sustainable fashion backed up by blockchain. Trace every step from material to finished product, safety contracts, earn ICP tokens for supporting ethical and eco-friendly manufacturing.",
     image: "/projects/verithread.png",
@@ -74,7 +83,7 @@ const projects: Project[] = [
     category: "App"
   },
   {
-    id: 5,
+    id: 7,
     title: "Veripong",
     description: "VGA Pong Game Implementation on DE10-Lite FPGA",
     image: "/projects/veripong.png",
@@ -83,7 +92,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 6,
+    id: 8,
     title: "Amnesiac's Odyssey",
     description: "JRPG Game on the Nintendo Gameboy using GBDK and Aseprite.",
     image: "/projects/aogame.png",
@@ -92,7 +101,7 @@ const projects: Project[] = [
     category: "Game"
   },
   {
-    id: 7,
+    id: 9,
     title: "CTRL+HACK+DEL",
     description: "Landing page of CTRL+HACK+DEL, York University's Premier Hackathon.",
     image: "/projects/chd.png",

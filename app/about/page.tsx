@@ -99,7 +99,7 @@ export default function Page(): React.JSX.Element {
           <div className="prose prose-invert max-w-none">
             <p className="text-xl text-gray-300 mb-6">
               Hi! I'm Fayaz, a software engineer based in Toronto, Canada. Originally from Dhaka, Bangladesh, 
-              I'm currently pursuing my degree in Electrical Engineering at York University, where I've found 
+              I'm currently pursuing my degree in Computer Engineering at York University, where I've found 
               my passion at the intersection of hardware and software.
             </p>
             <p className="text-gray-400 mb-6">

@@ -17,8 +17,18 @@ export interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: 0,
+    title: "Campus Class Availability Analytics (Streamlit)",
+    description: "An interactive Streamlit dashboard that analyzes York University Markham Campus timetables to identify optimal time slots for hosting events.",
+    image: "/projects/pnstreamlit.png",
+    technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
+    link: "https://fayaz-rafin-student-data-visualization-streamlit-app-upgzzd.streamlit.app/",
+    category: "Web App"
+},
 
   {
+    
     id: 1,
     title: "social brocoli",
     description: "The first Agentic shopping assistant for no name brands.",

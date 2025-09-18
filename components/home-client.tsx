@@ -130,35 +130,41 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                   <span className="text-2xl">💻</span>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">About My Work</h2>
-                  <p className="text-gray-400">Full-stack development expertise</p>
+                  <h2 className="text-2xl font-bold text-white">About Me</h2>
+                  <p className="text-gray-400">Software engineer & Computer Engineering student</p>
                 </div>
               </div>
               
               <div className="space-y-6 text-gray-300 leading-relaxed">
                 <p className="text-lg">
-                  I have strong experience in <span className="text-pink-400 font-medium">front-end development with React and Next.js</span>, 
-                  focusing on building responsive and user-friendly web applications.
+                  I'm a software engineer based in <span className="text-pink-400 font-medium">Toronto, Canada</span>, originally from 
+                  <span className="text-pink-400 font-medium"> Dhaka, Bangladesh</span>. Currently pursuing my degree in 
+                  <span className="text-pink-400 font-medium"> Computer Engineering at York University</span>.
                 </p>
                 
                 <p className="text-base">
-                  I prioritize <span className="text-pink-400 font-medium">accessibility, visual consistency, and performance</span> while 
-                  iterating quickly based on feedback.
+                  My journey combines <span className="text-pink-400 font-medium">hardware and software expertise</span>. While my Computer 
+                  Engineering background satisfies my curiosity for hardware systems, my internship at 
+                  <span className="text-white font-medium"> Radar in 2022</span> helped me discover my true calling in software engineering.
                 </p>
 
                 <p className="text-base">
-                  My work often involves transforming <span className="text-white font-medium">wireframes into interactive experiences</span>, 
-                  integrating backend APIs, and ensuring seamless functionality across devices.
+                  I have experience as a <span className="text-pink-400 font-medium">Software Engineer at Dorayaki Studios</span>, 
+                  <span className="text-pink-400 font-medium"> Prompt Engineer at Outlier AI</span>, and 
+                  <span className="text-pink-400 font-medium"> Software Engineer Intern at Radar</span>. This unique perspective allows me to 
+                  approach problems with both hardware and software solutions in mind.
                 </p>
               </div>
               
               <div className="mt-8 flex flex-wrap gap-3">
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">JavaScript</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">TypeScript</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Python</span>
                 <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">React</span>
                 <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Next.js</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">TypeScript</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Tailwind CSS</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">shadcn/ui</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Figma</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">AWS</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Docker</span>
+                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">PostgreSQL</span>
               </div>
             </div>
           </motion.div>
@@ -185,7 +191,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                   <span className="text-3xl">🏃</span>
                 </div>
                 <p className="text-xl text-gray-300 leading-normal">
-                  Making the most of my summer break before university starts.
+                Guess who's back? Back in classes and ready for the semester.
                 </p>
               </div>
             </div>

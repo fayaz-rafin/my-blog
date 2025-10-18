@@ -4,23 +4,10 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="relative mt-20">
-      {/* Curved divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          className="relative block h-[60px] w-full sm:h-[100px]"
-          style={{ transform: 'rotateY(180deg)' }}
-        >
-          <path
-            d="M0,96 C200,120 400,40 800,40 C1000,40 1200,80 1200,80 V120 H0 V96Z"
-            className="fill-[#313244]"
-          />
-        </svg>
-      </div>
+      {/* Curved divider removed for transparent footer */}
 
       {/* Footer content */}
-      <div className="relative bg-[#313244] py-8 sm:py-12 text-muted-foreground">
+      <div className="relative bg-transparent py-8 sm:py-12 text-muted-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Navigation links */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">

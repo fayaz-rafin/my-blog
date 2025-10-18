@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import OnlineViewers from './online-viewers'
+import { GlassPanel } from './ui/glass-panel'
 
 interface BlogPost {
   title: string
@@ -57,72 +58,74 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
         <div className="flex justify-end mb-4">
           <OnlineViewers />
         </div>
-        {/* Intro Section */}
-        <div className="flex items-start gap-6 flex-col sm:flex-row">
-          <div className="flex-shrink-0">
-            <Image
-              src="/avatar.jpg"
-              alt="Fayaz Rafin avatar"
-              width={200}
-              height={200}
-              className="rounded-full border-4 border-[#313244] shadow-lg"
-            />
-          </div>
-          <div className="flex-1 space-y-6">
-            <h1 className="text-5xl sm:text-6xl font-bold text-white" style={{ minHeight: '4rem' }}>
-            {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
-            </h1>
-            <p className="text-2xl text-gray-300">
-              My name is Fayaz Rafin. Computer Engineering Student at York University with expertise in full-stack development.
-            </p>
-            <p className="text-xl text-gray-400">
-              Welcome to my digital garden. Here, I share my thoughts, projects, and experiences in software development and beyond.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex gap-4 pt-4">
-              <Link 
-                href="https://github.com/fayaz-rafin" 
-                target="_blank"
-                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
-              >
-                <Image
-                  src="/icons/github.svg"
-                  alt="GitHub"
-                  width={20}
-                  height={20}
-                />
-                <span className="text-white">GitHub</span>
-              </Link>
-              <Link 
-                href="https://linkedin.com/in/fayazrafin" 
-                target="_blank"
-                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
-              >
-                <Image
-                  src="/icons/linkedin.svg"
-                  alt="LinkedIn"
-                  width={20}
-                  height={20}
-                />
-                <span className="text-white">LinkedIn</span>
-              </Link>
-              <Link 
-                href="https://devpost.com/fayaz-rafin" 
-                target="_blank"
-                className="flex items-center gap-2 px-4 py-2 bg-[#313244] hover:bg-[#3b3d57] rounded-lg transition-colors duration-200"
-              >
-                <Image
-                  src="/icons/devpost.svg"
-                  alt="Devpost"
-                  width={20}
-                  height={20}
-                />
-                <span className="text-white">Devpost</span>
-              </Link>
+        {/* Intro Section wrapped in GlassPanel */}
+        <GlassPanel className="p-6 sm:p-8">
+          <div className="flex items-start gap-6 flex-col sm:flex-row">
+            <div className="flex-shrink-0">
+              <Image
+                src="/avatar.jpg"
+                alt="Fayaz Rafin avatar"
+                width={200}
+                height={200}
+                className="rounded-full border-4 border-white/10 shadow-lg"
+              />
+            </div>
+            <div className="flex-1 space-y-6">
+              <h1 className="text-5xl sm:text-6xl font-bold text-white" style={{ minHeight: '4rem' }}>
+              {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
+              </h1>
+              <p className="text-2xl text-white/90">
+                My name is Fayaz Rafin. Computer Engineering Student at York University with expertise in full-stack development.
+              </p>
+              <p className="text-xl text-white/70">
+                Welcome to my digital garden. Here, I share my thoughts, projects, and experiences in software development and beyond.
+              </p>
+              
+              {/* Social Links */}
+              <div className="flex gap-4 pt-4">
+                <Link 
+                  href="https://github.com/fayaz-rafin" 
+                  target="_blank"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                >
+                  <Image
+                    src="/icons/github.svg"
+                    alt="GitHub"
+                    width={20}
+                    height={20}
+                  />
+                  <span className="text-white">GitHub</span>
+                </Link>
+                <Link 
+                  href="https://linkedin.com/in/fayazrafin" 
+                  target="_blank"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                >
+                  <Image
+                    src="/icons/linkedin.svg"
+                    alt="LinkedIn"
+                    width={20}
+                    height={20}
+                  />
+                  <span className="text-white">LinkedIn</span>
+                </Link>
+                <Link 
+                  href="https://devpost.com/fayaz-rafin" 
+                  target="_blank"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                >
+                  <Image
+                    src="/icons/devpost.svg"
+                    alt="Devpost"
+                    width={20}
+                    height={20}
+                  />
+                  <span className="text-white">Devpost</span>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </GlassPanel>
 
         {/* Professional Summary Section */}
         <section className="mt-16">

@@ -295,7 +295,7 @@ export default function Page(): React.JSX.Element {
               {skills.practices.map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                  className="rounded-xl p-4 flex items-center gap-3 border border-white/10 bg-white/10 backdrop-blur-md"
                 >
                   <Image 
                     src={skill.icon}

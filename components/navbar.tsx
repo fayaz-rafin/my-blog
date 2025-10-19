@@ -76,7 +76,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden mx-4 mt-2 rounded-xl border border-white/10 bg-white/10 backdrop-blur-xl"
+            className="md:hidden mx-4 mt-2 rounded-xl border border-white/10 bg-white/10 backdrop-blur-xl pointer-events-auto"
           >
             <div className="px-4 py-4 space-y-3">
               {navItems.map((item) => (

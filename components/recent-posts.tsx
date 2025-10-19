@@ -63,7 +63,7 @@ export default function RecentPosts() {
                   <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                     {post.description}
                   </p>
-                  <div className="flex items-center gap-3 sm:gap-4 text-gray-400 text-xs sm:text-sm">
+                  <div className="flex items-center gap-3 sm:gap-4 text-gray-400 text-xs sm:text-sm whitespace-nowrap">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime} min read</span>

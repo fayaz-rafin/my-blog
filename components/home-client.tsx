@@ -81,45 +81,48 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               </p>
               
               {/* Social Links */}
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-2 sm:gap-3 pt-4 flex-wrap">
                 <Link 
                   href="https://github.com/fayaz-rafin" 
                   target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
                 >
                   <Image
                     src="/icons/github.svg"
                     alt="GitHub"
-                    width={20}
-                    height={20}
+                    width={18}
+                    height={18}
+                    className="flex-shrink-0"
                   />
-                  <span className="text-white">GitHub</span>
+                  <span className="text-white text-sm sm:text-base truncate">GitHub</span>
                 </Link>
                 <Link 
                   href="https://linkedin.com/in/fayazrafin" 
                   target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
                 >
                   <Image
                     src="/icons/linkedin.svg"
                     alt="LinkedIn"
-                    width={20}
-                    height={20}
+                    width={18}
+                    height={18}
+                    className="flex-shrink-0"
                   />
-                  <span className="text-white">LinkedIn</span>
+                  <span className="text-white text-sm sm:text-base truncate">LinkedIn</span>
                 </Link>
                 <Link 
                   href="https://devpost.com/fayaz-rafin" 
                   target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
+                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
                 >
                   <Image
                     src="/icons/devpost.svg"
                     alt="Devpost"
-                    width={20}
-                    height={20}
+                    width={18}
+                    height={18}
+                    className="flex-shrink-0"
                   />
-                  <span className="text-white">Devpost</span>
+                  <span className="text-white text-sm sm:text-base truncate">Devpost</span>
                 </Link>
               </div>
             </div>

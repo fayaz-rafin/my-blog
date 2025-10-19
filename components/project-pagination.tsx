@@ -22,7 +22,7 @@ export function ProjectPagination({
         <button
           key={pageNumber}
           onClick={() => onPageChange(pageNumber)}
-          className={`w-10 h-10 rounded-lg transition-colors duration-200 
+          className={`w-10 h-10 rounded-lg transition-colors duration-200 overflow-hidden 
             ${currentPage === pageNumber 
               ? 'bg-purple-400 text-white' 
               : 'bg-white/10 border border-white/10 backdrop-blur-md text-white/90 hover:bg-white/15'

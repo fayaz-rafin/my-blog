@@ -14,8 +14,8 @@ export function ProjectFilter({ categories, selectedCategory, onCategoryChange }
           onClick={() => onCategoryChange(category)}
           className={`px-4 py-2 rounded-lg transition-colors duration-200 
             ${selectedCategory === category 
-              ? 'bg-pink-400 text-white' 
-              : 'bg-[#252837] text-gray-300 hover:bg-[#313244]'
+              ? 'bg-purple-400 text-white' 
+              : 'bg-white/10 border border-white/10 backdrop-blur-md text-white/90 hover:bg-white/15'
             }`}
         >
           {category}

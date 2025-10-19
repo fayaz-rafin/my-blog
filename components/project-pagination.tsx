@@ -24,8 +24,8 @@ export function ProjectPagination({
           onClick={() => onPageChange(pageNumber)}
           className={`w-10 h-10 rounded-lg transition-colors duration-200 
             ${currentPage === pageNumber 
-              ? 'bg-pink-400 text-white' 
-              : 'bg-[#252837] text-gray-300 hover:bg-[#313244]'
+              ? 'bg-purple-400 text-white' 
+              : 'bg-white/10 border border-white/10 backdrop-blur-md text-white/90 hover:bg-white/15'
             }`}
         >
           {pageNumber}

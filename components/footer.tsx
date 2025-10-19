@@ -13,13 +13,13 @@ export function Footer() {
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
             <FooterLink href="#top">↑ Back to top</FooterLink>
             <FooterLink href="mailto:fayaz.rafin@gmail.com">
-              <img src="/icons/email.svg" alt="Email" className="w-6 h-6" />
+          <img src="/icons/email.svg" alt="Email" className="w-6 h-6 invert" />
             </FooterLink>
             <FooterLink href="https://github.com/fayaz-rafin">
-              <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6" />
+          <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6 invert" />
             </FooterLink>
             <FooterLink href="https://linkedin.com/in/fayazrafin">
-              <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6" />
+          <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6 invert" />
             </FooterLink>
           </div>
 
@@ -42,10 +42,8 @@ function FooterLink({ href, children }: FooterLinkProps) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center
-        px-4 py-2 rounded-full text-sm sm:text-base
-        bg-[#252837] hover:bg-[#1e1e2e] text-gray-300 hover:text-[#cba6f7]
-        transition-all duration-200"
+      className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm sm:text-base
+        bg-white/10 hover:bg-white/15 text-white border border-white/10 transition-colors duration-200"
     >
       {typeof children === 'string' ? children : children}
     </Link>

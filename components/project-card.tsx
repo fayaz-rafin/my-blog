@@ -12,8 +12,8 @@ export function ProjectCard({
   category
 }: Project) {
   return (
-    <div className="bg-[#252837] rounded-xl overflow-hidden">
-      <div className="relative h-48">
+    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/10 backdrop-blur-xl">
+      <div className="relative h-40 sm:h-48">
         <Image
           src={image}
           alt={title}
@@ -21,19 +21,19 @@ export function ProjectCard({
           className="object-cover"
         />
       </div>
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-semibold text-white">{title}</h3>
-          <span className="text-sm text-pink-400 bg-pink-400/10 px-2 py-1 rounded">
+      <div className="p-4 sm:p-6">
+        <div className="flex justify-between items-start mb-3 sm:mb-4">
+          <h3 className="text-lg sm:text-xl font-semibold text-white">{title}</h3>
+          <span className="text-sm text-purple-400 bg-purple-400/10 px-2 py-1 rounded">
             {category}
           </span>
         </div>
-        <p className="text-gray-400 mb-4">{description}</p>
+        <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech, index) => (
             <span
               key={index}
-              className="text-sm text-gray-300 bg-[#1e1e2e] px-2 py-1 rounded"
+              className="text-sm text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md"
             >
               {tech}
             </span>
@@ -44,7 +44,7 @@ export function ProjectCard({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-pink-400 hover:text-pink-300 inline-flex items-center gap-1"
+            className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1"
           >
             View Project
             <svg

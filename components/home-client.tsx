@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+ 
 import OnlineViewers from './online-viewers'
-import { GlassPanel } from './ui/glass-panel'
 
 interface BlogPost {
   title: string
@@ -58,8 +57,8 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
         <div className="flex justify-end mb-4">
           <OnlineViewers />
         </div>
-        {/* Intro Section wrapped in GlassPanel */}
-        <GlassPanel className="p-6 sm:p-8">
+        {/* Intro Section */}
+        <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6 sm:p-8 shadow-lg">
           <div className="flex items-start gap-6 flex-col sm:flex-row">
             <div className="flex-shrink-0">
               <Image
@@ -71,13 +70,13 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               />
             </div>
             <div className="flex-1 space-y-6">
-              <h1 className="text-5xl sm:text-6xl font-bold text-white" style={{ minHeight: '4rem' }}>
+              <h1 className="text-4xl sm:text-6xl font-bold text-white" style={{ minHeight: '3rem' }}>
               {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
               </h1>
-              <p className="text-2xl text-white/90">
+              <p className="text-xl sm:text-2xl text-white/90">
                 My name is Fayaz Rafin. Computer Engineering Student at York University with expertise in full-stack development.
               </p>
-              <p className="text-xl text-white/70">
+              <p className="text-base sm:text-xl text-white/70">
                 Welcome to my digital garden. Here, I share my thoughts, projects, and experiences in software development and beyond.
               </p>
               
@@ -125,24 +124,14 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               </div>
             </div>
           </div>
-        </GlassPanel>
+        </div>
 
         {/* Professional Summary Section */}
         <section className="mt-16">
-          <motion.div 
-            className="bg-[#252837] rounded-xl p-8 relative overflow-hidden"
-            initial={{ backgroundColor: '#252837' }}
-            whileHover={{ backgroundColor: '#313244' }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-pink-500/20"
-              initial={{ x: '100%', y: '100%' }}
-              whileHover={{ x: 0, y: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
-            />
-            <div className="relative z-10">
+          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
+            <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="bg-[#313244] p-3 rounded-lg">
+                <div className="bg-transparent p-3 rounded-lg">
                   <span className="text-2xl">💻</span>
                 </div>
                 <div>
@@ -173,100 +162,76 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               </div>
               
               <div className="mt-8 flex flex-wrap gap-3">
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">JavaScript</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">TypeScript</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Python</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">React</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Next.js</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">AWS</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">Docker</span>
-                <span className="px-4 py-2 bg-[#313244] text-pink-400 rounded-lg text-sm font-medium">PostgreSQL</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">JavaScript</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">TypeScript</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Python</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">React</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Next.js</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">AWS</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Docker</span>
+                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">PostgreSQL</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* What's New Section */}
         <section className="mt-16">
-          <motion.div 
-            className="bg-[#252837] rounded-xl p-6 relative overflow-hidden"
-            initial={{ backgroundColor: '#252837' }}
-            whileHover={{ backgroundColor: '#313244' }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-emerald-500/20"
-              initial={{ x: '100%', y: '100%' }}
-              whileHover={{ x: 0, y: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
-            />
-            <div className="relative z-10">
-              <h2 className="text-2xl font-bold text-white mb-2">What's new?</h2>
-              <p className="text-gray-400">My latest updates and activities.</p>
-              <div className="mt-6 flex items-center gap-4">
-                <div className="bg-[#313244] p-4 rounded-lg flex-shrink-0">
-                  <span className="text-3xl">🏃</span>
-                </div>
-                <p className="text-xl text-gray-300 leading-normal">
-                Guess who's back? Back in classes and ready for the semester.
-                </p>
+          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
+            <h2 className="text-2xl font-bold text-white mb-2">What's new?</h2>
+            <p className="text-gray-400">My latest updates and activities.</p>
+            <div className="mt-6 flex items-center gap-4">
+              <div className="p-4 rounded-lg flex-shrink-0">
+                <span className="text-3xl">🏃</span>
               </div>
+              <p className="text-xl text-gray-300 leading-normal">
+                Guess who's back? Back in classes and ready for the semester.
+              </p>
             </div>
-          </motion.div>
+          </div>
         </section>
 
 
 
         {/* Recent Blog Post Section */}
         <section className="mt-16">
-          <motion.div 
-            className="bg-[#252837] rounded-xl p-6 relative overflow-hidden"
-            initial={{ backgroundColor: '#252837' }}
-            whileHover={{ backgroundColor: '#313244' }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-purple-500/20"
-              initial={{ x: '100%', y: '100%' }}
-              whileHover={{ x: 0, y: 0, transition: { duration: 0.3, ease: 'easeOut' } }}
-            />
-            <div className="relative z-10">
-              <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">Recent Update</h2>
-                  <p className="text-gray-400">Latest article from my blog.</p>
-                </div>
-                <Link 
-                  href="/blog"
-                  className="text-purple-400 hover:text-purple-300 flex items-center gap-2"
-                >
-                  View all posts
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">Recent Update</h2>
+                <p className="text-gray-400">Latest article from my blog.</p>
               </div>
-              {recentPost ? (
-                <Link 
-                  href={`/blog/${recentPost.slug}`}
-                  className="block bg-[#313244] rounded-lg p-4 hover:bg-[#3b3d57] transition-colors duration-200"
-                >
-                  <h3 className="text-lg font-medium text-white mb-2">{recentPost.title}</h3>
-                  <p className="text-gray-400 text-sm mb-2">{recentPost.description}</p>
-                  <time className="text-sm text-purple-400">{recentPost.date}</time>
-                </Link>
-              ) : (
-                <div className="bg-[#313244] rounded-lg p-6 text-center">
-                  <div className="text-4xl mb-4">📝</div>
-                  <p className="text-gray-300 text-lg">
-                    The most recent blog post will appear here.
-                  </p>
-                  <p className="text-gray-400 mt-2">
-                    Stay tuned for upcoming articles!
-                  </p>
-                </div>
-              )}
+              <Link 
+                href="/blog"
+                className="text-pink-400 hover:text-pink-300 flex items-center gap-2"
+              >
+                View all posts
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
-          </motion.div>
+            {recentPost ? (
+              <Link 
+                href={`/blog/${recentPost.slug}`}
+                className="block rounded-lg p-0 hover:text-white text-gray-300 transition-colors duration-200"
+              >
+                <h3 className="text-lg font-medium text-white mb-2">{recentPost.title}</h3>
+                <p className="text-gray-400 text-sm mb-2">{recentPost.description}</p>
+                <time className="text-sm text-pink-400">{recentPost.date}</time>
+              </Link>
+            ) : (
+              <div className="rounded-lg p-0 text-center">
+                <div className="text-4xl mb-4">📝</div>
+                <p className="text-gray-300 text-lg">
+                  The most recent blog post will appear here.
+                </p>
+                <p className="text-gray-400 mt-2">
+                  Stay tuned for upcoming articles!
+                </p>
+              </div>
+            )}
+          </div>
         </section>
       </div>
     </main>

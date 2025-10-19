@@ -95,8 +95,9 @@ export default function Page(): React.JSX.Element {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* About Me Section */}
         <section className="mb-16">
-          <h1 className="text-4xl font-bold text-white mb-8">About Me</h1>
-          <div className="prose prose-invert max-w-none">
+          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
+            <h1 className="text-4xl font-bold text-white mb-6">About Me</h1>
+            <div className="prose prose-invert max-w-none">
             <p className="text-xl text-gray-300 mb-6">
               Hi! I'm Fayaz, a software engineer based in Toronto, Canada. Originally from Dhaka, Bangladesh, 
               I'm currently pursuing my degree in Computer Engineering at York University, where I've found 
@@ -112,19 +113,19 @@ export default function Page(): React.JSX.Element {
               When I'm not coding or tinkering with hardware, you'll find me exploring the vibrant streets of 
               downtown Toronto or embarking on outdoor adventures - from tobogganing in winter to hiking and 
               beach trips in summer. I'm an avid gamer with a particular love for roguelikes like{' '}
-              <Link href="https://enterthegungeon.com/" className="text-pink-400 hover:text-pink-300">
+              <Link href="https://enterthegungeon.com/" className="text-purple-400 hover:text-purple-300">
               Enter the Gungeon
               </Link>{' '}
               and{' '}
-              <Link href="https://dead-cells.com/" className="text-pink-400 hover:text-pink-300">
+              <Link href="https://dead-cells.com/" className="text-purple-400 hover:text-purple-300">
               Dead Cells
               </Link>
               . You can also catch me diving into the worlds of{' '}
-              <Link href="https://www.minecraft.net/en-us" className="text-pink-400 hover:text-pink-300">
+              <Link href="https://www.minecraft.net/en-us" className="text-purple-400 hover:text-purple-300">
               Minecraft
               </Link>{' '}
               and{' '}
-              <Link href="https://play.pokemonshowdown.com/" className="text-pink-400 hover:text-pink-300">
+              <Link href="https://play.pokemonshowdown.com/" className="text-purple-400 hover:text-purple-300">
               Pokemon
               </Link>
               .
@@ -134,13 +135,14 @@ export default function Page(): React.JSX.Element {
               the latest tech trends, sharing cooking recipes, or getting lost in a good book, I'm always eager 
               to connect with people who share similar interests.
             </p>
+            </div>
           </div>
         </section>
 
         {/* Work History Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-white mb-8">Work history, in brief</h2>
-          <div className="bg-[#1a1b26] rounded-xl p-8">
+          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
             <div className="space-y-8">
               {experiences.map((exp, index) => (
                 <div key={index} className="flex items-center gap-6">
@@ -153,7 +155,7 @@ export default function Page(): React.JSX.Element {
                     />
                   </div>
                   <div className="flex-grow">
-                    <h3 className="text-pink-400 font-medium text-lg">
+                    <h3 className="text-purple-400 font-medium text-lg">
                       {exp.company}
                     </h3>
                     <p className="text-gray-300 italic">
@@ -167,12 +169,12 @@ export default function Page(): React.JSX.Element {
               ))}
             </div>
 
-            <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+            <div className="mt-12 pt-8 border-t border-white/10 text-center">
               <p className="text-gray-400">
                 Want to see more?{' '}
                 <Link 
                   href="resume/resume.pdf" 
-                  className="text-pink-400 hover:text-pink-300 inline-flex items-center gap-1"
+                  className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1"
                 >
                   Check out my Resume
                   <svg 
@@ -200,12 +202,12 @@ export default function Page(): React.JSX.Element {
           
           {/* Languages */}
           <div className="mb-8">
-            <h3 className="text-xl text-pink-400 mb-4">Programming Languages</h3>
+            <h3 className="text-xl text-purple-400 mb-4">Programming Languages</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.languages.map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                  className="rounded-xl p-4 flex items-center gap-3 border border-white/10 bg-white/10 backdrop-blur-md"
                 >
                   <Image 
                     src={skill.icon}
@@ -222,12 +224,12 @@ export default function Page(): React.JSX.Element {
 
           {/* Frameworks */}
           <div className="mb-8">
-            <h3 className="text-xl text-pink-400 mb-4">Libraries & Frameworks</h3>
+            <h3 className="text-xl text-purple-400 mb-4">Libraries & Frameworks</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.frameworks.map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                  className="rounded-xl p-4 flex items-center gap-3 border border-white/10 bg-white/10 backdrop-blur-md"
                 >
                   <Image 
                     src={skill.icon}
@@ -244,12 +246,12 @@ export default function Page(): React.JSX.Element {
 
           {/* Cloud & DevOps */}
           <div className="mb-8">
-            <h3 className="text-xl text-pink-400 mb-4">Cloud & DevOps</h3>
+            <h3 className="text-xl text-purple-400 mb-4">Cloud & DevOps</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.cloud.map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                  className="rounded-xl p-4 flex items-center gap-3 border border-white/10 bg-white/10 backdrop-blur-md"
                 >
                   <Image 
                     src={skill.icon}
@@ -266,12 +268,12 @@ export default function Page(): React.JSX.Element {
 
           {/* databases & Databases */}
           <div className="mb-8">
-            <h3 className="text-xl text-pink-400 mb-4">Databases</h3>
+            <h3 className="text-xl text-purple-400 mb-4">Databases</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.databases.map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-[#252837] rounded-lg p-4 flex items-center gap-3"
+                  className="rounded-xl p-4 flex items-center gap-3 border border-white/10 bg-white/10 backdrop-blur-md"
                 >
                   <Image 
                     src={skill.icon}
@@ -288,7 +290,7 @@ export default function Page(): React.JSX.Element {
 
           {/* Practices */}
           <div>
-            <h3 className="text-xl text-pink-400 mb-4">Practices & Concepts</h3>
+            <h3 className="text-xl text-purple-400 mb-4">Practices & Concepts</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.practices.map((skill, index) => (
                 <div 

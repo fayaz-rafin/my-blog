@@ -28,7 +28,7 @@ export function WorkHistory({ experiences }: WorkHistoryProps) {
               />
             </div>
             <div className="flex-grow">
-              <h3 className="text-pink-400 font-medium text-lg">
+              <h3 className="text-purple-400 font-medium text-lg">
                 {exp.company}
               </h3>
               <p className="text-gray-300 italic">
@@ -47,7 +47,7 @@ export function WorkHistory({ experiences }: WorkHistoryProps) {
           Want to see more?{' '}
           <Link 
             href="/resume.pdf" 
-            className="text-pink-400 hover:text-pink-300 inline-flex items-center gap-1"
+            className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1"
           >
             Check out my CV
             <svg 

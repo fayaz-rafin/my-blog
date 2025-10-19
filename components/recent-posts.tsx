@@ -46,36 +46,36 @@ export default function RecentPosts() {
   return (
     <section className="mb-16">
       <h2 className="text-2xl font-bold text-white mb-8">Recent Posts</h2>
-      <div className="bg-[#1a1b26] rounded-xl p-8">
+      <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-4 sm:p-8">
         {blogPosts.length > 0 ? (
           <div className="space-y-8">
             {blogPosts.map((post) => (
               <div
                 key={post.slug}
-                className="flex justify-between items-start gap-6 border-b border-gray-800 last:border-0 pb-8 last:pb-0"
+                className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6 border-b border-gray-800 last:border-0 pb-6 sm:pb-8 last:pb-0"
               >
                 <div className="flex-grow"> {/* Text content container */}
                   <Link href={`/blog/${post.slug}`}>
-                    <h3 className="text-pink-400 font-medium text-lg mb-2 hover:underline">
+                    <h3 className="text-purple-400 font-medium text-base sm:text-lg mb-2 hover:underline">
                       {post.title}
                     </h3>
                   </Link>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                     {post.description}
                   </p>
-                  <div className="flex items-center gap-4 text-gray-400 text-sm">
+                  <div className="flex items-center gap-3 sm:gap-4 text-gray-400 text-xs sm:text-sm">
                     <span>{post.date}</span>
                     <span>•</span>
                     <span>{post.readTime} min read</span>
                   </div>
                 </div>
                 {post.imageUrl && (
-                  <div className="flex-shrink-0"> {/* Image container */}
+                  <div className="flex-shrink-0 mt-3 sm:mt-0"> {/* Image container */}
                     <Link href={`/blog/${post.slug}`}>
                       <img 
                         src={post.imageUrl} 
                         alt={post.title} 
-                        className="w-24 h-24 object-cover rounded-md hover:opacity-90 transition-opacity" 
+                        className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-md hover:opacity-90 transition-opacity" 
                         width={96}
                         height={96}
                       />

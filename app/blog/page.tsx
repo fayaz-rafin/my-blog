@@ -22,27 +22,7 @@ export default function BlogPage() {
         {/* Recent Posts Section */}
         <RecentPosts />
 
-        {/* Categories Section */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Categories</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              "Web Development",
-              "System Design",
-              "TypeScript",
-              "React",
-              "Career Growth",
-              "Best Practices"
-            ].map((category, index) => (
-              <div 
-                key={index}
-                className="bg-[#252837] rounded-lg px-4 py-3 text-gray-300"
-              >
-                {category}
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Categories Section removed as requested */}
       </div>
     </main>
   )

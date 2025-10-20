@@ -33,14 +33,15 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Next.js 15 and Server Components</li>
               <li>TypeScript best practices</li>
+              <li>Java Object Oriented Programming</li>
               <li>Swift and SwiftUI</li>
             </ul>
             <p>
               Additionally, I'm taking the following courses in university:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-4">
-              <li>Computer Organization</li>
-              <li>Electricity and Magnetism</li>
+              <li>Operating Systems</li>
+              <li>Computer Networks</li>
             </ul>
           </section>
 
@@ -52,7 +53,7 @@ export default function Page(): React.JSX.Element {
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>Personal portfolio website (this one!)</li>
               <li>Developing an iOS app for runners on race day.</li>
-              <li>Developing a web application to turn Leetcode into a fun and competitive experience with friends.</li>
+
             </ul>
 
             <p>These are the open-source projects that i am contributing to:</p>
@@ -79,6 +80,7 @@ export default function Page(): React.JSX.Element {
               <li>Advanced React patterns</li>
               <li>Software architecture</li>
               <li>Cloud infrastructure (AWS, Azure)</li>
+              <li>Java Object Oriented Programming</li>
             </ul>
           </section>
 
@@ -105,7 +107,7 @@ export default function Page(): React.JSX.Element {
             <h2 className="text-2xl font-bold text-white">📖 Currently Reading</h2>
             <ul className="list-disc list-inside space-y-2 pl-4">
               <li>&quot;Dune&quot; by Frank Herbert</li>
-              <li>&quot;Lovecraft Country&quot; by Matt Ruff</li>
+              <li>&quot;Lovecraft Compendium&quot; by H.P. Lovecraft</li>
             </ul>
           </section>
 

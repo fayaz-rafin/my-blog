@@ -12,6 +12,7 @@ interface BlogPost {
   date: string
   slug: string
   readTime?: string
+  imageUrl?: string
 }
 
 interface HomeClientProps {
@@ -199,14 +200,14 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
         {/* Recent Blog Post Section */}
         <section className="mt-16">
           <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">Recent Update</h2>
                 <p className="text-gray-400">Latest article from my blog.</p>
               </div>
               <Link 
                 href="/blog"
-                className="text-pink-400 hover:text-pink-300 flex items-center gap-2"
+                className="text-pink-400 hover:text-pink-300 flex items-center gap-2 self-start sm:self-auto"
               >
                 View all posts
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,9 +220,24 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                 href={`/blog/${recentPost.slug}`}
                 className="block rounded-lg p-0 hover:text-white text-gray-300 transition-colors duration-200"
               >
-                <h3 className="text-lg font-medium text-white mb-2">{recentPost.title}</h3>
-                <p className="text-gray-400 text-sm mb-2">{recentPost.description}</p>
-                <time className="text-sm text-pink-400">{recentPost.date}</time>
+                <div className="flex flex-row gap-4 items-start">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-medium text-white mb-2">{recentPost.title}</h3>
+                    <p className="text-gray-400 text-sm mb-2">{recentPost.description}</p>
+                    <time className="text-sm text-pink-400">{recentPost.date}</time>
+                  </div>
+                  {recentPost.imageUrl && (
+                    <div className="flex-shrink-0 w-20 h-16 sm:w-32 sm:h-20">
+                      <Image
+                        src={recentPost.imageUrl}
+                        alt={recentPost.title}
+                        width={128}
+                        height={80}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
               </Link>
             ) : (
               <div className="rounded-lg p-0 text-center">

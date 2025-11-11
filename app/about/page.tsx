@@ -1,7 +1,11 @@
 // app/about/page.tsx
-import React from 'react'
+'use client'
+
+import React, { useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { useLanguage } from '@/components/language-provider'
 
 interface WorkExperience {
   company: string
@@ -89,59 +93,83 @@ const experiences: WorkExperience[] = [
     },
 ]
 
+const copy = {
+  en: {
+    title: 'About Me',
+    intro: [
+      `Hi! I'm Fayaz, a software engineer based in Toronto, Canada. Originally from Dhaka, Bangladesh, I'm currently pursuing my degree in Computer Engineering at York University, where I've found my passion at the intersection of hardware and software.`,
+      `My journey in tech has been shaped by my love for both hardware and software. While my Electrical Engineering background satisfies my curiosity for hardware systems, my internship at Radar in 2022 helped me discover my true calling in software engineering. This unique perspective allows me to approach problems with both hardware and software solutions in mind.`,
+      `When I'm not coding or tinkering with hardware, you'll find me exploring the vibrant streets of downtown Toronto or embarking on outdoor adventures — from tobogganing in winter to hiking and beach trips in summer. I'm an avid gamer with a particular love for roguelikes like <link href="https://enterthegungeon.com/">Enter the Gungeon</link> and <link href="https://dead-cells.com/">Dead Cells</link>. You can also catch me diving into the worlds of <link href="https://www.minecraft.net/en-us">Minecraft</link> and <link href="https://play.pokemonshowdown.com/">Pokemon</link>.`,
+      `As an extrovert, I thrive on social interactions and community engagement. Whether it's discussing the latest tech trends, sharing cooking recipes, or getting lost in a good book, I'm always eager to connect with people who share similar interests.`,
+    ],
+    workHeading: 'Work history, in brief',
+    resumeQuestion: 'Want to see more?',
+    resumeCta: 'Check out my Resume',
+    skillsHeading: 'Skills & Technologies',
+    programmingHeading: 'Programming Languages',
+    frameworksHeading: 'Libraries & Frameworks',
+    cloudHeading: 'Cloud & DevOps',
+    databasesHeading: 'Databases',
+    practicesHeading: 'Practices & Concepts',
+  },
+  fr: {
+    title: 'À propos de moi',
+    intro: [
+      `Bonjour ! Je suis Fayaz, ingénieur logiciel basé à Toronto, Canada, originaire de Dhaka au Bangladesh. Je poursuis actuellement un diplôme en génie informatique à l’Université York, où j’ai découvert ma passion pour la rencontre entre matériel et logiciel.`,
+      `Mon parcours en technologie est façonné par mon affection pour le matériel et le logiciel. Si ma formation en génie électrique nourrit ma curiosité pour les systèmes matériels, mon stage chez Radar en 2022 a confirmé mon intérêt pour le génie logiciel. Cette perspective hybride me permet d’aborder les problèmes sous les deux angles.`,
+      `Lorsque je ne code pas ou ne bricole pas, je profite de Toronto ou je pars en escapades : luge en hiver, randonnées et escapades à la plage en été. J’adore les roguelikes comme <link href="https://enterthegungeon.com/">Enter the Gungeon</link> et <link href="https://dead-cells.com/">Dead Cells</link>. Je plonge aussi dans l’univers de <link href="https://www.minecraft.net/en-us">Minecraft</link> et <link href="https://play.pokemonshowdown.com/">Pokemon</link>.`,
+      `Grand extraverti, j’aime les échanges et la vie communautaire. Que ce soit pour discuter des dernières tendances tech, partager des recettes ou parler de livres, j’adore rencontrer des personnes qui partagent les mêmes centres d’intérêt.`,
+    ],
+    workHeading: 'Parcours professionnel (aperçu)',
+    resumeQuestion: 'Envie d’en voir davantage ?',
+    resumeCta: 'Consultez mon CV',
+    skillsHeading: 'Compétences & technologies',
+    programmingHeading: 'Langages de programmation',
+    frameworksHeading: 'Bibliothèques & frameworks',
+    cloudHeading: 'Cloud & DevOps',
+    databasesHeading: 'Bases de données',
+    practicesHeading: 'Pratiques & concepts',
+  },
+} as const
+
 export default function Page(): React.JSX.Element {
+  const { language } = useLanguage()
+  const content = copy[language]
+
+  const introParagraphs = useMemo(
+    () =>
+      content.intro.map((paragraph) => {
+        const withLinks = paragraph.replace(
+          /<link href="([^"]+)">([^<]+)<\/link>/g,
+          `<a href="$1" class="text-purple-400 hover:text-purple-300" target="_blank" rel="noreferrer">$2</a>`,
+        )
+        return withLinks
+      }),
+    [content],
+  )
+
   return (
     <main className="pt-32 pb-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* About Me Section */}
         <section className="mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
-            <h1 className="text-4xl font-bold text-white mb-6">About Me</h1>
+            <h1 className="text-4xl font-bold text-white mb-6">{content.title}</h1>
             <div className="prose prose-invert max-w-none">
-            <p className="text-xl text-gray-300 mb-6">
-              Hi! I'm Fayaz, a software engineer based in Toronto, Canada. Originally from Dhaka, Bangladesh, 
-              I'm currently pursuing my degree in Computer Engineering at York University, where I've found 
-              my passion at the intersection of hardware and software.
-            </p>
-            <p className="text-gray-400 mb-6">
-              My journey in tech has been shaped by my love for both hardware and software. While my Electrical 
-              Engineering background satisfies my curiosity for hardware systems, my internship at Radar in 2022 
-              helped me discover my true calling in software engineering. This unique perspective allows me to 
-              approach problems with both hardware and software solutions in mind.
-            </p>
-            <p className="text-gray-400 mb-6">
-              When I'm not coding or tinkering with hardware, you'll find me exploring the vibrant streets of 
-              downtown Toronto or embarking on outdoor adventures - from tobogganing in winter to hiking and 
-              beach trips in summer. I'm an avid gamer with a particular love for roguelikes like{' '}
-              <Link href="https://enterthegungeon.com/" className="text-purple-400 hover:text-purple-300">
-              Enter the Gungeon
-              </Link>{' '}
-              and{' '}
-              <Link href="https://dead-cells.com/" className="text-purple-400 hover:text-purple-300">
-              Dead Cells
-              </Link>
-              . You can also catch me diving into the worlds of{' '}
-              <Link href="https://www.minecraft.net/en-us" className="text-purple-400 hover:text-purple-300">
-              Minecraft
-              </Link>{' '}
-              and{' '}
-              <Link href="https://play.pokemonshowdown.com/" className="text-purple-400 hover:text-purple-300">
-              Pokemon
-              </Link>
-              .
-            </p>
-            <p className="text-gray-400 mb-6">
-              As an extrovert, I thrive on social interactions and community engagement. Whether it's discussing 
-              the latest tech trends, sharing cooking recipes, or getting lost in a good book, I'm always eager 
-              to connect with people who share similar interests.
-            </p>
+              {introParagraphs.map((paragraph, index) => (
+                <p
+                  key={paragraph}
+                  className={index === 0 ? 'text-xl text-gray-300 mb-6' : 'text-gray-400 mb-6'}
+                  dangerouslySetInnerHTML={{ __html: paragraph }}
+                />
+              ))}
             </div>
           </div>
         </section>
 
         {/* Work History Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Work history, in brief</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">{content.workHeading}</h2>
           <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
             <div className="space-y-8">
               {experiences.map((exp, index) => (
@@ -171,12 +199,12 @@ export default function Page(): React.JSX.Element {
 
             <div className="mt-12 pt-8 border-t border-white/10 text-center">
               <p className="text-gray-400">
-                Want to see more?{' '}
+                {content.resumeQuestion}{' '}
                 <Link 
                   href="resume/resume.pdf" 
                   className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1"
                 >
-                  Check out my Resume
+                  {content.resumeCta}
                   <svg 
                     className="w-5 h-5" 
                     fill="none" 
@@ -198,11 +226,11 @@ export default function Page(): React.JSX.Element {
 
         {/* Skills Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Skills & Technologies</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">{content.skillsHeading}</h2>
           
           {/* Languages */}
           <div className="mb-8">
-            <h3 className="text-xl text-purple-400 mb-4">Programming Languages</h3>
+            <h3 className="text-xl text-purple-400 mb-4">{content.programmingHeading}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.languages.map((skill, index) => (
                 <div 
@@ -224,7 +252,7 @@ export default function Page(): React.JSX.Element {
 
           {/* Frameworks */}
           <div className="mb-8">
-            <h3 className="text-xl text-purple-400 mb-4">Libraries & Frameworks</h3>
+            <h3 className="text-xl text-purple-400 mb-4">{content.frameworksHeading}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.frameworks.map((skill, index) => (
                 <div 
@@ -246,7 +274,7 @@ export default function Page(): React.JSX.Element {
 
           {/* Cloud & DevOps */}
           <div className="mb-8">
-            <h3 className="text-xl text-purple-400 mb-4">Cloud & DevOps</h3>
+            <h3 className="text-xl text-purple-400 mb-4">{content.cloudHeading}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.cloud.map((skill, index) => (
                 <div 
@@ -268,7 +296,7 @@ export default function Page(): React.JSX.Element {
 
           {/* databases & Databases */}
           <div className="mb-8">
-            <h3 className="text-xl text-purple-400 mb-4">Databases</h3>
+            <h3 className="text-xl text-purple-400 mb-4">{content.databasesHeading}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.databases.map((skill, index) => (
                 <div 
@@ -290,7 +318,7 @@ export default function Page(): React.JSX.Element {
 
           {/* Practices */}
           <div>
-            <h3 className="text-xl text-purple-400 mb-4">Practices & Concepts</h3>
+            <h3 className="text-xl text-purple-400 mb-4">{content.practicesHeading}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {skills.practices.map((skill, index) => (
                 <div 

@@ -1,10 +1,11 @@
 // app/projects/page.tsx
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ProjectCard } from '@/components/project-card'
 import { ProjectFilter } from '@/components/project-filter'
 import { ProjectPagination } from '@/components/project-pagination'
+import { useLanguage } from '@/components/language-provider'
 
 export interface Project {
   id: number
@@ -133,6 +134,7 @@ const projects: Project[] = [
 const PROJECTS_PER_PAGE = 6
 
 export default function ProjectsPage() {
+  const { language } = useLanguage()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
 
@@ -159,19 +161,29 @@ export default function ProjectsPage() {
     setCurrentPage(1) // Reset to first page when changing category
   }
 
+  const copy = useMemo(
+    () => ({
+      title: language === 'fr' ? 'Projets' : 'Projects',
+      description:
+        language === 'fr'
+          ? 'Voici un aperçu de mes projets récents, personnels ou professionnels.'
+          : "A collection of my recent work and side projects—both professional and personal experiments.",
+      filterLabel: language === 'fr' ? 'Filtrer par catégorie :' : 'Filter by category:',
+      noProjects: language === 'fr' ? 'Aucun projet trouvé dans cette catégorie.' : 'No projects found in this category.',
+    }),
+    [language],
+  )
+
   return (
     <main className="pt-32 pb-16">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-16">
-          <h1 className="text-4xl font-bold text-white mb-4">Projects</h1>
-          <p className="text-xl text-gray-400">
-            A collection of my latest work and side projects. From web applications to hardware projects,
-            here's what I've been working on.
-          </p>
+          <h1 className="text-4xl font-bold text-white mb-4">{copy.title}</h1>
+          <p className="text-xl text-gray-400">{copy.description}</p>
         </header>
 
         <div className="mb-8">
-          <h2 className="text-lg text-gray-300 mb-4">Filter by category:</h2>
+          <h2 className="text-lg text-gray-300 mb-4">{copy.filterLabel}</h2>
           <ProjectFilter 
             categories={categories}
             selectedCategory={selectedCategory}
@@ -190,7 +202,7 @@ export default function ProjectsPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-400">No projects found in this category.</p>
+              <p className="text-gray-400">{copy.noProjects}</p>
             </div>
           )}
         </section>

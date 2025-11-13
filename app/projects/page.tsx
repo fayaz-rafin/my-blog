@@ -20,6 +20,24 @@ export interface Project {
 const projects: Project[] = [
   {
     id: 0,
+    title: 'AI Chess Battle',
+    description: 'Watch two large language models face off on the board. Streams real-time chess games between AI opponents with configurable providers.',
+    image: '/projects/aichessbattle.png',
+    technologies: [
+      'Next.js',
+      'Three.js',
+      'Tailwind CSS',
+      'LiteLLM',
+      'Google Gemini',
+      'OpenAI',
+      'Anthropic Claude',
+      'Vercel',
+    ],
+    link: 'https://llm-chess-arena.vercel.app/',
+    category: 'Web App',
+  },
+  {
+    id: 1,
     title: "The Computing Students Hub Website",
     description: "Official site for CSHub built with modern Next.js 15 App Router, TypeScript, shadcn/ui, Framer Motion, Radix UI, Prisma and more.",
     image: "/projects/cshub.png",
@@ -37,7 +55,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 1,
+    id: 2,
     title: "HONCK!",
     description: "A robotic goose productivity coach that monitors activity and honks when you slack. Hardware (Raspberry Pi + camera) with a React Native (Expo) app, FastAPI backend, OpenCV/TensorFlow detection, and Groq analysis.",
     image: "/projects/honck.png",
@@ -47,7 +65,7 @@ const projects: Project[] = [
   },
 
   {
-    id: 2,
+    id: 3,
     title: "Campus Class Availability Analytics (Streamlit)",
     description: "An interactive Streamlit dashboard that analyzes York University Markham Campus timetables to identify optimal time slots for hosting events.",
     image: "/projects/streamlit.png",
@@ -57,7 +75,7 @@ const projects: Project[] = [
   },
 
   {
-    id: 3,
+    id: 4,
     title: "Broccoli",
     description: "The first Agentic shopping assistant for no name brands.",
     image: "/projects/broccoli.png",
@@ -66,7 +84,7 @@ const projects: Project[] = [
     category: "Web App",
   },
   {
-    id: 4,
+    id: 5,
     title: "sponsorship.io",
     description: "A web-app to help peopel draft emails for sponsorships.",
     image: "/projects/sponsorship.png",
@@ -75,7 +93,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 5,
+    id: 6,
     title: "Leetcode Tracker",
     description: "A Leetcode progress tracker to make Leetcode more fun and engaging.",
     image: "/projects/leetlogger.png",
@@ -84,7 +102,7 @@ const projects: Project[] = [
     category: "Web App"
   },
   {
-    id: 6,
+    id: 7,
     title: "Pomoduino",
     description: "A functional Pomodoro timer in Arduino using a 4-Digit 7 Segment LED Display and 4x4 Keypad and Arduino DUE Microcontroller.",
     image: "/projects/pomoduino.png",
@@ -93,7 +111,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 7,
+    id: 8,
     title: "Veri-Thread",
     description: "Transparent, sustainable fashion backed up by blockchain. Trace every step from material to finished product, safety contracts, earn ICP tokens for supporting ethical and eco-friendly manufacturing.",
     image: "/projects/verithread.png",
@@ -102,7 +120,7 @@ const projects: Project[] = [
     category: "App"
   },
   {
-    id: 8,
+    id: 9,
     title: "Veripong",
     description: "VGA Pong Game Implementation on DE10-Lite FPGA",
     image: "/projects/veripong.png",
@@ -111,7 +129,7 @@ const projects: Project[] = [
     category: "Hardware"
   },
   {
-    id: 9,
+    id: 10,
     title: "Amnesiac's Odyssey",
     description: "JRPG Game on the Nintendo Gameboy using GBDK and Aseprite.",
     image: "/projects/aogame.png",
@@ -120,7 +138,7 @@ const projects: Project[] = [
     category: "Game"
   },
   {
-    id: 10,
+    id: 11,
     title: "CTRL+HACK+DEL",
     description: "Landing page of CTRL+HACK+DEL, York University's Premier Hackathon.",
     image: "/projects/chd.png",

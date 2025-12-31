@@ -12,6 +12,7 @@ interface WorkExperience {
   role: string
   period: string
   logo: string
+  companyLink?: string
 }
 
 interface Skill {
@@ -74,22 +75,32 @@ const skills = {
 
 const experiences: WorkExperience[] = [
     {
+        company: "TD Canada Trust",
+        role: "Software Engineer, TD Securities",
+        period: "January 2026 — Present",
+        logo: "/logos/tdbank.png",
+        companyLink: "https://www.tdsecurities.com/ca/en"
+    },
+    {
         company: "Dorayaki Studios",
         role: "Software Engineer",
         period: "March 2024 — Present",
-        logo: "/logos/ds.png"
+        logo: "/logos/ds.png",
+        companyLink: "https://www.dorayakistudios.com/"
     },
     {
         company: "Outlier AI",
         role: "Prompt Engineer",
         period: "May 2024 — August 2024",
-        logo: "/logos/outlier.png"
+        logo: "/logos/outlier.png",
+        companyLink: "https://outlier.ai/"
     },
     {
         company: "Radar",
         role: "Software Engineer Intern",
         period: "May 2022 — August 2022",
-        logo:"/logos/radar.png"
+        logo:"/logos/radar.png",
+        companyLink: "https://www.linkedin.com/company/theradarapp"
     },
 ]
 
@@ -183,9 +194,20 @@ export default function Page(): React.JSX.Element {
                     />
                   </div>
                   <div className="flex-grow">
-                    <h3 className="text-purple-400 font-medium text-lg">
-                      {exp.company}
-                    </h3>
+                    {exp.companyLink ? (
+                      <Link 
+                        href={exp.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-400 font-medium text-lg hover:text-purple-300 transition-colors"
+                      >
+                        {exp.company}
+                      </Link>
+                    ) : (
+                      <h3 className="text-purple-400 font-medium text-lg">
+                        {exp.company}
+                      </h3>
+                    )}
                     <p className="text-gray-300 italic">
                       {exp.role}
                     </p>

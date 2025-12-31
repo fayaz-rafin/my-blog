@@ -22,11 +22,13 @@ export function ProjectCard({
         />
       </div>
       <div className="p-4 sm:p-6">
-        <div className="flex justify-between items-start mb-3 sm:mb-4">
-          <h3 className="text-lg sm:text-xl font-semibold text-white">{title}</h3>
-          <span className="text-sm text-purple-400 bg-purple-400/10 px-2 py-1 rounded">
-            {category}
-          </span>
+        <div className="flex justify-between items-start gap-2 mb-3 sm:mb-4">
+          <h3 className="text-lg sm:text-xl font-semibold text-white flex-1 min-w-0">{title}</h3>
+          {category && (
+            <span className="text-sm text-purple-400 bg-purple-400/10 px-2 py-1 rounded flex-shrink-0 whitespace-nowrap">
+              {category}
+            </span>
+          )}
         </div>
         <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{description}</p>
         <div className="flex flex-wrap gap-2 mb-4">

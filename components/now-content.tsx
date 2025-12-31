@@ -29,11 +29,11 @@ const copy: Record<Language, NowPageCopy> = {
         emoji: '🚀',
         title: 'Current Focus',
         paragraphs: [
-          "Starting a new full-time job as a Student Life Assistant @ York University. I'm also diving deep into:",
+          "Starting a new full-time job as a Software Engineer @ TD Securities. I'm also diving deep into:",
         ],
         lists: [
-          ['Next.js 15 and Server Components', 'TypeScript best practices', 'Java Object Oriented Programming', 'Swift and SwiftUI'],
-          ['Operating Systems', 'Computer Networks'],
+          ['Java Object Oriented Programming', 'Swift and SwiftUI'],
+          ['Operating Systems', 'Computer Networks', 'System Design', 'Cloud Architecture'],
         ],
         listLabels: [undefined, 'Additionally, I’m taking the following courses in university:'],
       },
@@ -45,7 +45,13 @@ const copy: Record<Language, NowPageCopy> = {
         afterList: [
           'These are the open-source projects that I am contributing to:',
           `<link href="https://github.com/SheerSt/pokewilds">Pokewilds</link> — A Gen 2 Pokémon fan game/engine using libGDX`,
-          `<link href="https://github.com/JustJavaOrg/gymcore">Gymcore</link> — a simple RESTful API for managing gym members and their subscriptions.`,
+        ],
+      },
+      {
+        emoji: '🎮',
+        title: 'Streaming',
+        paragraphs: [
+          "I started streaming on Twitch for fun! I stream occasionally, playing games like Jump King, Celeste, Plants VS Zombies, and Pokemon.",
         ],
       },
       {
@@ -63,12 +69,12 @@ const copy: Record<Language, NowPageCopy> = {
       },
       {
         emoji: '🎯',
-        title: 'Goals for 2025',
+        title: 'Goals for 2026',
         lists: [
           [
             'Launch 3 side projects',
             'Write one technical blog post per month',
-            'Contribute to 5 open source projects',
+            'Contribute to more open source projects',
             'Improve system design skills',
             'Learn more about the stock market',
             'Learn app development in Swift',
@@ -91,23 +97,29 @@ const copy: Record<Language, NowPageCopy> = {
         emoji: '🚀',
         title: 'Priorités actuelles',
         paragraphs: [
-          "Je commence un nouvel emploi à temps plein comme Student Life Assistant à l’Université York. Je me plonge aussi en profondeur dans :",
+          "Je commence un nouvel emploi à temps plein comme Ingénieur Logiciel chez TD Securities. Je me plonge aussi en profondeur dans :",
         ],
         lists: [
-          ['Next.js 15 et les Server Components', 'Bonnes pratiques TypeScript', 'Programmation orientée objet en Java', 'Swift et SwiftUI'],
-          ['Systèmes d’exploitation', 'Réseaux informatiques'],
+          ['Programmation orientée objet en Java', 'Swift et SwiftUI'],
+          ['Systèmes d\'exploitation', 'Réseaux informatiques', 'Architecture système', 'Architecture cloud'],
         ],
-        listLabels: [undefined, 'Je suis également les cours universitaires suivants :'],
+        listLabels: [undefined, 'De plus, je suis les cours universitaires suivants :'],
       },
       {
         emoji: '💻',
         title: 'Projets en cours',
         paragraphs: ['Je travaille actuellement sur plusieurs projets :'],
-        lists: [['Ce portfolio (eh oui !)', 'Une application iOS pour les coureurs le jour de la course.']],
+        lists: [['Ce portfolio (eh oui !)', 'Développement d\'une application iOS pour les coureurs le jour de la course.']],
         afterList: [
           'Et voici les projets open source auxquels je contribue :',
           `<link href="https://github.com/SheerSt/pokewilds">Pokewilds</link> — un fan game/engine Pokémon Gen 2 construit sur libGDX`,
-          `<link href="https://github.com/JustJavaOrg/gymcore">Gymcore</link> — une API REST simple pour gérer les membres d’une salle et leurs abonnements.`,
+        ],
+      },
+      {
+        emoji: '🎮',
+        title: 'Streaming',
+        paragraphs: [
+          "J'ai commencé à streamer sur Twitch pour le plaisir ! Je stream occasionnellement, en jouant à des jeux comme Jump King, Celeste, Plants VS Zombies et Pokemon.",
         ],
       },
       {
@@ -120,20 +132,20 @@ const copy: Record<Language, NowPageCopy> = {
         emoji: '📍',
         title: 'Localisation',
         paragraphs: [
-          'Je vis actuellement à Toronto (Ontario, Canada). J’aime beaucoup la scène tech locale et sa communauté de développeurs.',
+          'Je vis actuellement à Toronto (Ontario, Canada). J\'aime beaucoup la scène tech locale et sa communauté de développeurs.',
         ],
       },
       {
         emoji: '🎯',
-        title: 'Objectifs pour 2025',
+        title: 'Objectifs pour 2026',
         lists: [
           [
             'Lancer 3 projets personnels',
             'Écrire un billet technique par mois',
-            'Contribuer à 5 projets open source',
+            'Contribuer à davantage de projets open source',
             'Améliorer mes compétences en architecture système',
             'Mieux comprendre la bourse',
-            'Apprendre le développement d’applications Swift',
+            'Apprendre le développement d\'applications Swift',
           ],
         ],
       },

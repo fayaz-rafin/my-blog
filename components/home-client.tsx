@@ -60,7 +60,7 @@ const homeCopy = {
     ],
     whatsNewHeading: "What's new?",
     whatsNewDescription: 'My latest updates and activities.',
-    whatsNewBody: 'Reading Week was too short. I need more time!!!!',
+    whatsNewBody: 'New Year, Same Old Me! 🎉',
     recentHeading: 'Recent Update',
     recentDescription: 'Latest article from my blog.',
     viewAllPosts: 'View all posts',
@@ -81,7 +81,7 @@ const homeCopy = {
     ],
     whatsNewHeading: 'Quoi de neuf ?',
     whatsNewDescription: 'Mes dernières mises à jour et activités.',
-    whatsNewBody: 'La semaine de lecture était trop courte. Il me faut plus de temps !!!!',
+    whatsNewBody: 'Nouvelle année, même moi ! 🎉',
     recentHeading: 'Mise à jour récente',
     recentDescription: 'Dernier article publié sur mon blog.',
     viewAllPosts: 'Voir tous les articles',
@@ -260,7 +260,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             <p className="text-gray-400">{content.whatsNewDescription}</p>
             <div className="mt-6 flex items-center gap-4">
               <div className="p-4 rounded-lg flex-shrink-0">
-                <span className="text-3xl">😔</span>
+                <span className="text-3xl">🎉</span>
               </div>
               <p className="text-xl text-gray-300 leading-normal">
                 {content.whatsNewBody}

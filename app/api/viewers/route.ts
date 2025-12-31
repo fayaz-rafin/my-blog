@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put, list, del } from '@vercel/blob'
+// import { put, list, del } from '@vercel/blob'
 
 interface ViewerData {
   id: string
@@ -47,22 +47,30 @@ export async function POST(request: NextRequest) {
       lastSeen: Date.now()
     }
 
-    // Try to use Vercel Blob, fallback to in-memory storage
-    try {
-      const filename = `viewers/${id}.json`
-      await put(filename, JSON.stringify(viewerData), {
-        access: 'public',
-        addRandomSuffix: false
-      })
-    } catch (blobError) {
-      console.log('Vercel Blob not configured, using in-memory storage')
-      // Update or add to in-memory storage
-      const existingIndex = inMemoryViewers.findIndex(v => v.id === id)
-      if (existingIndex >= 0) {
-        inMemoryViewers[existingIndex] = viewerData
-      } else {
-        inMemoryViewers.push(viewerData)
-      }
+    // Using in-memory storage (Vercel Blob commented out)
+    // try {
+    //   const filename = `viewers/${id}.json`
+    //   await put(filename, JSON.stringify(viewerData), {
+    //     access: 'public',
+    //     addRandomSuffix: false
+    //   })
+    // } catch (blobError) {
+    //   console.log('Vercel Blob not configured, using in-memory storage')
+    //   // Update or add to in-memory storage
+    //   const existingIndex = inMemoryViewers.findIndex(v => v.id === id)
+    //   if (existingIndex >= 0) {
+    //     inMemoryViewers[existingIndex] = viewerData
+    //   } else {
+    //     inMemoryViewers.push(viewerData)
+    //   }
+    // }
+    
+    // Update or add to in-memory storage
+    const existingIndex = inMemoryViewers.findIndex(v => v.id === id)
+    if (existingIndex >= 0) {
+      inMemoryViewers[existingIndex] = viewerData
+    } else {
+      inMemoryViewers.push(viewerData)
     }
 
     return NextResponse.json({ success: true, viewer: viewerData })
@@ -78,30 +86,70 @@ export async function GET() {
     const activeThreshold = 5 * 60 * 1000 // 5 minutes
     let viewers: ViewerData[] = []
 
-    // Try to use Vercel Blob, fallback to in-memory storage
-    try {
-      const { blobs } = await list({ prefix: 'viewers/' })
-      
-      for (const blob of blobs) {
-        try {
-          const response = await fetch(blob.url)
-          const viewerData: ViewerData = await response.json()
-          
-          // Only include active viewers (seen in last 5 minutes)
-          if (now - viewerData.lastSeen < activeThreshold) {
-            viewers.push(viewerData)
-          }
-        } catch (error) {
-          console.error('Error reading viewer data:', error)
-        }
-      }
-    } catch (blobError) {
-      console.log('Using in-memory viewer data')
-      // Use in-memory storage
-      viewers = inMemoryViewers.filter(viewer => 
-        now - viewer.lastSeen < activeThreshold
-      )
-    }
+    // Using in-memory storage (Vercel Blob commented out)
+    // try {
+    //   const { blobs } = await list({ prefix: 'viewers/' })
+    //   
+    //   for (const blob of blobs) {
+    //     try {
+    //       const response = await fetch(blob.url)
+    //       
+    //       // Check if response is OK and content type is JSON
+    //       if (!response.ok) {
+    //         console.warn(`Failed to fetch blob ${blob.url}: ${response.status} ${response.statusText}`)
+    //         continue
+    //       }
+    //       
+    //       const contentType = response.headers.get('content-type')
+    //       if (!contentType || !contentType.includes('application/json')) {
+    //         console.warn(`Blob ${blob.url} is not JSON, content-type: ${contentType}`)
+    //         continue
+    //       }
+    //       
+    //       const text = await response.text()
+    //       
+    //       // Validate that the text is valid JSON before parsing
+    //       if (!text || text.trim().length === 0) {
+    //         console.warn(`Blob ${blob.url} returned empty content`)
+    //         continue
+    //       }
+    //       
+    //       // Check if it looks like JSON (starts with { or [)
+    //       if (!text.trim().startsWith('{') && !text.trim().startsWith('[')) {
+    //         console.warn(`Blob ${blob.url} does not contain valid JSON, starts with: ${text.substring(0, 50)}`)
+    //         continue
+    //       }
+    //       
+    //       const viewerData: ViewerData = JSON.parse(text)
+    //       
+    //       // Validate the parsed data has required fields
+    //       if (!viewerData || typeof viewerData !== 'object' || !viewerData.id || typeof viewerData.lastSeen !== 'number') {
+    //         console.warn(`Blob ${blob.url} contains invalid viewer data structure`)
+    //         continue
+    //       }
+    //       
+    //       // Only include active viewers (seen in last 5 minutes)
+    //       if (now - viewerData.lastSeen < activeThreshold) {
+    //         viewers.push(viewerData)
+    //       }
+    //     } catch (error) {
+    //       console.error('Error reading viewer data:', error)
+    //       // Continue to next blob instead of breaking
+    //       continue
+    //     }
+    //   }
+    // } catch (blobError) {
+    //   console.log('Using in-memory viewer data')
+    //   // Use in-memory storage
+    //   viewers = inMemoryViewers.filter(viewer => 
+    //     now - viewer.lastSeen < activeThreshold
+    //   )
+    // }
+    
+    // Use in-memory storage
+    viewers = inMemoryViewers.filter(viewer => 
+      now - viewer.lastSeen < activeThreshold
+    )
 
     // Group by country for geographic data
     const geographicData = viewers.reduce((acc, viewer) => {
@@ -142,26 +190,48 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const { id } = body
     
-    // Try to update in Vercel Blob, fallback to in-memory storage
-    try {
-      const filename = `viewers/${id}.json`
-      const response = await fetch(`${process.env.VERCEL_BLOB_STORE_URL || ''}/${filename}`)
-      
-      if (response.ok) {
-        const viewerData: ViewerData = await response.json()
-        viewerData.lastSeen = Date.now()
-        
-        await put(filename, JSON.stringify(viewerData), {
-          access: 'public',
-          addRandomSuffix: false
-        })
-      }
-    } catch (blobError) {
-      // Update in-memory storage
-      const viewerIndex = inMemoryViewers.findIndex(v => v.id === id)
-      if (viewerIndex >= 0) {
-        inMemoryViewers[viewerIndex].lastSeen = Date.now()
-      }
+    // Using in-memory storage (Vercel Blob commented out)
+    // try {
+    //   const filename = `viewers/${id}.json`
+    //   const response = await fetch(`${process.env.VERCEL_BLOB_STORE_URL || ''}/${filename}`)
+    //   
+    //   if (response.ok) {
+    //     const contentType = response.headers.get('content-type')
+    //     if (contentType && contentType.includes('application/json')) {
+    //       const text = await response.text()
+    //       
+    //       // Validate JSON before parsing
+    //       if (text && text.trim().length > 0 && (text.trim().startsWith('{') || text.trim().startsWith('['))) {
+    //         try {
+    //           const viewerData: ViewerData = JSON.parse(text)
+    //           
+    //           // Validate the parsed data
+    //           if (viewerData && typeof viewerData === 'object' && viewerData.id) {
+    //             viewerData.lastSeen = Date.now()
+    //             
+    //             await put(filename, JSON.stringify(viewerData), {
+    //               access: 'public',
+    //               addRandomSuffix: false
+    //             })
+    //           }
+    //         } catch (parseError) {
+    //           console.error('Error parsing viewer data in PUT:', parseError)
+    //         }
+    //       }
+    //     }
+    //   }
+    // } catch (blobError) {
+    //   // Update in-memory storage
+    //   const viewerIndex = inMemoryViewers.findIndex(v => v.id === id)
+    //   if (viewerIndex >= 0) {
+    //     inMemoryViewers[viewerIndex].lastSeen = Date.now()
+    //   }
+    // }
+    
+    // Update in-memory storage
+    const viewerIndex = inMemoryViewers.findIndex(v => v.id === id)
+    if (viewerIndex >= 0) {
+      inMemoryViewers[viewerIndex].lastSeen = Date.now()
     }
 
     return NextResponse.json({ success: true })

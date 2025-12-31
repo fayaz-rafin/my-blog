@@ -40,18 +40,32 @@ export function Navbar() {
             </div>
 
             <nav className="relative z-10 flex items-center gap-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative inline-flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
-                >
-                  <span>{item.label}</span>
-                  {pathname === item.href && (
-                    <motion.div layoutId="underline" className="absolute left-0 -bottom-2 h-[2px] w-full bg-white/70" />
-                  )}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="relative inline-flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
+                  >
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <motion.div 
+                        layoutId="navbar-underline" 
+                        layout="position"
+                        initial={false}
+                        transition={{ 
+                          layout: { 
+                            duration: 0.2, 
+                            ease: [0.4, 0, 0.2, 1]
+                          }
+                        }}
+                        className="absolute left-0 -bottom-2 h-[2px] w-full bg-white/70" 
+                      />
+                    )}
+                  </Link>
+                )
+              })}
               <LanguageToggle />
             </nav>
           </div>

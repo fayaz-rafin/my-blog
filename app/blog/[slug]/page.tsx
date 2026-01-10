@@ -92,8 +92,7 @@ export default async function BlogPost({ params }: PageProps) {
     const filePath = path.join(process.cwd(), 'content/blog', `${slug}.md`)
     const fileContent = await fs.readFile(filePath, 'utf8')
     const { content, data } = matter(fileContent)
-    const stats = await fs.stat(filePath) // Get file stats
-    const formattedDate = stats.mtime.toLocaleDateString('en-US', { // Format mtime
+    const formattedDate = new Date(data.date).toLocaleDateString('en-US', { // Format date from frontmatter
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -104,7 +103,7 @@ export default async function BlogPost({ params }: PageProps) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl font-bold text-white mb-2">{data.title}</h1>
           <div className="flex items-center gap-4 text-sm text-gray-400 mb-8">
-            <span>{formattedDate}</span> {/* Use formatted mtime */}
+            <span>{formattedDate}</span>
             <span>•</span>
             <span>{calculateReadTime(content)} min read</span>
           </div>

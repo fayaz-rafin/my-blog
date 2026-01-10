@@ -9,7 +9,7 @@ type Section = {
   title: string
   paragraphs?: string[]
   lists?: string[][]
-  listLabels?: (string | undefined)[]
+  listLabels?: (string | null | undefined)[]
   afterList?: string[]
 }
 
@@ -35,7 +35,7 @@ const copy: Record<Language, NowPageCopy> = {
           ['Java Object Oriented Programming', 'Swift and SwiftUI'],
           ['Operating Systems', 'Computer Networks', 'System Design', 'Cloud Architecture'],
         ],
-        listLabels: [undefined, 'Additionally, I’m taking the following courses in university:'],
+        listLabels: [null, "Additionally, I'm taking the following courses in university:"],
       },
       {
         emoji: '💻',
@@ -84,7 +84,7 @@ const copy: Record<Language, NowPageCopy> = {
       {
         emoji: '📖',
         title: 'Currently Reading',
-        lists: [['“Dune” by Frank Herbert', '“Lovecraft Compendium” by H.P. Lovecraft']],
+        lists: [['"Dune" by Frank Herbert', '"Lovecraft Compendium" by H.P. Lovecraft']],
       },
     ],
     footer: `This is a "now page", inspired by <link href="https://nownownow.com/about">nownownow.com</link>. It shows what I'm currently focused on at this point in my life.`,
@@ -103,7 +103,7 @@ const copy: Record<Language, NowPageCopy> = {
           ['Programmation orientée objet en Java', 'Swift et SwiftUI'],
           ['Systèmes d\'exploitation', 'Réseaux informatiques', 'Architecture système', 'Architecture cloud'],
         ],
-        listLabels: [undefined, 'De plus, je suis les cours universitaires suivants :'],
+        listLabels: [null, 'De plus, je suis les cours universitaires suivants :'],
       },
       {
         emoji: '💻',
@@ -226,4 +226,3 @@ export default function NowContent({ lastUpdatedIso }: NowContentProps): React.R
     </main>
   )
 }
-

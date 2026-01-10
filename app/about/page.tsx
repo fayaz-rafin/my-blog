@@ -75,7 +75,7 @@ const skills = {
 
 const experiences: WorkExperience[] = [
     {
-        company: "TD Canada Trust",
+        company: "TD Bank",
         role: "Software Engineer, TD Securities",
         period: "January 2026 — Present",
         logo: "/logos/tdbank.png",

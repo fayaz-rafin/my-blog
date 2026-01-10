@@ -1,0 +1,68 @@
+{
+  "title": "Ce que je fais maintenant",
+  "lastUpdatedPrefix": "Dernière mise à jour :",
+  "sections": [
+    {
+      "emoji": "🚀",
+      "title": "Priorités actuelles",
+      "paragraphs": [
+        "Je commence un nouvel emploi à temps plein comme Ingénieur Logiciel chez TD Securities. Je me plonge aussi en profondeur dans :"
+      ],
+      "lists": [
+        ["Programmation orientée objet en Java", "Swift et SwiftUI"],
+        ["Systèmes d'exploitation", "Réseaux informatiques", "Architecture système", "Architecture cloud"]
+      ],
+      "listLabels": [null, "De plus, je suis les cours universitaires suivants :"]
+    },
+    {
+      "emoji": "💻",
+      "title": "Projets en cours",
+      "paragraphs": ["Je travaille actuellement sur plusieurs projets :"],
+      "lists": [["Ce portfolio (eh oui !)", "Développement d'une application iOS pour les coureurs le jour de la course."]],
+      "afterList": [
+        "Et voici les projets open source auxquels je contribue :",
+        "<link href=\"https://github.com/SheerSt/pokewilds\">Pokewilds</link> — un fan game/engine Pokémon Gen 2 construit sur libGDX"
+      ]
+    },
+    {
+      "emoji": "🎮",
+      "title": "Streaming",
+      "paragraphs": [
+        "J'ai commencé à streamer sur Twitch pour le plaisir ! Je stream occasionnellement, en jouant à des jeux comme Jump King, Celeste, Plants VS Zombies et Pokemon."
+      ]
+    },
+    {
+      "emoji": "📚",
+      "title": "Apprentissages",
+      "paragraphs": ["Je continue de me former sur :"],
+      "lists": [["Patrons avancés React", "Architecture logicielle", "Infrastructures cloud (AWS, Azure)", "Programmation orientée objet en Java"]]
+    },
+    {
+      "emoji": "📍",
+      "title": "Localisation",
+      "paragraphs": [
+        "Je vis actuellement à Toronto (Ontario, Canada). J'aime beaucoup la scène tech locale et sa communauté de développeurs."
+      ]
+    },
+    {
+      "emoji": "🎯",
+      "title": "Objectifs pour 2026",
+      "lists": [
+        [
+          "Lancer 3 projets personnels",
+          "Écrire un billet technique par mois",
+          "Contribuer à davantage de projets open source",
+          "Améliorer mes compétences en architecture système",
+          "Mieux comprendre la bourse",
+          "Apprendre le développement d'applications Swift"
+        ]
+      ]
+    },
+    {
+      "emoji": "📖",
+      "title": "Lectures du moment",
+      "lists": [["« Dune » de Frank Herbert", "« Lovecraft Compendium » de H.P. Lovecraft"]]
+    }
+  ],
+  "footer": "Ceci est une « now page » inspirée de <link href=\"https://nownownow.com/about\">nownownow.com</link>. Elle présente ce sur quoi je me concentre en ce moment."
+}

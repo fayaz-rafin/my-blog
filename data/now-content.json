@@ -1,0 +1,68 @@
+{
+  "title": "What I'm Doing Now",
+  "lastUpdatedPrefix": "Last updated:",
+  "sections": [
+    {
+      "emoji": "🚀",
+      "title": "Current Focus",
+      "paragraphs": [
+        "Starting a new full-time job as a Software Engineer @ TD Securities. I'm also diving deep into:"
+      ],
+      "lists": [
+        ["Java Object Oriented Programming", "Swift and SwiftUI"],
+        ["Operating Systems", "Computer Networks", "System Design", "Cloud Architecture"]
+      ],
+      "listLabels": [null, "Additionally, I'm taking the following courses in university:"]
+    },
+    {
+      "emoji": "💻",
+      "title": "Working On",
+      "paragraphs": ["Currently working on several projects:"],
+      "lists": [["Personal portfolio website (this one!)", "Developing an iOS app for runners on race day."]],
+      "afterList": [
+        "These are the open-source projects that I am contributing to:",
+        "<link href=\"https://github.com/SheerSt/pokewilds\">Pokewilds</link> — A Gen 2 Pokémon fan game/engine using libGDX"
+      ]
+    },
+    {
+      "emoji": "🎮",
+      "title": "Streaming",
+      "paragraphs": [
+        "I started streaming on Twitch for fun! I stream occasionally, playing games like Jump King, Celeste, Plants VS Zombies, and Pokemon."
+      ]
+    },
+    {
+      "emoji": "📚",
+      "title": "Learning",
+      "paragraphs": ["Always expanding my knowledge in:"],
+      "lists": [["Advanced React patterns", "Software architecture", "Cloud infrastructure (AWS, Azure)", "Java Object Oriented Programming"]]
+    },
+    {
+      "emoji": "📍",
+      "title": "Location",
+      "paragraphs": [
+        "I'm currently based in Toronto, Ontario, Canada. I love the tech scene here and the vibrant community of developers."
+      ]
+    },
+    {
+      "emoji": "🎯",
+      "title": "Goals for 2026",
+      "lists": [
+        [
+          "Launch 3 side projects",
+          "Write one technical blog post per month",
+          "Contribute to more open source projects",
+          "Improve system design skills",
+          "Learn more about the stock market",
+          "Learn app development in Swift"
+        ]
+      ]
+    },
+    {
+      "emoji": "📖",
+      "title": "Currently Reading",
+      "lists": [["\"Dune\" by Frank Herbert", "\"Lovecraft Compendium\" by H.P. Lovecraft"]]
+    }
+  ],
+  "footer": "This is a \"now page\", inspired by <link href=\"https://nownownow.com/about\">nownownow.com</link>. It shows what I'm currently focused on at this point in my life."
+}

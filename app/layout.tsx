@@ -22,6 +22,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Fayaz Rafin",
   description: "My personal portfolio",
+  verification: {
+    google: "OLQYFZO0ZFj1WdZRo7DlI-fr3xSL2d3Z_OMjzKRbYyQ",
+  },
 };
 
 export default function RootLayout({

@@ -354,6 +354,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
 }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null)
 	const visibilityRef = useRef({ visible: true })
+	const isIntersectingRef = useRef(true)
+	const isDocumentVisibleRef = useRef(true)
 	const speedRef = useRef(speed)
 
 	const threeRef = useRef<{
@@ -393,6 +395,25 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
 		const container = containerRef.current
 		if (!container) return
 		speedRef.current = speed
+		isDocumentVisibleRef.current = !document.hidden
+		const updateVisibility = () => {
+			visibilityRef.current.visible =
+				isIntersectingRef.current && isDocumentVisibleRef.current
+		}
+		const handleVisibilityChange = () => {
+			isDocumentVisibleRef.current = !document.hidden
+			updateVisibility()
+		}
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				isIntersectingRef.current = entry.isIntersecting
+				updateVisibility()
+			},
+			{ threshold: 0.1 }
+		)
+		observer.observe(container)
+		document.addEventListener('visibilitychange', handleVisibilityChange)
+		updateVisibility()
 		const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount']
 		const cfg = { antialias, liquid, noiseAmount }
 		let mustReinit = false
@@ -427,7 +448,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
 			})
 			renderer.domElement.style.width = '100%'
 			renderer.domElement.style.height = '100%'
-			renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+			renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5))
 			container.appendChild(renderer.domElement)
 			const uniforms = {
 				uResolution: { value: new THREE.Vector2(0, 0) },
@@ -617,6 +638,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
 		}
 		prevConfigRef.current = cfg
 		return () => {
+			observer.disconnect()
+			document.removeEventListener('visibilitychange', handleVisibilityChange)
 			if (threeRef.current && mustReinit) return
 			if (!threeRef.current) return
 			const t = threeRef.current

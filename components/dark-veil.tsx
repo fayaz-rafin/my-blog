@@ -95,12 +95,19 @@ export default function DarkVeil({
   resolutionScale = 1
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const frameRef = useRef<number | null>(null)
+  const startTimeRef = useRef(0)
+  const elapsedRef = useRef(0)
+  const isVisibleRef = useRef(true)
+
   useEffect(() => {
-    const canvas = ref.current as HTMLCanvasElement
-    const parent = canvas.parentElement as HTMLElement
+    const canvas = ref.current
+    if (!canvas) return
+    const parent = canvas.parentElement
+    if (!parent) return
 
     const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 2),
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
       canvas
     })
 
@@ -124,33 +131,80 @@ export default function DarkVeil({
     const mesh = new Mesh(gl, { geometry, program })
 
     const resize = () => {
-      const w = parent.clientWidth, h = parent.clientHeight
+      const w = parent.clientWidth
+      const h = parent.clientHeight
       renderer.setSize(w * resolutionScale, h * resolutionScale)
       program.uniforms.uResolution.value.set(w, h)
     }
 
-    window.addEventListener('resize', resize)
-    resize()
-
-    const start = performance.now()
-    let frame = 0
-
-    const loop = () => {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed
+    const updateUniforms = () => {
       program.uniforms.uHueShift.value = hueShift
       program.uniforms.uNoise.value = noiseIntensity
       program.uniforms.uScan.value = scanlineIntensity
       program.uniforms.uScanFreq.value = scanlineFrequency
       program.uniforms.uWarp.value = warpAmount
-      renderer.render({ scene: mesh })
-      frame = requestAnimationFrame(loop)
     }
 
-    loop()
+    const renderFrame = () => {
+      if (!isVisibleRef.current || document.hidden) {
+        frameRef.current = null
+        return
+      }
+      const elapsed = performance.now() - startTimeRef.current
+      program.uniforms.uTime.value = (elapsed / 1000) * speed
+      updateUniforms()
+      renderer.render({ scene: mesh })
+      frameRef.current = requestAnimationFrame(renderFrame)
+    }
+
+    const startLoop = () => {
+      if (frameRef.current !== null) return
+      startTimeRef.current = performance.now() - elapsedRef.current
+      frameRef.current = requestAnimationFrame(renderFrame)
+    }
+
+    const stopLoop = () => {
+      if (frameRef.current === null) return
+      elapsedRef.current = performance.now() - startTimeRef.current
+      cancelAnimationFrame(frameRef.current)
+      frameRef.current = null
+    }
+
+    const syncLoopState = () => {
+      if (isVisibleRef.current && !document.hidden) startLoop()
+      else stopLoop()
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting
+        syncLoopState()
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(canvas)
+    window.addEventListener('resize', resize)
+    document.addEventListener('visibilitychange', syncLoopState)
+    resize()
+
+    const hasIdleCallback = 'requestIdleCallback' in window
+    const idleId = hasIdleCallback
+      ? (window as typeof window & {
+          requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number
+        }).requestIdleCallback(syncLoopState, { timeout: 800 })
+      : window.setTimeout(syncLoopState, 300)
 
     return () => {
-      cancelAnimationFrame(frame)
+      stopLoop()
+      if (hasIdleCallback) {
+        ;(window as typeof window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(idleId)
+      } else {
+        window.clearTimeout(idleId)
+      }
+      observer.disconnect()
       window.removeEventListener('resize', resize)
+      document.removeEventListener('visibilitychange', syncLoopState)
     }
   }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale])
   return <canvas ref={ref} className="w-full h-full block" />

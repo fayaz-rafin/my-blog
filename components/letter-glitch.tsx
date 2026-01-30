@@ -26,6 +26,7 @@ const LetterGlitch = ({
   const grid = useRef({ columns: 0, rows: 0 });
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const lastGlitchTime = useRef(Date.now());
+  const isVisibleRef = useRef(true);
 
   const fontSize = 16;
   const charWidth = 10;
@@ -154,7 +155,7 @@ const LetterGlitch = ({
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const rect = parent.getBoundingClientRect();
 
     canvas.width = rect.width * dpr;
@@ -235,6 +236,11 @@ const LetterGlitch = ({
   };
 
   const animate = () => {
+    if (!isVisibleRef.current || document.hidden) {
+      animationRef.current = null;
+      return;
+    }
+
     const now = Date.now();
     if (now - lastGlitchTime.current >= glitchSpeed) {
       updateLetters();
@@ -249,30 +255,70 @@ const LetterGlitch = ({
     animationRef.current = requestAnimationFrame(animate);
   };
 
+  const startAnimation = () => {
+    if (animationRef.current !== null) return;
+    animate();
+  };
+
+  const stopAnimation = () => {
+    if (animationRef.current === null) return;
+    cancelAnimationFrame(animationRef.current);
+    animationRef.current = null;
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     context.current = canvas.getContext("2d");
     resizeCanvas();
-    animate();
 
     let resizeTimeout: NodeJS.Timeout;
 
     const handleResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        cancelAnimationFrame(animationRef.current as number);
+        stopAnimation();
         resizeCanvas();
-        animate();
+        syncAnimationState();
       }, 100);
     };
 
+    const syncAnimationState = () => {
+      if (!document.hidden && isVisibleRef.current) startAnimation();
+      else stopAnimation();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        syncAnimationState();
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(canvas);
     window.addEventListener("resize", handleResize);
+    document.addEventListener("visibilitychange", syncAnimationState);
+
+    const hasIdleCallback = 'requestIdleCallback' in window;
+    const idleId = hasIdleCallback
+      ? (window as typeof window & {
+          requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number;
+        }).requestIdleCallback(syncAnimationState, { timeout: 800 })
+      : window.setTimeout(syncAnimationState, 300);
 
     return () => {
-      cancelAnimationFrame(animationRef.current!);
+      stopAnimation();
+      clearTimeout(resizeTimeout);
+      if (hasIdleCallback) {
+        (window as typeof window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", syncAnimationState);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);

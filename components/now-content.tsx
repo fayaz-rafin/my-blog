@@ -29,13 +29,9 @@ const copy: Record<Language, NowPageCopy> = {
         emoji: '🚀',
         title: 'Current Focus',
         paragraphs: [
-          "Starting a new full-time job as a Software Engineer @ TD Securities. I'm also diving deep into:",
+          'My current focus is starting a new full-time job as a Senior Consultant at KPMG Canada.',
+          "I'm taking a course on designing a 32-bit RISC-V CPU.",
         ],
-        lists: [
-          ['Java Object Oriented Programming', 'Swift and SwiftUI'],
-          ['Operating Systems', 'Computer Networks', 'System Design', 'Cloud Architecture'],
-        ],
-        listLabels: [null, "Additionally, I'm taking the following courses in university:"],
       },
       {
         emoji: '💻',
@@ -97,13 +93,9 @@ const copy: Record<Language, NowPageCopy> = {
         emoji: '🚀',
         title: 'Priorités actuelles',
         paragraphs: [
-          "Je commence un nouvel emploi à temps plein comme Ingénieur Logiciel chez TD Securities. Je me plonge aussi en profondeur dans :",
+          'Ma priorité actuelle est de commencer un nouvel emploi à temps plein comme consultant principal chez KPMG Canada.',
+          'Je suis un cours sur la conception d’un CPU RISC-V 32 bits.',
         ],
-        lists: [
-          ['Programmation orientée objet en Java', 'Swift et SwiftUI'],
-          ['Systèmes d\'exploitation', 'Réseaux informatiques', 'Architecture système', 'Architecture cloud'],
-        ],
-        listLabels: [null, 'De plus, je suis les cours universitaires suivants :'],
       },
       {
         emoji: '💻',

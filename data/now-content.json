@@ -1,4 +1,5 @@
 {
+  "lastUpdatedIso": "2026-04-18T12:00:00.000Z",
   "title": "What I'm Doing Now",
   "lastUpdatedPrefix": "Last updated:",
   "sections": [
@@ -6,13 +7,9 @@
       "emoji": "🚀",
       "title": "Current Focus",
       "paragraphs": [
-        "Starting a new full-time job as a Software Engineer @ TD Securities. I'm also diving deep into:"
-      ],
-      "lists": [
-        ["Java Object Oriented Programming", "Swift and SwiftUI"],
-        ["Operating Systems", "Computer Networks", "System Design", "Cloud Architecture"]
-      ],
-      "listLabels": [null, "Additionally, I'm taking the following courses in university:"]
+        "My current focus is starting a new full-time job as a Senior Consultant at KPMG Canada.",
+        "I'm taking a course on designing a 32-bit RISC-V CPU."
+      ]
     },
     {
       "emoji": "💻",

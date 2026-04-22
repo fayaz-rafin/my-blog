@@ -41,6 +41,8 @@ const skills = {
     { name: "SwiftUI", icon: "/icons/swift.svg" },
     { name: "Flask", icon: "/icons/flask.svg" },
     { name: "Express.js", icon: "/icons/express.svg" },
+    { name: "Spring Boot", icon: "/icons/springboot.svg" },
+    { name: "Maven", icon: "/icons/maven.svg" },
     { name: "Docker", icon: "/icons/docker.svg" },
     { name: "TailwindCSS", icon: "/icons/tailwind.svg" },
   ],
@@ -54,6 +56,8 @@ const skills = {
     { name: "Localstack", icon: "/icons/cloud.svg"},
     { name: "auth0", icon: "/icons/auth0.svg" },
     { name: "Vercel", icon: "/icons/vercel.svg" },
+    { name: "Azure App Service", icon: "/icons/azure.svg" },
+    { name: "Azure Data Lake Storage", icon: "/icons/azure.svg" },
   ],
   databases: [
     { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
@@ -75,9 +79,16 @@ const skills = {
 
 const experiences: WorkExperience[] = [
     {
+        company: "KPMG Canada",
+        role: "Senior Consultant, Internal AI Solutions, Ignition Tax",
+        period: "May 2026 - Present",
+        logo: "/logos/kpmg.svg",
+        companyLink: "https://kpmg.com/ca/en/home.html"
+    },
+    {
         company: "TD Bank",
-        role: "Software Engineer, TD Securities",
-        period: "January 2026 — Present",
+        role: "Software Engineer Intern, TD Securities",
+        period: "January 2026 — April 2026",
         logo: "/logos/tdbank.png",
         companyLink: "https://www.tdsecurities.com/ca/en"
     },
@@ -183,14 +194,20 @@ export default function Page(): React.JSX.Element {
           <h2 className="text-2xl font-bold text-white mb-8">{content.workHeading}</h2>
           <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
             <div className="space-y-8">
-              {experiences.map((exp, index) => (
+              {experiences.map((exp, index) => {
+                const isVectorLogo = exp.logo.endsWith('.svg')
+                return (
                 <div key={index} className="flex items-center gap-6">
-                  <div className="w-16 h-16 relative flex-shrink-0 bg-[#252837] rounded-full overflow-hidden">
+                  <div
+                    className={`w-16 h-16 relative flex-shrink-0 rounded-full overflow-hidden ${
+                      isVectorLogo ? 'bg-white p-2' : 'bg-[#252837]'
+                    }`}
+                  >
                     <Image
                       src={exp.logo}
                       alt={exp.company}
                       fill
-                      className="object-cover"
+                      className={isVectorLogo ? 'object-contain' : 'object-cover'}
                     />
                   </div>
                   <div className="flex-grow">
@@ -216,7 +233,8 @@ export default function Page(): React.JSX.Element {
                     {exp.period}
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
 
             <div className="mt-12 pt-8 border-t border-white/10 text-center">

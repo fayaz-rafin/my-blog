@@ -210,40 +210,39 @@ export default function ProjectsPage() {
   )
 
   return (
-    <main className="pt-32 pb-16">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="mb-16">
-          <h1 className="text-4xl font-bold text-white mb-4">{copy.title}</h1>
-          <p className="text-xl text-gray-400">{copy.description}</p>
+    <main className="pb-16">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-8 max-w-2xl border-b border-white/10 pb-8 sm:mb-12 sm:pb-10">
+          <p className="page-index">{language === 'fr' ? '03 / Projets' : '03 / Projects'}</p>
+          <h1 className="page-title">{copy.title}</h1>
+          <p className="page-lede">{copy.description}</p>
         </header>
 
-        <div className="mb-8">
-          <h2 className="text-lg text-gray-300 mb-4">{copy.filterLabel}</h2>
-          <ProjectFilter 
+        <div className="mb-8 sm:mb-10">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] sm:mb-4 sm:text-[11px] sm:tracking-[0.16em]">
+            {copy.filterLabel}
+          </p>
+          <ProjectFilter
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
           />
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <section className="mb-16">
           {currentProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
               {currentProjects.map((project) => (
                 <ProjectCard key={project.id} {...project} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-400">{copy.noProjects}</p>
-            </div>
+            <p className="py-12 text-[var(--muted-raw)]">{copy.noProjects}</p>
           )}
         </section>
 
         {filteredProjects.length > PROJECTS_PER_PAGE && (
-          <ProjectPagination 
+          <ProjectPagination
             currentPage={currentPage}
             totalProjects={filteredProjects.length}
             projectsPerPage={PROJECTS_PER_PAGE}

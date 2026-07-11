@@ -1,10 +1,12 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'motion/react'
+import { ArrowUpRight } from 'lucide-react'
 
-import OnlineViewers from './online-viewers'
+import HeroSection from './hero-section'
 import { useLanguage } from '@/components/language-provider'
 
 interface BlogPost {
@@ -20,314 +22,150 @@ interface HomeClientProps {
   recentPost: BlogPost | null
 }
 
-const englishTypingPhrases = [
-  'Hello, World!',
-  'Bonjour, le monde!',
-  'Hola, Mundo!',
-  'こんにちは、世界！',
-  '안녕하세요, 세계!',
-  'Привет, мир!',
-  'مرحبا بالعالم!',
-  'হ্যালো, বিশ্ব!',
-  'नमस्ते, दुनिया!',
-  'வணக்கம், உலகம்!',
-  '你好，世界！',
-  'Olá, Mundo!',
-  'Ciao, Mondo!',
-  'שלום, עולם!',
-]
-
-const frenchTypingPhrases = [
-  'Bonjour, le monde !',
-  'Salut tout le monde !',
-  'Bienvenue !',
-  'Enchanté !',
-  'Bienvenue sur mon site !',
-]
-
 const homeCopy = {
   en: {
-    heroIntro:
-      'My name is Fayaz Rafin. Computer Engineering Student at York University with expertise in full-stack development.',
-    heroWelcome:
-      'Welcome to my digital garden. Here, I share my thoughts, projects, and experiences in software development and beyond.',
-    aboutHeading: 'About Me',
-    aboutSubtitle: 'Software engineer & Computer Engineering student',
-    aboutParagraphs: [
-      `I'm a software engineer based in <span class="text-purple-400 font-medium">Toronto, Canada</span>, originally from <span class="text-purple-400 font-medium">Dhaka, Bangladesh</span>. Currently pursuing my degree in <span class="text-purple-400 font-medium">Computer Engineering at York University</span>.`,
-      `I currently work at <span class="text-purple-400 font-medium">KPMG Canada</span> as a <span class="text-purple-400 font-medium">Senior Consultant for Internal AI Solutions</span> on the <span class="text-white font-medium">Ignition Tax team</span>, where I build AI-powered tools that streamline internal workflows. Previously, I was a <span class="text-purple-400 font-medium">Software Engineer at TD Securities</span> under <span class="text-white font-medium">Corporate and Investment Banking</span>.`,
-      `My journey combines <span class="text-purple-400 font-medium">hardware and software expertise</span>. While my Computer Engineering background satisfies my curiosity for hardware systems, my internship at <span class="text-white font-medium">Radar in 2022</span> helped me discover my true calling in software engineering.`,
-      `I've also gained experience as a <span class="text-purple-400 font-medium">Software Engineer at Dorayaki Studios</span>, <span class="text-purple-400 font-medium">Prompt Engineer at Outlier AI</span>, and <span class="text-purple-400 font-medium">Software Engineer Intern at Radar</span>. This unique perspective allows me to approach problems with both hardware and software solutions in mind.`,
-    ],
-    whatsNewHeading: "What's new?",
-    whatsNewDescription: 'My latest updates and activities.',
-    whatsNewBody: 'New Year, Same Old Me! 🎉',
-    recentHeading: 'Recent Update',
-    recentDescription: 'Latest article from my blog.',
-    viewAllPosts: 'View all posts',
-    noPostTitle: 'The most recent blog post will appear here.',
-    noPostSubtitle: 'Stay tuned for upcoming articles!',
+    aboutHeading: '01 / About',
+    aboutLead:
+      'I build AI-powered tools at KPMG Canada and study Computer Engineering at York University.',
+    aboutBody:
+      'Based in Toronto, originally from Dhaka. Previously software engineering at TD Securities, Dorayaki Studios, and Radar.',
+    aboutMore: 'More about me',
+    recentHeading: '02 / Writing',
+    viewAllPosts: 'All posts',
+    readArticle: 'Read',
+    noPostTitle: 'No posts yet.',
+    noPostSubtitle: 'Check back soon, or browse the archive.',
   },
   fr: {
-    heroIntro:
-      "Je m'appelle Fayaz Rafin. Étudiant en génie informatique à l'Université York avec une expertise en développement full-stack.",
-    heroWelcome:
-      'Bienvenue dans mon jardin numérique. Ici, je partage mes réflexions, projets et expériences en développement logiciel et au-delà.',
-    aboutHeading: 'À propos de moi',
-    aboutSubtitle: "Ingénieur logiciel et étudiant en génie informatique",
-    aboutParagraphs: [
-      `Je suis un ingénieur logiciel basé à <span class="text-purple-400 font-medium">Toronto, Canada</span>, originaire de <span class="text-purple-400 font-medium">Dhaka, Bangladesh</span>. Je poursuis actuellement mon diplôme en <span class="text-purple-400 font-medium">génie informatique à l'Université York</span>.`,
-      `Je travaille actuellement chez <span class="text-purple-400 font-medium">KPMG Canada</span> en tant que <span class="text-purple-400 font-medium">consultant senior en solutions d'IA internes</span> au sein de l'équipe <span class="text-white font-medium">Ignition Tax</span>, où je conçois des outils propulsés par l'IA pour optimiser les flux de travail internes. Auparavant, j'étais <span class="text-purple-400 font-medium">ingénieur logiciel chez TD Securities</span>, au sein de la division <span class="text-white font-medium">Services bancaires aux entreprises et d'investissement</span>.`,
-      `Mon parcours combine <span class="text-purple-400 font-medium">expertise matérielle et logicielle</span>. Si ma formation en génie informatique nourrit ma curiosité pour les systèmes matériels, mon stage chez <span class="text-white font-medium">Radar en 2022</span> m'a permis de découvrir ma véritable vocation : le génie logiciel.`,
-      `J'ai également acquis de l'expérience en tant qu'<span class="text-purple-400 font-medium">ingénieur logiciel chez Dorayaki Studios</span>, <span class="text-purple-400 font-medium">prompt engineer chez Outlier AI</span> et <span class="text-purple-400 font-medium">stagiaire en génie logiciel chez Radar</span>. Cette perspective unique me permet d'aborder les problèmes sous l'angle du matériel et du logiciel.`,
-    ],
-    whatsNewHeading: 'Quoi de neuf ?',
-    whatsNewDescription: 'Mes dernières mises à jour et activités.',
-    whatsNewBody: 'Nouvelle année, même moi ! 🎉',
-    recentHeading: 'Mise à jour récente',
-    recentDescription: 'Dernier article publié sur mon blog.',
-    viewAllPosts: 'Voir tous les articles',
-    noPostTitle: 'Le billet de blog le plus récent apparaîtra ici.',
-    noPostSubtitle: 'Restez à l’écoute des prochains articles !',
+    aboutHeading: '01 / À propos',
+    aboutLead:
+      'Je conçois des outils propulsés par l’IA chez KPMG Canada et j’étudie le génie informatique à l’Université York.',
+    aboutBody:
+      'Basé à Toronto, originaire de Dhaka. Auparavant ingénieur logiciel chez TD Securities, Dorayaki Studios et Radar.',
+    aboutMore: 'En savoir plus',
+    recentHeading: '02 / Écriture',
+    viewAllPosts: 'Tous les articles',
+    readArticle: 'Lire',
+    noPostTitle: 'Aucun article pour le moment.',
+    noPostSubtitle: 'Revenez bientôt, ou parcourez les archives.',
   },
 } as const
 
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+  },
+}
+
 export default function HomeClient({ recentPost }: HomeClientProps) {
   const { language } = useLanguage()
-
-  const phrases = useMemo(
-    () => (language === 'fr' ? frenchTypingPhrases : englishTypingPhrases),
-    [language],
-  )
-
   const content = homeCopy[language]
 
-  const [displayText, setDisplayText] = useState('')
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [typingSpeed, setTypingSpeed] = useState(150)
-
-  useEffect(() => {
-    setDisplayText('')
-    setPhraseIndex(0)
-    setIsDeleting(false)
-  }, [phrases])
-
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentPhrase = phrases[phraseIndex] ?? ''
-      setDisplayText(
-        isDeleting
-          ? currentPhrase.substring(0, displayText.length - 1)
-          : currentPhrase.substring(0, displayText.length + 1),
-      )
-
-      setTypingSpeed(isDeleting ? 75 : 150)
-
-      if (!isDeleting && displayText === currentPhrase) {
-        setTimeout(() => setIsDeleting(true), 1000)
-      } else if (isDeleting && displayText === '') {
-        setIsDeleting(false)
-        setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length)
-      }
-    }
-
-    const typingTimer = setTimeout(handleTyping, typingSpeed)
-
-    return () => clearTimeout(typingTimer)
-  }, [displayText, isDeleting, phraseIndex, typingSpeed, phrases])
-
-
   return (
-    <main className="pt-32 pb-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Online Viewers Counter */}
-        <div className="flex justify-end mb-4">
-          <OnlineViewers />
-        </div>
-        {/* Intro Section */}
-        <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6 sm:p-8 shadow-lg">
-          <div className="flex items-start gap-6 flex-col sm:flex-row">
-            <div className="flex-shrink-0">
-              <Image
-                src="/avatar.jpg"
-                alt="Fayaz Rafin avatar"
-                width={200}
-                height={200}
-                className="rounded-full border-4 border-white/10 shadow-lg"
-              />
-            </div>
-            <div className="flex-1 space-y-6">
-              <h1 className="text-4xl sm:text-6xl font-bold text-white" style={{ minHeight: '3rem' }}>
-              {displayText}<span className={`cursor ${((!isDeleting && displayText === phrases[phraseIndex]) || (isDeleting && displayText === '')) ? 'blinking' : ''}`}>|</span>
-              </h1>
-              <p className="text-xl sm:text-2xl text-white/90">
-                {content.heroIntro}
-              </p>
-              <p className="text-base sm:text-xl text-white/70">
-                {content.heroWelcome}
-              </p>
-              
-              {/* Social Links */}
-              <div className="flex gap-2 sm:gap-3 pt-4 flex-wrap">
-                <Link 
-                  href="https://github.com/fayaz-rafin" 
-                  target="_blank"
-                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
-                >
-                  <Image
-                    src="/icons/github.svg"
-                    alt="GitHub"
-                    width={18}
-                    height={18}
-                    className="flex-shrink-0"
-                  />
-                  <span className="text-white text-sm sm:text-base truncate">GitHub</span>
-                </Link>
-                <Link 
-                  href="https://linkedin.com/in/fayazrafin" 
-                  target="_blank"
-                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
-                >
-                  <Image
-                    src="/icons/linkedin.svg"
-                    alt="LinkedIn"
-                    width={18}
-                    height={18}
-                    className="flex-shrink-0"
-                  />
-                  <span className="text-white text-sm sm:text-base truncate">LinkedIn</span>
-                </Link>
-                <Link 
-                  href="https://devpost.com/fayaz-rafin" 
-                  target="_blank"
-                  className="inline-flex items-center gap-2 max-w-full px-3 py-2 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/15 rounded-lg transition-colors duration-200 border border-white/10"
-                >
-                  <Image
-                    src="/icons/devpost.svg"
-                    alt="Devpost"
-                    width={18}
-                    height={18}
-                    className="flex-shrink-0"
-                  />
-                  <span className="text-white text-sm sm:text-base truncate">Devpost</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+    <main className="pb-16 sm:pb-24 lg:pb-28">
+      <div className="mx-auto max-w-6xl">
+        <HeroSection />
 
-        {/* Professional Summary Section */}
-        <section className="mt-16">
-          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-transparent p-3 rounded-lg">
-                  <span className="text-2xl">💻</span>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-white">{content.aboutHeading}</h2>
-                  <p className="text-gray-400">{content.aboutSubtitle}</p>
-                </div>
-              </div>
-              
-              <div className="space-y-6 text-gray-300 leading-relaxed">
-                {content.aboutParagraphs.map((paragraph, index) => (
-                  <p
-                    key={paragraph}
-                    className={index === 0 ? 'text-lg' : 'text-base'}
-                    dangerouslySetInnerHTML={{ __html: paragraph }}
-                  />
-                ))}
-              </div>
-              
-              <div className="mt-8 flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">JavaScript</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">TypeScript</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Python</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">React</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Next.js</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">AWS</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">Docker</span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md text-pink-300 text-sm font-medium">PostgreSQL</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div className="mt-4 space-y-14 border-t border-white/10 pt-12 sm:mt-2 sm:space-y-24 sm:pt-16 lg:space-y-28 lg:pt-20">
+          <motion.section
+            aria-labelledby="about-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={reveal}
+            className="max-w-2xl"
+          >
+            <h2
+              id="about-heading"
+              className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent-raw)] sm:text-[11px] sm:tracking-[0.22em]"
+            >
+              {content.aboutHeading}
+            </h2>
+            <p className="mt-4 text-[clamp(1.2rem,4.5vw,1.85rem)] font-medium leading-snug tracking-[-0.02em] text-[#f2f0eb] sm:mt-6">
+              {content.aboutLead}
+            </p>
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-[#9a9690] sm:mt-5 sm:text-lg">
+              {content.aboutBody}
+            </p>
+            <Link href="/about" className="link-raw mt-5 sm:mt-7">
+              {content.aboutMore}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </motion.section>
 
-        {/* What's New Section */}
-        <section className="mt-16">
-          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
-            <h2 className="text-2xl font-bold text-white mb-2">{content.whatsNewHeading}</h2>
-            <p className="text-gray-400">{content.whatsNewDescription}</p>
-            <div className="mt-6 flex items-center gap-4">
-              <div className="p-4 rounded-lg flex-shrink-0">
-                <span className="text-3xl">🎉</span>
-              </div>
-              <p className="text-xl text-gray-300 leading-normal">
-                {content.whatsNewBody}
-              </p>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* Recent Blog Post Section */}
-        <section className="mt-16">
-          <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-              <div>
-                <h2 className="text-2xl font-bold text-white mb-2">{content.recentHeading}</h2>
-                <p className="text-gray-400">{content.recentDescription}</p>
-              </div>
-              <Link 
-                href="/blog"
-                className="text-purple-400 hover:text-purple-300 flex items-center gap-2 self-start sm:self-auto"
+          <motion.section
+            aria-labelledby="recent-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={reveal}
+          >
+            <div className="mb-6 flex flex-col gap-3 border-b border-white/10 pb-4 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+              <h2
+                id="recent-heading"
+                className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent-raw)] sm:text-[11px] sm:tracking-[0.22em]"
               >
+                {content.recentHeading}
+              </h2>
+              <Link href="/blog" className="link-raw self-start">
                 {content.viewAllPosts}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
+
             {recentPost ? (
-              <Link 
+              <Link
                 href={`/blog/${recentPost.slug}`}
-                className="block rounded-lg p-0 hover:text-white text-gray-300 transition-colors duration-200"
+                className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-raw)]"
+                aria-label={`${content.readArticle}: ${recentPost.title}`}
               >
-                <div className="flex flex-row gap-4 items-start">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-medium text-white mb-2">{recentPost.title}</h3>
-                    <p className="text-gray-400 text-sm mb-2">{recentPost.description}</p>
-                    <time className="text-sm text-purple-400">{recentPost.date}</time>
-                  </div>
+                <article className="grid gap-5 sm:grid-cols-[180px_1fr] sm:gap-8 lg:grid-cols-[200px_1fr] lg:gap-10">
                   {recentPost.imageUrl && (
-                    <div className="flex-shrink-0 w-20 h-16 sm:w-32 sm:h-20">
+                    <div className="relative h-44 w-full overflow-hidden border border-white/15 sm:h-36">
                       <Image
                         src={recentPost.imageUrl}
-                        alt={recentPost.title}
-                        width={128}
-                        height={80}
-                        className="w-full h-full object-cover rounded-lg"
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 100vw, 200px"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                       />
                     </div>
                   )}
-                </div>
+                  <div className="min-w-0">
+                    <time className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#9a9690] sm:text-[11px] sm:tracking-[0.16em]">
+                      {recentPost.date}
+                    </time>
+                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#f2f0eb] transition-colors duration-300 group-hover:text-[var(--accent-raw)] sm:mt-3 sm:text-2xl lg:text-3xl">
+                      {recentPost.title}
+                    </h3>
+                    <p className="mt-2 text-[0.9375rem] leading-relaxed text-[#9a9690] sm:mt-3 sm:text-base">
+                      {recentPost.description}
+                    </p>
+                    <span className="link-raw mt-4 sm:mt-5">
+                      {content.readArticle}
+                      <ArrowUpRight
+                        className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                </article>
               </Link>
             ) : (
-              <div className="rounded-lg p-0 text-center">
-                <div className="text-4xl mb-4">📝</div>
-                <p className="text-gray-300 text-lg">
-                  {content.noPostTitle}
-                </p>
-                <p className="text-gray-400 mt-2">
-                  {content.noPostSubtitle}
-                </p>
+              <div className="py-2">
+                <p className="text-[#f2f0eb]">{content.noPostTitle}</p>
+                <p className="mt-1 text-[#9a9690]">{content.noPostSubtitle}</p>
+                <Link href="/blog" className="link-raw mt-5">
+                  {content.viewAllPosts}
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               </div>
             )}
-          </div>
-        </section>
+          </motion.section>
+        </div>
       </div>
     </main>
   )

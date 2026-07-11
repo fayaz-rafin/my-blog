@@ -7,7 +7,6 @@ import { Footer } from "@/components/footer";
 import { Providers } from "@/app/providers";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import DarkVeil from "@/components/dark-veil";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +26,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#090807",
+  viewportFit: "cover" as const,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,20 +44,23 @@ export default function RootLayout({
       <SpeedInsights />
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-[var(--text-raw)]`}
         suppressHydrationWarning
       >
         
         <Providers>
-          {/* Global background */}
-          <div className="fixed inset-0 -z-10">
-            <DarkVeil hueShift={0} noiseIntensity={0.02} scanlineIntensity={0.12} scanlineFrequency={0.035} speed={0.6} warpAmount={0.05} resolutionScale={1} />
+          <div className="site-bg" aria-hidden="true">
+            <div className="site-bg__base" />
+            <div className="site-bg__glow site-bg__glow--primary" />
+            <div className="site-bg__glow site-bg__glow--secondary" />
+            <div className="site-bg__grid" />
+            <div className="site-bg__scan" />
+            <div className="site-bg__grain" />
+            <div className="site-bg__vignette" />
           </div>
-          {/* Move the Navbar outside the content container */}
           <Navbar />
-          {/* Content container separate from Navbar */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-8 sm:py-12 md:py-16 space-y-16 md:space-y-24">
+          <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="pt-[max(5rem,calc(env(safe-area-inset-top)+4.5rem))] pb-8 sm:pt-24 sm:pb-12 md:pb-16">
               {children}
             </div>
           </div>

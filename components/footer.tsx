@@ -1,51 +1,118 @@
-// components/Footer.tsx
+'use client'
+
+import Image from 'next/image'
 import Link from 'next/link'
 
+import { useLanguage } from '@/components/language-provider'
+
+const socialLinks = [
+  {
+    href: 'mailto:fayaz.rafin@gmail.com',
+    label: 'Email',
+    icon: '/icons/email.svg',
+    external: false,
+  },
+  {
+    href: 'https://github.com/fayaz-rafin',
+    label: 'GitHub',
+    icon: '/icons/github.svg',
+    external: true,
+  },
+  {
+    href: 'https://linkedin.com/in/fayazrafin',
+    label: 'LinkedIn',
+    icon: '/icons/linkedin.svg',
+    external: true,
+  },
+] as const
+
+const footerCopy = {
+  en: {
+    index: '99 / Outro',
+    tagline: 'Software engineer · Toronto',
+    backToTop: 'Back to top',
+    navLabel: 'Contact',
+  },
+  fr: {
+    index: '99 / Outro',
+    tagline: 'Ingénieur logiciel · Toronto',
+    backToTop: 'Retour en haut',
+    navLabel: 'Contact',
+  },
+} as const
+
 export function Footer() {
+  const { language } = useLanguage()
+  const content = footerCopy[language]
+  const year = new Date().getFullYear()
+
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <footer className="relative mt-20">
-      {/* Curved divider removed for transparent footer */}
+    <footer className="relative mt-12 border-t border-white/10 sm:mt-20">
+      <div
+        aria-hidden="true"
+        className="absolute left-0 top-0 h-px w-16 bg-[var(--accent-raw)] sm:w-24"
+      />
 
-      {/* Footer content */}
-      <div className="relative bg-transparent py-8 sm:py-12 text-muted-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Navigation links */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
-            <FooterLink href="#top">↑ Back to top</FooterLink>
-            <FooterLink href="mailto:fayaz.rafin@gmail.com">
-          <img src="/icons/email.svg" alt="Email" className="w-6 h-6 invert" />
-            </FooterLink>
-            <FooterLink href="https://github.com/fayaz-rafin">
-          <img src="/icons/github.svg" alt="GitHub" className="w-6 h-6 invert" />
-            </FooterLink>
-            <FooterLink href="https://linkedin.com/in/fayazrafin">
-          <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-6 h-6 invert" />
-            </FooterLink>
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:gap-10 sm:px-6 sm:py-12 lg:px-8">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-12">
+          <div className="min-w-0">
+            <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent-raw)] sm:text-[11px] sm:tracking-[0.22em]">
+              {content.index}
+            </p>
+            <p className="mt-3 font-mono text-lg font-semibold tracking-[-0.03em] text-[var(--text-raw)] sm:text-xl">
+              Fayaz Rafin
+            </p>
+            <p className="mt-2 text-sm text-[var(--muted-raw)]">{content.tagline}</p>
           </div>
 
-          {/* Copyright */}
-          <div className="text-center text-sm sm:text-base text-gray-400">
-            © 2025 Fayaz Rafin. All rights reserved.
-          </div>
+          <nav
+            className="flex w-full flex-col gap-3 sm:w-auto sm:items-end"
+            aria-label={content.navLabel}
+          >
+            <div className="flex w-full divide-x divide-white/10 border border-white/15 sm:w-auto">
+              {socialLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  aria-label={link.label}
+                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 px-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] transition-colors duration-300 hover:bg-white/5 hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)] sm:flex-none sm:px-5 sm:text-[11px]"
+                >
+                  <Image
+                    src={link.icon}
+                    alt=""
+                    width={16}
+                    height={16}
+                    aria-hidden="true"
+                    className="brightness-0 invert opacity-80"
+                  />
+                  <span className="hidden sm:inline">{link.label}</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+
+        <div className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.16em]">
+            © {year} Fayaz Rafin
+          </p>
+          <button
+            type="button"
+            onClick={handleBackToTop}
+            className="inline-flex min-h-11 items-center gap-2 self-start font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] transition-colors duration-300 hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)] sm:self-auto sm:text-[11px]"
+            aria-label={content.backToTop}
+          >
+            <span aria-hidden="true">↑</span>
+            {content.backToTop}
+          </button>
         </div>
       </div>
     </footer>
-  )
-}
-
-interface FooterLinkProps {
-  href: string
-  children: React.ReactNode
-}
-
-function FooterLink({ href, children }: FooterLinkProps) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm sm:text-base max-w-full overflow-hidden whitespace-nowrap text-ellipsis
-        bg-white/10 hover:bg-white/15 text-white border border-white/10 transition-colors duration-200"
-    >
-      {typeof children === 'string' ? children : children}
-    </Link>
   )
 }

@@ -27,129 +27,101 @@ export function Navbar() {
   )
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4 pointer-events-none">
-      <div className="max-w-6xl mx-auto pointer-events-auto">
-        <div className="hidden md:block">
-          <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-6 rounded-full border border-white/10 bg-white/10 backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]">
-            <div className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/10" />
-            <div className="relative z-10 flex items-center gap-2 min-w-0">
-              <Image src="/logo.png" alt="" width={20} height={20} className="select-none flex-shrink-0" priority />
-              <Link href="/" className="truncate text-white font-semibold text-sm xs:text-base sm:text-lg max-w-[45vw]" aria-label={language === 'fr' ? 'Retour à la page d’accueil' : 'Back to homepage'}>
-                Fayaz Rafin
-              </Link>
-            </div>
+    <header className="pointer-events-none fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#090807]/90 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+      <div className="pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="flex min-w-0 items-center gap-2 font-mono text-sm font-semibold tracking-[-0.02em] text-[var(--text-raw)] transition-colors hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
+          aria-label={language === 'fr' ? 'Retour à la page d’accueil' : 'Back to homepage'}
+        >
+          <Image src="/logo.png" alt="" width={18} height={18} className="shrink-0 select-none" priority />
+          <span className="truncate">Fayaz Rafin</span>
+        </Link>
 
-            <nav className="relative z-10 flex items-center gap-6">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="relative inline-flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors duration-200"
-                  >
-                    <span>{item.label}</span>
-                    {isActive && (
-                      <motion.div 
-                        layoutId="navbar-underline" 
-                        layout="position"
-                        initial={false}
-                        transition={{ 
-                          layout: { 
-                            duration: 0.2, 
-                            ease: [0.4, 0, 0.2, 1]
-                          }
-                        }}
-                        className="absolute left-0 -bottom-2 h-[2px] w-full bg-white/70" 
-                      />
-                    )}
-                  </Link>
-                )
-              })}
-              <LanguageToggle />
-            </nav>
-          </div>
-        </div>
-
-        <div className="mt-2 flex items-center justify-between rounded-full border border-white/10 bg-white/10 px-4 py-2 shadow-[0_10px_35px_-15px_rgba(0,0,0,0.55)] backdrop-blur-md md:hidden">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
-              alt=""
-              width={18}
-              height={18}
-              className="h-5 w-5 select-none"
-              priority
-            />
-            <span className="text-sm font-semibold text-white">Fayaz Rafin</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <button
-              type="button"
-              onClick={() => setIsOpen((prev) => !prev)}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 text-white transition-colors duration-200 hover:border-white/40"
-              aria-label={isOpen ? (language === 'fr' ? 'Fermer le menu' : 'Close menu') : language === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
-            >
-              <span className="sr-only">{isOpen ? (language === 'fr' ? 'Fermer le menu' : 'Close menu') : language === 'fr' ? 'Ouvrir le menu' : 'Open menu'}</span>
-              <svg
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                {isOpen ? (
-                  <path d="M18 6L6 18M6 6l12 12" />
-                ) : (
-                  <>
-                    <path d="M4 6h16" />
-                    <path d="M4 12h16" />
-                    <path d="M4 18h16" />
-                  </>
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]',
+                  isActive ? 'text-[var(--accent-raw)]' : 'text-[var(--muted-raw)] hover:text-[var(--text-raw)]',
                 )}
-              </svg>
-            </button>
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="navbar-underline"
+                    className="absolute inset-x-3 -bottom-px h-px bg-[var(--accent-raw)]"
+                    transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                )}
+              </Link>
+            )
+          })}
+          <div className="ml-2 border-l border-white/10 pl-3">
+            <LanguageToggle />
           </div>
-        </div>
+        </nav>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.nav
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="mt-2 rounded-2xl border border-white/10 bg-black/50 px-4 py-4 shadow-[0_10px_25px_-10px_rgba(0,0,0,0.6)] backdrop-blur-lg md:hidden"
-            >
-              <div className="space-y-2">
-                {navItems.map((item) => (
-                  <button
-                    key={item.href}
-                    type="button"
-                    onClick={() => {
-                      setIsOpen(false)
-                      if (item.href !== pathname) {
-                        window.location.href = item.href
-                      }
-                    }}
-                    className={cn(
-                      'block w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-white/80 transition-colors duration-200',
-                      pathname === item.href ? 'bg-white/15 text-white' : 'hover:bg-white/10 hover:text-white',
-                    )}
-                    aria-current={pathname === item.href ? 'page' : undefined}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageToggle />
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="inline-flex h-10 w-10 items-center justify-center border border-white/20 text-[var(--text-raw)] transition-colors hover:border-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? (language === 'fr' ? 'Fermer le menu' : 'Close menu') : language === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
+          >
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              {isOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+              ) : (
+                <>
+                  <path d="M4 7h16" strokeLinecap="round" />
+                  <path d="M4 12h16" strokeLinecap="round" />
+                  <path d="M4 17h16" strokeLinecap="round" />
+                </>
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="pointer-events-auto overflow-hidden border-t border-white/10 bg-black md:hidden"
+            aria-label="Mobile"
+          >
+            <div className="space-y-1 px-4 py-3">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    'block w-full border border-transparent px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-colors',
+                    pathname === item.href
+                      ? 'border-[var(--accent-raw)]/40 text-[var(--accent-raw)]'
+                      : 'text-[var(--muted-raw)] hover:text-[var(--text-raw)]',
+                  )}
+                  aria-current={pathname === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

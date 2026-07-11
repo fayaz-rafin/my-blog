@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/resume/'],
+      disallow: ['/resume/'],
     },
     sitemap: 'https://fayazrafin.xyz/sitemap.xml',
   }

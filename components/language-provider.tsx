@@ -1,6 +1,13 @@
 'use client'
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useSyncExternalStore,
+} from 'react'
 
 export type Language = 'en' | 'fr'
 
@@ -11,6 +18,7 @@ interface LanguageContextValue {
 }
 
 const LANGUAGE_STORAGE_KEY = 'preferred-language'
+const LANGUAGE_CHANGE_EVENT = 'portfolio-language-change'
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined)
 
@@ -67,41 +75,83 @@ const setHtmlLangAttribute = (language: Language) => {
   document.documentElement.lang = language
 }
 
+const readStoredLanguage = (): Language => {
+  if (typeof window === 'undefined') {
+    return 'en'
+  }
+
+  const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+  if (stored === 'en' || stored === 'fr') {
+    return stored
+  }
+
+  return detectDefaultLanguage()
+}
+
+const subscribeToLanguage = (onStoreChange: () => void) => {
+  if (typeof window === 'undefined') {
+    return () => undefined
+  }
+
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === LANGUAGE_STORAGE_KEY) {
+      onStoreChange()
+    }
+  }
+
+  window.addEventListener('storage', handleStorage)
+  window.addEventListener(LANGUAGE_CHANGE_EVENT, onStoreChange)
+
+  return () => {
+    window.removeEventListener('storage', handleStorage)
+    window.removeEventListener(LANGUAGE_CHANGE_EVENT, onStoreChange)
+  }
+}
+
+const writeLanguage = (language: Language) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
+  window.dispatchEvent(new Event(LANGUAGE_CHANGE_EVENT))
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en')
+  const language = useSyncExternalStore(
+    subscribeToLanguage,
+    readStoredLanguage,
+    () => 'en' as Language,
+  )
 
   useEffect(() => {
+    setHtmlLangAttribute(language)
+
     if (typeof window === 'undefined') {
       return
     }
 
-    const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
-    if (stored === 'en' || stored === 'fr') {
-      setLanguageState(stored)
-      setHtmlLangAttribute(stored)
-      return
+    if (!window.localStorage.getItem(LANGUAGE_STORAGE_KEY)) {
+      writeLanguage(language)
     }
+  }, [language])
 
-    const detected = detectDefaultLanguage()
-    setLanguageState(detected)
-    setHtmlLangAttribute(detected)
+  const setLanguage = useCallback((nextLanguage: Language) => {
+    writeLanguage(nextLanguage)
+    setHtmlLangAttribute(nextLanguage)
   }, [])
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
-    }
-
-    setHtmlLangAttribute(language)
-  }, [language])
+  const toggleLanguage = useCallback(() => {
+    setLanguage(language === 'en' ? 'fr' : 'en')
+  }, [language, setLanguage])
 
   const value = useMemo<LanguageContextValue>(
     () => ({
       language,
-      setLanguage: (nextLanguage) => setLanguageState(nextLanguage),
-      toggleLanguage: () => setLanguageState((prev) => (prev === 'en' ? 'fr' : 'en')),
+      setLanguage,
+      toggleLanguage,
     }),
-    [language],
+    [language, setLanguage, toggleLanguage],
   )
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
@@ -116,4 +166,3 @@ export function useLanguage(): LanguageContextValue {
 
   return context
 }
-

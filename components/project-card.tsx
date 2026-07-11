@@ -1,6 +1,7 @@
-// components/project-card.tsx
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
+
 import { Project } from '../app/projects/page'
 
 export function ProjectCard({
@@ -9,62 +10,55 @@ export function ProjectCard({
   image,
   technologies,
   link,
-  category
+  category,
 }: Project) {
   return (
-    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/10 backdrop-blur-xl">
-      <div className="relative h-40 sm:h-48">
+    <article className="card-raw group flex h-full flex-col">
+      <div className="relative h-44 overflow-hidden border-b border-white/15 sm:h-48">
         <Image
           src={image}
-          alt={title}
+          alt=""
           fill
-          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-4 sm:p-6">
-        <div className="flex justify-between items-start gap-2 mb-3 sm:mb-4">
-          <h3 className="text-lg sm:text-xl font-semibold text-white flex-1 min-w-0">{title}</h3>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--text-raw)] sm:text-xl">
+            {title}
+          </h3>
           {category && (
-            <span className="text-sm text-purple-400 bg-purple-400/10 px-2 py-1 rounded flex-shrink-0 whitespace-nowrap">
+            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-raw)]">
               {category}
             </span>
           )}
         </div>
-        <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, index) => (
-            <span
-              key={index}
-              className="text-sm text-white/90 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md"
+        <p className="mb-4 text-sm leading-relaxed text-[var(--muted-raw)] sm:text-base">
+          {description}
+        </p>
+        <ul className="mb-5 flex flex-wrap gap-1.5">
+          {technologies.map((tech) => (
+            <li
+              key={tech}
+              className="border border-white/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--muted-raw)]"
             >
               {tech}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
         {link && (
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1"
+            className="link-raw mt-auto"
           >
-            View Project
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            View
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         )}
       </div>
-    </div>
+    </article>
   )
 }

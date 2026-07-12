@@ -138,7 +138,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                     <time className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.16em]">
                       {recentPost.date}
                     </time>
-                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[var(--text-raw)] transition-colors duration-300 group-hover:text-[var(--accent-raw)] sm:mt-3 sm:text-2xl lg:text-3xl">
+                    <h3 className="blog-display-title mt-2 text-xl transition-colors duration-300 group-hover:text-[var(--accent-raw)] sm:mt-3 sm:text-2xl lg:text-3xl">
                       {recentPost.title}
                     </h3>
                     <p className="mt-2 text-[0.9375rem] leading-relaxed text-[var(--muted-raw)] sm:mt-3 sm:text-base">

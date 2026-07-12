@@ -212,7 +212,7 @@ export default function ProjectsPage() {
   return (
     <main className="pb-16">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-8 max-w-2xl border-b border-white/10 pb-8 sm:mb-12 sm:pb-10">
+        <header className="mb-8 max-w-2xl border-b border-[color:var(--hairline)] pb-8 sm:mb-12 sm:pb-10">
           <p className="page-index">{language === 'fr' ? '03 / Projets' : '03 / Projects'}</p>
           <h1 className="page-title">{copy.title}</h1>
           <p className="page-lede">{copy.description}</p>

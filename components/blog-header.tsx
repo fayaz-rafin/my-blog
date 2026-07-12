@@ -19,7 +19,7 @@ export default function BlogHeader() {
         }
 
   return (
-    <header className="mb-10 border-b border-white/10 pb-8 sm:mb-14 sm:pb-10">
+    <header className="mb-10 border-b border-[color:var(--hairline)] pb-8 sm:mb-14 sm:pb-10">
       <p className="page-index">{copy.index}</p>
       <h1 className="page-title">{copy.title}</h1>
       <p className="page-lede">{copy.lede}</p>

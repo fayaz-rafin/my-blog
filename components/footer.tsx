@@ -51,7 +51,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative mt-12 border-t border-white/10 sm:mt-20">
+    <footer className="relative mt-12 border-t border-[color:var(--hairline)] sm:mt-20">
       <div
         aria-hidden="true"
         className="absolute left-0 top-0 h-px w-16 bg-[var(--accent-raw)] sm:w-24"
@@ -73,7 +73,7 @@ export function Footer() {
             className="flex w-full flex-col gap-3 sm:w-auto sm:items-end"
             aria-label={content.navLabel}
           >
-            <div className="flex w-full divide-x divide-white/10 border border-white/15 sm:w-auto">
+            <div className="flex w-full divide-x divide-[color:var(--hairline)] border border-[color:var(--hairline-strong)] sm:w-auto">
               {socialLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -81,7 +81,7 @@ export function Footer() {
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
                   aria-label={link.label}
-                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 px-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] transition-colors duration-300 hover:bg-white/5 hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)] sm:flex-none sm:px-5 sm:text-[11px]"
+                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 px-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] transition-colors duration-300 hover:bg-[var(--surface-hover)] hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)] sm:flex-none sm:px-5 sm:text-[11px]"
                 >
                   <Image
                     src={link.icon}
@@ -89,7 +89,7 @@ export function Footer() {
                     width={16}
                     height={16}
                     aria-hidden="true"
-                    className="brightness-0 invert opacity-80"
+                    className="opacity-80 [filter:var(--icon-filter)]"
                   />
                   <span className="hidden sm:inline">{link.label}</span>
                 </Link>
@@ -98,7 +98,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <div className="flex flex-col gap-3 border-t border-[color:var(--hairline)] pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.16em]">
             © {year} Fayaz Rafin
           </p>

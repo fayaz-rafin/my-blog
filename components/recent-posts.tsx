@@ -53,7 +53,7 @@ export default function RecentPosts() {
       </h2>
 
       {blogPosts.length > 0 ? (
-        <ul className="divide-y divide-white/10 border-y border-white/10">
+        <ul className="divide-y divide-[color:var(--hairline)] border-y border-[color:var(--hairline)]">
           {blogPosts.map((post) => (
             <li key={post.slug}>
               <Link
@@ -76,7 +76,7 @@ export default function RecentPosts() {
                   </span>
                 </div>
                 {post.imageUrl && (
-                  <div className="relative h-28 w-full shrink-0 overflow-hidden border border-white/15 sm:h-24 sm:w-36">
+                  <div className="relative h-28 w-full shrink-0 overflow-hidden border border-[color:var(--hairline-strong)] sm:h-24 sm:w-36">
                     <Image
                       src={post.imageUrl}
                       alt=""

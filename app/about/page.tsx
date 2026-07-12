@@ -169,7 +169,7 @@ const SkillGrid = ({
             alt=""
             width={18}
             height={18}
-            className="brightness-0 invert opacity-80"
+            className="opacity-80 [filter:var(--icon-filter)]"
             aria-hidden="true"
           />
           <span>{skill.name}</span>
@@ -197,7 +197,7 @@ export default function Page(): React.JSX.Element {
   return (
     <main className="pb-16">
       <div className="mx-auto max-w-3xl">
-        <header className="mb-10 border-b border-white/10 pb-8 sm:mb-14 sm:pb-10">
+        <header className="mb-10 border-b border-[color:var(--hairline)] pb-8 sm:mb-14 sm:pb-10">
           <p className="page-index">{content.index}</p>
           <h1 className="page-title">{content.title}</h1>
         </header>
@@ -218,13 +218,13 @@ export default function Page(): React.JSX.Element {
 
         <section className="mb-14 sm:mb-20">
           <h2 className="section-index mb-6 sm:mb-8">{content.workHeading}</h2>
-          <ul className="divide-y divide-white/10 border-y border-white/10">
+          <ul className="divide-y divide-[color:var(--hairline)] border-y border-[color:var(--hairline)]">
             {experiences.map((exp) => {
               const isVectorLogo = exp.logo.endsWith('.svg')
               return (
                 <li key={exp.company + exp.period} className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:gap-6">
                   <div
-                    className={`relative h-12 w-12 shrink-0 overflow-hidden border border-white/15 ${
+                    className={`relative h-12 w-12 shrink-0 overflow-hidden border border-[color:var(--hairline-strong)] ${
                       isVectorLogo ? 'bg-white p-1.5' : 'bg-[#1a1a1a]'
                     }`}
                   >
@@ -242,7 +242,7 @@ export default function Page(): React.JSX.Element {
                         href={exp.companyLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-medium text-[var(--accent-raw)] transition-colors hover:text-[#f0c14d] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
+                        className="font-medium text-[var(--accent-raw)] transition-colors hover:text-[var(--accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
                       >
                         {exp.company}
                       </Link>

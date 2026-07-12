@@ -14,7 +14,7 @@ export function ProjectCard({
 }: Project) {
   return (
     <article className="card-raw group flex h-full flex-col">
-      <div className="relative h-44 overflow-hidden border-b border-white/15 sm:h-48">
+      <div className="relative h-44 overflow-hidden border-b border-[color:var(--hairline-strong)] sm:h-48">
         <Image
           src={image}
           alt=""
@@ -41,7 +41,7 @@ export function ProjectCard({
           {technologies.map((tech) => (
             <li
               key={tech}
-              className="border border-white/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--muted-raw)]"
+              className="border border-[color:var(--hairline)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--muted-raw)]"
             >
               {tech}
             </li>

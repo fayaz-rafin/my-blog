@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
 import { LanguageToggle } from '@/components/language-toggle'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { useLanguage } from '@/components/language-provider'
 
 export function Navbar() {
@@ -27,7 +28,7 @@ export function Navbar() {
   )
 
   return (
-    <header className="pointer-events-none fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#090807]/90 pt-[env(safe-area-inset-top)] backdrop-blur-md">
+    <header className="pointer-events-none fixed top-0 left-0 right-0 z-50 border-b border-[color:var(--hairline)] bg-[var(--nav-bg)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <div className="pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -62,17 +63,19 @@ export function Navbar() {
               </Link>
             )
           })}
-          <div className="ml-2 border-l border-white/10 pl-3">
+          <div className="ml-2 flex items-center gap-1 border-l border-[color:var(--hairline)] pl-3">
+            <ThemeToggle />
             <LanguageToggle />
           </div>
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <LanguageToggle />
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            className="inline-flex h-10 w-10 items-center justify-center border border-white/20 text-[var(--text-raw)] transition-colors hover:border-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
+            className="inline-flex h-10 w-10 items-center justify-center border border-[color:var(--hairline-strong)] text-[var(--text-raw)] transition-colors hover:border-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
             aria-expanded={isOpen}
             aria-label={isOpen ? (language === 'fr' ? 'Fermer le menu' : 'Close menu') : language === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
           >
@@ -98,7 +101,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-auto overflow-hidden border-t border-white/10 bg-black md:hidden"
+            className="pointer-events-auto overflow-hidden border-t border-[color:var(--hairline)] bg-[var(--bg-raw)] md:hidden"
             aria-label="Mobile"
           >
             <div className="space-y-1 px-4 py-3">

@@ -113,7 +113,7 @@ const components: Components = {
     if (isInline) {
       return (
         <code
-          className="border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-sm text-[var(--text-raw)]"
+          className="border border-[color:var(--hairline)] bg-[var(--surface-hover)] px-1.5 py-0.5 font-mono text-sm text-[var(--text-raw)]"
           {...props}
         >
           {children}
@@ -123,7 +123,7 @@ const components: Components = {
 
     return (
       <code
-        className={`${className} my-4 block overflow-auto border border-white/10 bg-black/60 p-4 font-mono text-sm`}
+        className={`${className} my-4 block overflow-auto border border-[color:var(--hairline)] bg-[var(--code-bg)] p-4 font-mono text-sm`}
         {...props}
       >
         {children}
@@ -131,35 +131,35 @@ const components: Components = {
     )
   },
   pre: ({ children, ...props }) => (
-    <pre className="my-4 overflow-auto border border-white/10" {...props}>
+    <pre className="my-4 overflow-auto border border-[color:var(--hairline)]" {...props}>
       {children}
     </pre>
   ),
   table: ({ children, ...props }) => (
     <div className="my-6 overflow-auto">
-      <table className="w-full border-collapse border border-white/15" {...props}>
+      <table className="w-full border-collapse border border-[color:var(--hairline-strong)]" {...props}>
         {children}
       </table>
     </div>
   ),
   th: ({ children, ...props }) => (
     <th
-      className="border border-white/15 bg-white/5 px-4 py-2 text-left font-mono text-xs uppercase tracking-[0.1em] text-[var(--text-raw)]"
+      className="border border-[color:var(--hairline-strong)] bg-[var(--surface-hover)] px-4 py-2 text-left font-mono text-xs uppercase tracking-[0.1em] text-[var(--text-raw)]"
       {...props}
     >
       {children}
     </th>
   ),
   td: ({ children, ...props }) => (
-    <td className="border border-white/15 px-4 py-2 text-[var(--muted-raw)]" {...props}>
+    <td className="border border-[color:var(--hairline-strong)] px-4 py-2 text-[var(--muted-raw)]" {...props}>
       {children}
     </td>
   ),
   img: ({ alt = '', ...props }) => (
     // eslint-disable-next-line @next/next/no-img-element -- markdown content images
-    <img alt={alt} className="my-6 h-auto max-w-full border border-white/15" {...props} />
+    <img alt={alt} className="my-6 h-auto max-w-full border border-[color:var(--hairline-strong)]" {...props} />
   ),
-  hr: (props) => <hr className="my-10 border-white/10" {...props} />,
+  hr: (props) => <hr className="my-10 border-[color:var(--hairline)]" {...props} />,
   strong: ({ children, ...props }) => (
     <strong className="font-semibold text-[var(--text-raw)]" {...props}>
       {children}
@@ -202,7 +202,7 @@ export default async function BlogPost({ params }: PageProps) {
   return (
     <main className="pb-16">
       <div className="mx-auto max-w-3xl">
-        <header className="mb-10 border-b border-white/10 pb-8">
+        <header className="mb-10 border-b border-[color:var(--hairline)] pb-8">
           <p className="page-index">04 / Post</p>
           <h1 className="page-title text-[clamp(1.85rem,3vw+0.5rem,2.75rem)]">{data.title}</h1>
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--muted-raw)]">

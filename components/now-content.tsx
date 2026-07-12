@@ -207,7 +207,7 @@ export default function NowContent({ lastUpdatedIso }: NowContentProps): React.R
   return (
     <main className="pb-16">
       <div className="mx-auto max-w-2xl">
-        <header className="mb-10 border-b border-white/10 pb-8 sm:mb-14 sm:pb-10">
+        <header className="mb-10 border-b border-[color:var(--hairline)] pb-8 sm:mb-14 sm:pb-10">
           <p className="page-index">{content.index}</p>
           <h1 className="page-title">{content.title}</h1>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.14em]">
@@ -237,7 +237,7 @@ export default function NowContent({ lastUpdatedIso }: NowContentProps): React.R
                   {section.listLabels?.[listIndex] && (
                     <p className="text-[var(--muted-raw)]">{section.listLabels[listIndex]}</p>
                   )}
-                  <ul className="space-y-2 border-l border-white/15 pl-4">
+                  <ul className="space-y-2 border-l border-[color:var(--hairline-strong)] pl-4">
                     {items.map((item) => (
                       <li
                         key={item}
@@ -258,7 +258,7 @@ export default function NowContent({ lastUpdatedIso }: NowContentProps): React.R
             </section>
           ))}
 
-          <footer className="border-t border-white/10 pt-8">
+          <footer className="border-t border-[color:var(--hairline)] pt-8">
             <p
               className="text-sm leading-relaxed text-[var(--muted-raw)]"
               dangerouslySetInnerHTML={{ __html: renderRichText(content.footer) }}

@@ -69,7 +69,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
       <div className="mx-auto max-w-6xl">
         <HeroSection />
 
-        <div className="mt-4 space-y-14 border-t border-white/10 pt-12 sm:mt-2 sm:space-y-24 sm:pt-16 lg:space-y-28 lg:pt-20">
+        <div className="mt-4 space-y-14 border-t border-[color:var(--hairline)] pt-12 sm:mt-2 sm:space-y-24 sm:pt-16 lg:space-y-28 lg:pt-20">
           <motion.section
             aria-labelledby="about-heading"
             initial="hidden"
@@ -84,10 +84,10 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             >
               {content.aboutHeading}
             </h2>
-            <p className="mt-4 text-[clamp(1.2rem,4.5vw,1.85rem)] font-medium leading-snug tracking-[-0.02em] text-[#f2f0eb] sm:mt-6">
+            <p className="mt-4 text-[clamp(1.2rem,4.5vw,1.85rem)] font-medium leading-snug tracking-[-0.02em] text-[var(--text-raw)] sm:mt-6">
               {content.aboutLead}
             </p>
-            <p className="mt-4 text-[0.9375rem] leading-relaxed text-[#9a9690] sm:mt-5 sm:text-lg">
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--muted-raw)] sm:mt-5 sm:text-lg">
               {content.aboutBody}
             </p>
             <Link href="/about" className="link-raw mt-5 sm:mt-7">
@@ -103,7 +103,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
             viewport={{ once: true, margin: '-40px' }}
             variants={reveal}
           >
-            <div className="mb-6 flex flex-col gap-3 border-b border-white/10 pb-4 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <div className="mb-6 flex flex-col gap-3 border-b border-[color:var(--hairline)] pb-4 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
               <h2
                 id="recent-heading"
                 className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--accent-raw)] sm:text-[11px] sm:tracking-[0.22em]"
@@ -124,7 +124,7 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               >
                 <article className="grid gap-5 sm:grid-cols-[180px_1fr] sm:gap-8 lg:grid-cols-[200px_1fr] lg:gap-10">
                   {recentPost.imageUrl && (
-                    <div className="relative h-44 w-full overflow-hidden border border-white/15 sm:h-36">
+                    <div className="relative h-44 w-full overflow-hidden border border-[color:var(--hairline-strong)] sm:h-36">
                       <Image
                         src={recentPost.imageUrl}
                         alt=""
@@ -135,13 +135,13 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
                     </div>
                   )}
                   <div className="min-w-0">
-                    <time className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#9a9690] sm:text-[11px] sm:tracking-[0.16em]">
+                    <time className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.16em]">
                       {recentPost.date}
                     </time>
-                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#f2f0eb] transition-colors duration-300 group-hover:text-[var(--accent-raw)] sm:mt-3 sm:text-2xl lg:text-3xl">
+                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[var(--text-raw)] transition-colors duration-300 group-hover:text-[var(--accent-raw)] sm:mt-3 sm:text-2xl lg:text-3xl">
                       {recentPost.title}
                     </h3>
-                    <p className="mt-2 text-[0.9375rem] leading-relaxed text-[#9a9690] sm:mt-3 sm:text-base">
+                    <p className="mt-2 text-[0.9375rem] leading-relaxed text-[var(--muted-raw)] sm:mt-3 sm:text-base">
                       {recentPost.description}
                     </p>
                     <span className="link-raw mt-4 sm:mt-5">
@@ -156,8 +156,8 @@ export default function HomeClient({ recentPost }: HomeClientProps) {
               </Link>
             ) : (
               <div className="py-2">
-                <p className="text-[#f2f0eb]">{content.noPostTitle}</p>
-                <p className="mt-1 text-[#9a9690]">{content.noPostSubtitle}</p>
+                <p className="text-[var(--text-raw)]">{content.noPostTitle}</p>
+                <p className="mt-1 text-[var(--muted-raw)]">{content.noPostSubtitle}</p>
                 <Link href="/blog" className="link-raw mt-5">
                   {content.viewAllPosts}
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

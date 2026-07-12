@@ -29,14 +29,21 @@ const copy: Record<Language, NowPageCopy> = {
       {
         title: 'Current Focus',
         paragraphs: [
-          'My current focus is starting a new full-time job as a Senior Consultant at KPMG Canada.',
-          "I'm taking a course on designing a 32-bit RISC-V CPU.",
+          'My current focus is working as an AI Engineer / Consultant at KPMG Canada.',
+          "I'm also focusing on learning more in depth about how LLMs and Agentic AI work, along with their infrastructure and systems design.",
         ],
       },
       {
         title: 'Working On',
         paragraphs: ['Currently working on several projects:'],
-        lists: [['Personal portfolio website (this one!)', 'Developing an iOS app for runners on race day.']],
+        lists: [
+          [
+            'Personal portfolio website (this one!)',
+            'An iOS app that is an agentic grocery shopping assistant.',
+            'An iOS app, just for me, that builds a very quick travel itinerary tailored to my needs.',
+            "A game that pays homage to Toronto's TTC subway system.",
+          ],
+        ],
         afterList: [
           'These are the open-source projects that I am contributing to:',
           `<link href="https://github.com/SheerSt/pokewilds">Pokewilds</link> — A Gen 2 Pokémon fan game/engine using libGDX`,
@@ -45,7 +52,8 @@ const copy: Record<Language, NowPageCopy> = {
       {
         title: 'Streaming',
         paragraphs: [
-          'I started streaming on Twitch for fun! I stream occasionally, playing games like Jump King, Celeste, Plants VS Zombies, and Pokemon.',
+          "I'm on a break from streaming right now, but I'll resume soon!",
+          'I usually stream on Twitch for fun, playing games like Jump King, Celeste, Plants VS Zombies, and Pokemon.',
         ],
       },
       {
@@ -81,7 +89,13 @@ const copy: Record<Language, NowPageCopy> = {
       },
       {
         title: 'Currently Reading',
-        lists: [['"Dune" by Frank Herbert', '"Lovecraft Compendium" by H.P. Lovecraft']],
+        lists: [
+          [
+            '"Dune" by Frank Herbert',
+            '"Lovecraft Compendium" by H.P. Lovecraft',
+            `"We'll Prescribe You a Cat" by Syou Ishida`,
+          ],
+        ],
       },
     ],
     footer: `This is a "now page", inspired by <link href="https://nownownow.com/about">nownownow.com</link>. It shows what I'm currently focused on at this point in my life.`,
@@ -94,15 +108,20 @@ const copy: Record<Language, NowPageCopy> = {
       {
         title: 'Priorités actuelles',
         paragraphs: [
-          'Ma priorité actuelle est de commencer un nouvel emploi à temps plein comme consultant principal chez KPMG Canada.',
-          'Je suis un cours sur la conception d’un CPU RISC-V 32 bits.',
+          'Ma priorité actuelle est de travailler comme ingénieur IA / consultant chez KPMG Canada.',
+          "Je me concentre aussi sur l'approfondissement du fonctionnement des LLM et de l'IA agentique, ainsi que de leur infrastructure et de la conception de leurs systèmes.",
         ],
       },
       {
         title: 'Projets en cours',
         paragraphs: ['Je travaille actuellement sur plusieurs projets :'],
         lists: [
-          ['Ce portfolio (eh oui !)', "Développement d'une application iOS pour les coureurs le jour de la course."],
+          [
+            'Ce portfolio (eh oui !)',
+            'Une application iOS qui est un assistant agentique pour faire les courses.',
+            'Une application iOS, juste pour moi, qui crée très rapidement un itinéraire de voyage adapté à mes besoins.',
+            'Un jeu qui rend hommage au réseau de métro de la TTC de Toronto.',
+          ],
         ],
         afterList: [
           'Et voici les projets open source auxquels je contribue :',
@@ -112,7 +131,8 @@ const copy: Record<Language, NowPageCopy> = {
       {
         title: 'Streaming',
         paragraphs: [
-          "J'ai commencé à streamer sur Twitch pour le plaisir ! Je stream occasionnellement, en jouant à des jeux comme Jump King, Celeste, Plants VS Zombies et Pokemon.",
+          "Je fais une pause dans le streaming en ce moment, mais je vais bientôt reprendre !",
+          "Je stream habituellement sur Twitch pour le plaisir, en jouant à des jeux comme Jump King, Celeste, Plants VS Zombies et Pokemon.",
         ],
       },
       {
@@ -148,7 +168,13 @@ const copy: Record<Language, NowPageCopy> = {
       },
       {
         title: 'Lectures du moment',
-        lists: [['« Dune » de Frank Herbert', '« Lovecraft Compendium » de H.P. Lovecraft']],
+        lists: [
+          [
+            '« Dune » de Frank Herbert',
+            '« Lovecraft Compendium » de H.P. Lovecraft',
+            '« We’ll Prescribe You a Cat » de Syou Ishida',
+          ],
+        ],
       },
     ],
     footer: `Ceci est une « now page » inspirée de <link href="https://nownownow.com/about">nownownow.com</link>. Elle présente ce sur quoi je me concentre en ce moment.`,

@@ -11,13 +11,13 @@ import { useLanguage } from '@/components/language-provider'
 const heroCopy = {
   en: {
     index: '00 / INTRO',
-    role: 'Software engineer at KPMG Canada. Computer Engineering at York University.',
+    role: 'Senior AI Engineer / Consultant at KPMG Canada. Computer Engineering at York University.',
     viewProjects: 'View Projects',
     readBlog: 'Read Blog',
   },
   fr: {
     index: '00 / INTRO',
-    role: 'Ingénieur logiciel chez KPMG Canada. Génie informatique à l’Université York.',
+    role: 'Ingénieur IA / Consultant chez KPMG Canada. Génie informatique à l’Université York.',
     viewProjects: 'Voir les projets',
     readBlog: 'Lire le blog',
   },

@@ -74,14 +74,14 @@ const skills = {
 const experiences: WorkExperience[] = [
   {
     company: 'KPMG Canada',
-    role: 'Senior Consultant, Internal AI Solutions, Ignition Tax',
+    role: 'Senior AI Engineer / Consultant, Ignition Tax',
     period: 'May 2026 - Present',
     logo: '/logos/kpmg.svg',
     companyLink: 'https://kpmg.com/ca/en/home.html',
   },
   {
     company: 'TD Bank',
-    role: 'Software Engineer Intern, TD Securities',
+    role: 'Software Engineer Intern, Corporate and Investment Banking, TD Securities',
     period: 'January 2026 — April 2026',
     logo: '/logos/tdbank.png',
     companyLink: 'https://www.tdsecurities.com/ca/en',
@@ -232,6 +232,7 @@ export default function Page(): React.JSX.Element {
                       src={exp.logo}
                       alt=""
                       fill
+                      sizes="48px"
                       className={isVectorLogo ? 'object-contain' : 'object-cover'}
                     />
                   </div>

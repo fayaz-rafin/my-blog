@@ -19,6 +19,16 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: 13,
+    title: 'Terminal Football Manager',
+    description:
+      "A FIFA 14 Manager Career–style football management sim for the terminal. Offline, single-player, and deterministic, with live matches, transfers, youth academy, and a full Textual TUI.",
+    image: '/projects/terminal-fm.png',
+    technologies: ['Python', 'Textual', 'Rich'],
+    link: 'https://github.com/fayaz-rafin/terminal-football-manager',
+    category: 'Game',
+  },
+  {
     id: 0,
     title: 'CTRL+HACK+DEL 2.0 Website',
     description: 'Official website for CTRL+HACK+DEL 2.0, York University\'s Premier Hackathon. A 36-hour innovation marathon featuring modern design and seamless user experience.',

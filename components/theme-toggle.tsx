@@ -6,11 +6,15 @@ import { useTheme } from 'next-themes'
 const toggleClasses =
   'inline-flex h-9 min-w-9 items-center justify-center border border-[color:var(--hairline-strong)] px-2 text-[var(--muted-raw)] transition-colors duration-200 hover:border-[var(--accent-raw)] hover:text-[var(--accent-raw)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]'
 
+const subscribeToHydration = () => () => {}
+
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => setMounted(true), [])
+  const mounted = React.useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
+  )
 
   if (!mounted) {
     return <span aria-hidden="true" className={toggleClasses} />

@@ -1,4 +1,4 @@
-# Welcome to my Portfolio! [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fayaz-rafin_my-blog&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fayaz-rafin_my-blog)
+# Welcome to my Portfolio!
 
 Welcome to my personal portfolio website! Built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**, this site showcases who I am, what I've built, what I'm working on now, and where I'm headed.
 

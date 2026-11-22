@@ -8,15 +8,7 @@ import { ArrowUpRight } from 'lucide-react'
 
 import HeroSection from './hero-section'
 import { useLanguage } from '@/components/language-provider'
-
-interface BlogPost {
-  title: string
-  description: string
-  date: string
-  slug: string
-  readTime?: string
-  imageUrl?: string
-}
+import type { BlogPost } from '@/lib/blog'
 
 interface HomeClientProps {
   recentPost: BlogPost | null

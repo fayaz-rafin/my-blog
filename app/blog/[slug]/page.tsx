@@ -3,7 +3,6 @@ import path from 'path'
 import matter from 'gray-matter'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { Children, isValidElement, type ReactNode } from 'react'
 import ReactMarkdown, { type Components } from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
@@ -58,11 +57,6 @@ const extractCoverImage = (markdown: string) => {
   return { cover, body }
 }
 
-const isImageBlock = (node: ReactNode) =>
-  isValidElement<{ className?: string }>(node) &&
-  typeof node.props.className === 'string' &&
-  node.props.className.includes('blog-figure')
-
 const components: Components = {
   h1: ({ children, ...props }) => (
     <h1 className="blog-section-title" {...props}>
@@ -84,22 +78,11 @@ const components: Components = {
       {children}
     </h4>
   ),
-  p: ({ children, ...props }) => {
-    const kids = Children.toArray(children).filter(
-      (child) => !(typeof child === 'string' && child.trim() === ''),
-    )
-
-    // Markdown may wrap standalone images in <p>; unwrap image-only paragraphs.
-    if (kids.length === 1 && isImageBlock(kids[0])) {
-      return kids[0]
-    }
-
-    return (
-      <p className="blog-paragraph" {...props}>
-        {children}
-      </p>
-    )
-  },
+  p: ({ children, ...props }) => (
+    <p className="blog-paragraph" {...props}>
+      {children}
+    </p>
+  ),
   a: ({ children, href, ...props }) => (
     <a href={href} className="blog-link" {...props}>
       {children}

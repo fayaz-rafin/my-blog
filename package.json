@@ -9,12 +9,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.9",
-    "@react-three/fiber": "^9.8.1",
     "@tailwindcss/typography": "^0.5.20",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint-config-next": "^16.3.8",
     "gray-matter": "^4.0.3",
@@ -22,41 +19,28 @@
     "lucide-react": "^1.49.0",
     "motion": "^13.4.6",
     "next": "16.3.8",
-    "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.4.6",
-    "ogl": "^1.0.11",
-    "postprocessing": "^6.39.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^16.1.1",
     "rehype-highlight": "^7.0.2",
     "rehype-raw": "^7.0.0",
     "rehype-slug": "^6.0.0",
     "rehype-unwrap-images": "^1.0.0",
     "remark-gfm": "^4.0.1",
-    "shiki": "^4.4.3",
     "tailwind-merge": "^3.7.0",
-    "tailwindcss-animate": "^1.0.7",
-    "three": "^0.186.1"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.7",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "@types/three": "^0.186.0",
     "eslint": "^9.39.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
   },
   "description": "Personal portfolio website built with Next.js 16, TypeScript, and Tailwind CSS.",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fayaz-rafin/my-blog.git"

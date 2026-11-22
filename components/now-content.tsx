@@ -8,7 +8,6 @@ type Section = {
   title: string
   paragraphs?: string[]
   lists?: string[][]
-  listLabels?: (string | null | undefined)[]
   afterList?: string[]
 }
 
@@ -234,9 +233,6 @@ export default function NowContent({ lastUpdatedIso }: NowContentProps): React.R
               ))}
               {section.lists?.map((items, listIndex) => (
                 <div key={`${section.title}-list-${listIndex}`} className="space-y-2">
-                  {section.listLabels?.[listIndex] && (
-                    <p className="text-[var(--muted-raw)]">{section.listLabels[listIndex]}</p>
-                  )}
                   <ul className="space-y-2 border-l border-[color:var(--hairline-strong)] pl-4">
                     {items.map((item) => (
                       <li

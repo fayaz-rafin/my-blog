@@ -42,9 +42,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Analytics />
-      <SpeedInsights />
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-[var(--text-raw)]`}
@@ -70,8 +67,9 @@ export default function RootLayout({
           
           <Footer />
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
-    </>
   );
 }

@@ -14,37 +14,9 @@
 
 @font-face {
   font-family: 'MinionPro';
-  src: url('/fonts/MinionPro-MediumIt.otf') format('opentype');
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'MinionPro';
   src: url('/fonts/MinionPro-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'MinionPro';
-  src: url('/fonts/MinionPro-SemiboldIt.otf') format('opentype');
-  font-weight: 600;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'MinionPro';
-  src: url('/fonts/MinionPro-Bold.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'MinionPro';
-  src: url('/fonts/MinionPro-BoldIt.otf') format('opentype');
-  font-weight: bold;
-  font-style: italic;
 }
 
 @font-face {
@@ -55,8 +27,6 @@
 }
 
 @import "tailwindcss";
-
-@custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: var(--font-geist-sans);
@@ -72,7 +42,6 @@
   --bg-raw: #090807;
   --text-raw: #f2f0eb;
   --muted-raw: #9a9690;
-  --border-raw: rgba(255, 255, 255, 0.15);
   --hairline: rgba(255, 255, 255, 0.1);
   --hairline-strong: rgba(255, 255, 255, 0.15);
   --hairline-hover: rgba(255, 255, 255, 0.35);
@@ -84,10 +53,6 @@
   --icon-filter: brightness(0) invert(1);
 }
 
-/* body {
-  font-family: 'MinionPro', sans-serif;
-} */
-
 /* Light theme — warm paper palette tuned to the amber brand */
 .light {
   --accent-raw: #9a6a00;
@@ -96,7 +61,6 @@
   --bg-raw: #f5f2ea;
   --text-raw: #1c1a15;
   --muted-raw: #6b655a;
-  --border-raw: rgba(28, 26, 21, 0.14);
   --hairline: rgba(28, 26, 21, 0.1);
   --hairline-strong: rgba(28, 26, 21, 0.14);
   --hairline-hover: rgba(28, 26, 21, 0.3);
@@ -341,10 +305,6 @@
 
   .page-lede {
     @apply mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-[var(--muted-raw)] sm:mt-5 sm:text-lg;
-  }
-
-  .section-index {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--accent-raw)];
   }
 
   .btn-raw-primary {

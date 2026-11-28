@@ -28,11 +28,9 @@ export function ProjectCard({
           <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--text-raw)] sm:text-xl">
             {title}
           </h3>
-          {category && (
-            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-raw)]">
-              {category}
-            </span>
-          )}
+          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent-raw)]">
+            {category}
+          </span>
         </div>
         <p className="mb-4 text-sm leading-relaxed text-[var(--muted-raw)] sm:text-base">
           {description}
@@ -47,17 +45,15 @@ export function ProjectCard({
             </li>
           ))}
         </ul>
-        {link && (
-          <Link
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-raw mt-auto"
-          >
-            View
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        )}
+        <Link
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-raw mt-auto"
+        >
+          View
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     </article>
   )

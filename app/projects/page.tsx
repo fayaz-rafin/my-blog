@@ -1,4 +1,3 @@
-// app/projects/page.tsx
 'use client'
 
 import { useMemo, useState } from 'react'
@@ -13,8 +12,8 @@ export interface Project {
   description: string
   image: string
   technologies: string[]
-  link?: string
-  category?: string
+  link: string
+  category: string
 }
 
 const projects: Project[] = [
@@ -183,15 +182,12 @@ export default function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
 
-  // Get unique categories for filter
-  const categories = ['All', ...new Set(projects.map(project => project.category || 'Other'))]
+  const categories = ['All', ...new Set(projects.map(project => project.category))]
 
-  // Filter projects based on category
   const filteredProjects = selectedCategory === 'All'
     ? projects
     : projects.filter(project => project.category === selectedCategory)
 
-  // Calculate pagination
   const indexOfLastProject = currentPage * PROJECTS_PER_PAGE
   const indexOfFirstProject = indexOfLastProject - PROJECTS_PER_PAGE
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject)
@@ -203,7 +199,7 @@ export default function ProjectsPage() {
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
-    setCurrentPage(1) // Reset to first page when changing category
+    setCurrentPage(1)
   }
 
   const copy = useMemo(
@@ -214,7 +210,6 @@ export default function ProjectsPage() {
           ? 'Voici un aperçu de mes projets récents, personnels ou professionnels.'
           : "A collection of my recent work and side projects—both professional and personal experiments.",
       filterLabel: language === 'fr' ? 'Filtrer par catégorie :' : 'Filter by category:',
-      noProjects: language === 'fr' ? 'Aucun projet trouvé dans cette catégorie.' : 'No projects found in this category.',
     }),
     [language],
   )
@@ -240,15 +235,11 @@ export default function ProjectsPage() {
         </div>
 
         <section className="mb-16">
-          {currentProjects.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-              {currentProjects.map((project) => (
-                <ProjectCard key={project.id} {...project} />
-              ))}
-            </div>
-          ) : (
-            <p className="py-12 text-[var(--muted-raw)]">{copy.noProjects}</p>
-          )}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            {currentProjects.map((project) => (
+              <ProjectCard key={project.id} {...project} />
+            ))}
+          </div>
         </section>
 
         {filteredProjects.length > PROJECTS_PER_PAGE && (

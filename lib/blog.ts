@@ -16,33 +16,46 @@ export interface BlogPost {
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog')
 
-export const getBlogPosts = (): BlogPost[] => {
-  const files = fs.readdirSync(BLOG_DIR)
+export const getSlugs = () =>
+  fs.readdirSync(BLOG_DIR).filter((filename) => filename.endsWith('.md')).map((filename) => filename.replace(/\.md$/, ''))
 
-  return files
-    .filter((filename) => filename.endsWith('.md'))
-    .map((filename) => {
-      const slug = filename.replace(/\.md$/, '')
-      const fileContent = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf-8')
-      const { data, content } = matter(fileContent)
-      const dateIso = new Date(data.date).toISOString()
+export const getPost = (slug: string) => {
+  const fileContent = fs.readFileSync(path.join(BLOG_DIR, `${slug}.md`), 'utf-8')
+  const { data, content } = matter(fileContent)
+  const dateIso = new Date(data.date).toISOString()
 
-      const imageMatch = content.match(/!\[.*?\]\((.*?)\)/)
-      const imageUrl = imageMatch ? imageMatch[1] : undefined
+  const imageMatch = content.match(/!\[(.*?)\]\((.*?)\)/)
+  const imageUrl = imageMatch ? imageMatch[2] : undefined
 
+  return {
+    slug,
+    title: data.title as string,
+    description: (data.description as string) || '',
+    date: new Date(data.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+    dateIso,
+    readTime: calculateReadTime(content),
+    imageUrl,
+    cover: imageMatch ? { alt: imageMatch[1] || '', src: imageMatch[2] } : null,
+    body: imageMatch ? content.replace(imageMatch[0], '').replace(/^\s*\n+/, '') : content,
+  }
+}
+
+export const getBlogPosts = (): BlogPost[] =>
+  getSlugs()
+    .map((slug) => {
+      const post = getPost(slug)
       return {
-        slug,
-        title: data.title as string,
-        description: (data.description as string) || '',
-        date: new Date(data.date).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }),
-        dateIso,
-        readTime: calculateReadTime(content),
-        imageUrl,
+        slug: post.slug,
+        title: post.title,
+        description: post.description,
+        date: post.date,
+        dateIso: post.dateIso,
+        readTime: post.readTime,
+        imageUrl: post.imageUrl,
       }
     })
     .sort((a, b) => new Date(b.dateIso).getTime() - new Date(a.dateIso).getTime())
-}

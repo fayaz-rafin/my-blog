@@ -1,6 +1,3 @@
-import fs from 'fs/promises'
-import path from 'path'
-import matter from 'gray-matter'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import ReactMarkdown, { type Components } from 'react-markdown'
@@ -11,7 +8,7 @@ import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
 
 import BlogPostFooter, { BlogBackLink } from '@/components/blog-post-nav'
-import { calculateReadTime } from '@/lib/utils'
+import { getPost, getSlugs } from '@/lib/blog'
 import 'highlight.js/styles/github-dark.css'
 
 interface PageProps {
@@ -20,24 +17,18 @@ interface PageProps {
   }>
 }
 
-export async function generateStaticParams() {
-  const files = await fs.readdir(path.join(process.cwd(), 'content/blog'))
-
-  return files.map((file) => ({
-    slug: file.replace(/\.md$/, ''),
-  }))
+export function generateStaticParams() {
+  return getSlugs().map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
     const { slug } = await params
-    const filePath = path.join(process.cwd(), 'content/blog', `${slug}.md`)
-    const file = await fs.readFile(filePath, 'utf8')
-    const { data } = matter(file)
+    const post = getPost(slug)
 
     return {
-      title: data.title || 'Blog',
-      description: data.description || '',
+      title: post.title || 'Blog',
+      description: post.description || '',
     }
   } catch {
     return {
@@ -46,22 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-const extractCoverImage = (markdown: string) => {
-  const match = markdown.match(/!\[(.*?)\]\((.*?)\)/)
-  if (!match) {
-    return { cover: null as null | { alt: string; src: string }, body: markdown }
-  }
-
-  const cover = { alt: match[1] || '', src: match[2] }
-  const body = markdown.replace(match[0], '').replace(/^\s*\n+/, '')
-  return { cover, body }
-}
-
 const components: Components = {
   h1: ({ children, ...props }) => (
-    <h1 className="blog-section-title" {...props}>
+    <h2 className="blog-section-title" {...props}>
       {children}
-    </h1>
+    </h2>
   ),
   h2: ({ children, ...props }) => (
     <h2 className="blog-section-title" {...props}>
@@ -177,36 +157,19 @@ const components: Components = {
   ),
 }
 
-const loadPost = async (slug: string) => {
-  const filePath = path.join(process.cwd(), 'content/blog', `${slug}.md`)
-  const fileContent = await fs.readFile(filePath, 'utf8')
-  return matter(fileContent)
-}
-
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params
 
-  let content: string
-  let data: matter.GrayMatterFile<string>['data']
-
+  let post: ReturnType<typeof getPost>
   try {
-    const post = await loadPost(slug)
-    content = post.content
-    data = post.data
+    post = getPost(slug)
   } catch (error) {
     console.error('Error rendering blog post:', error)
     notFound()
   }
 
-  const { cover, body } = extractCoverImage(content)
-  const readTime = calculateReadTime(content)
-  const dateIso = new Date(data.date).toISOString()
-  const formattedDate = new Date(data.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-  const description = typeof data.description === 'string' ? data.description.trim() : ''
+  const { cover, body, readTime, dateIso, date: formattedDate } = post
+  const description = typeof post.description === 'string' ? post.description.trim() : ''
 
   return (
     <main className="pb-16">
@@ -220,7 +183,7 @@ export default async function BlogPost({ params }: PageProps) {
             <BlogBackLink />
             <p className="page-index mt-6">04 / Post</p>
             <h1 className="blog-display-title mt-4 text-[clamp(2.35rem,7vw,4rem)]">
-              {data.title}
+              {post.title}
             </h1>
             {description ? (
               <p className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[var(--muted-raw)] sm:mt-6 sm:text-xl sm:leading-relaxed">

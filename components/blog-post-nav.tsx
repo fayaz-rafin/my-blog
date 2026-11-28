@@ -23,7 +23,7 @@ export default function BlogPostFooter() {
 
   return (
     <footer className="mt-16 border-t border-[color:var(--hairline)] pt-10 sm:mt-20 sm:pt-12">
-      <p className="section-index">{copy.label}</p>
+      <p className="page-index">{copy.label}</p>
       <p className="mt-3 max-w-md text-sm leading-relaxed text-[var(--muted-raw)] sm:text-base">
         {copy.note}
       </p>

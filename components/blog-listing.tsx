@@ -40,7 +40,7 @@ export default function BlogListing({ posts }: BlogListingProps) {
   return (
     <div className="space-y-14 sm:space-y-20">
       <section aria-labelledby="featured-heading">
-        <h2 id="featured-heading" className="section-index mb-6 sm:mb-8">
+        <h2 id="featured-heading" className="page-index mb-6 sm:mb-8">
           01 / {copy.featured}
         </h2>
 
@@ -101,7 +101,7 @@ export default function BlogListing({ posts }: BlogListingProps) {
 
       {archive.length > 0 && (
         <section aria-labelledby="archive-heading">
-          <h2 id="archive-heading" className="section-index mb-6 sm:mb-8">
+          <h2 id="archive-heading" className="page-index mb-6 sm:mb-8">
             02 / {copy.archive}
           </h2>
 

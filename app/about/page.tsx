@@ -217,7 +217,7 @@ export default function Page(): React.JSX.Element {
         </section>
 
         <section className="mb-14 sm:mb-20">
-          <h2 className="section-index mb-6 sm:mb-8">{content.workHeading}</h2>
+          <h2 className="page-index mb-6 sm:mb-8">{content.workHeading}</h2>
           <ul className="divide-y divide-[color:var(--hairline)] border-y border-[color:var(--hairline)]">
             {experiences.map((exp) => {
               const isVectorLogo = exp.logo.endsWith('.svg')
@@ -268,7 +268,7 @@ export default function Page(): React.JSX.Element {
         </section>
 
         <section className="space-y-10">
-          <h2 className="section-index">{content.skillsHeading}</h2>
+          <h2 className="page-index">{content.skillsHeading}</h2>
           <SkillGrid heading={content.programmingHeading} items={skills.languages} />
           <SkillGrid heading={content.frameworksHeading} items={skills.frameworks} />
           <SkillGrid heading={content.cloudHeading} items={skills.cloud} />

@@ -12,7 +12,7 @@ interface WorkExperience {
   role: string
   period: string
   logo: string
-  companyLink?: string
+  companyLink: string
 }
 
 const skills = {
@@ -237,18 +237,14 @@ export default function Page(): React.JSX.Element {
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    {exp.companyLink ? (
-                      <Link
-                        href={exp.companyLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-[var(--accent-raw)] transition-colors hover:text-[var(--accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
-                      >
-                        {exp.company}
-                      </Link>
-                    ) : (
-                      <h3 className="font-medium text-[var(--text-raw)]">{exp.company}</h3>
-                    )}
+                    <Link
+                      href={exp.companyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-[var(--accent-raw)] transition-colors hover:text-[var(--accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-raw)]"
+                    >
+                      {exp.company}
+                    </Link>
                     <p className="mt-1 text-sm text-[var(--muted-raw)] sm:text-base">{exp.role}</p>
                   </div>
                   <time className="shrink-0 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--muted-raw)] sm:text-[11px] sm:tracking-[0.12em]">

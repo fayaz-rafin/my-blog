@@ -13,8 +13,6 @@ export function ProjectPagination({
 }: ProjectPaginationProps) {
   const totalPages = Math.ceil(totalProjects / projectsPerPage)
 
-  if (totalPages <= 1) return null
-
   return (
     <nav className="flex justify-center gap-2" aria-label="Pagination">
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => {
